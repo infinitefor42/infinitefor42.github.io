@@ -1557,7 +1557,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #4af93b;
+    background: #d99aa2;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2903,9 +2903,6 @@ html #dsqjs {
   .gt-container .gt-header-textarea {
     background-color: light-dark(#f6f6f6, var(--card-bg-color-dark)) !important;
   }
-}
-.utterances {
-  max-width: unset;
 }
 .search-active {
   overflow: hidden;
