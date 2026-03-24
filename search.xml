@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>个人简介</title>
+    <url>/2026/03/24/about-me/</url>
+    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
+  </entry>
+  <entry>
     <title>烟花算法深度解析</title>
     <url>/2026/03/24/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</url>
     <content><![CDATA[<h2 id="1-什么是烟花算法？"><a href="#1-什么是烟花算法？" class="headerlink" title="1. 什么是烟花算法？"></a>1. 什么是烟花算法？</h2><p>烟花算法(Fireworks Algorithm, FWA)是一种模拟烟花爆炸过程的群体智能优化算法。</p>
@@ -8,10 +13,5 @@
       <tags>
         <tag>烟花算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>个人简介</title>
-    <url>/2026/03/24/about-me/</url>
-    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
   </entry>
 </search>
