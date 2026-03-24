@@ -1,78 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2026/03/22/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>数据结构：线性表（ C 语言实现）</title>
-    <url>/2026/03/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<h2 id="1-为什么-DS-课要用-C-语言？"><a href="#1-为什么-DS-课要用-C-语言？" class="headerlink" title="1. 为什么 DS 课要用 C 语言？"></a>1. 为什么 DS 课要用 C 语言？</h2><p>在处理大数据量时，C 语言的<strong>指针</strong>和<strong>手动内存管理</strong>能让我们精确控制算法的执行效率。</p>
-<h2 id="2-时间复杂度分析"><a href="#2-时间复杂度分析" class="headerlink" title="2. 时间复杂度分析"></a>2. 时间复杂度分析</h2><p>单链表的插入与删除操作：</p>
-<ul>
-<li><strong>头部插入</strong>：$O(1)$</li>
-<li><strong>尾部查找&#x2F;插入</strong>：$O(n)$</li>
-</ul>
-<h2 id="3-C-语言实现单链表"><a href="#3-C-语言实现单链表" class="headerlink" title="3. C 语言实现单链表"></a>3. C 语言实现单链表</h2><p>下面是包含结构体定义、节点创建和遍历的完整逻辑：</p>
-<pre><code class="language-c">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-// 定义节点结构体
-struct Node {
-    int data;
-    struct Node* next;
-};
-
-// 打印链表
-void printList(struct Node* n) {
-    while (n != NULL) {
-        printf(&quot; %d &quot;, n-&gt;data);
-        n = n-&gt;next;
-    }
-}
-
-int main() {
-    struct Node* head = NULL;
-    struct Node* second = NULL;
-
-    // 在堆(Heap)上分配内存
-    head = (struct Node*)malloc(sizeof(struct Node));
-    second = (struct Node*)malloc(sizeof(struct Node));
-
-    head-&gt;data = 1024;     // 数据域
-    head-&gt;next = second;   // 指针域指向下一个节点
-
-    second-&gt;data = 2048;
-    second-&gt;next = NULL;
-
-    printf(&quot;链表内容：&quot;);
-    printList(head);
-
-    return 0;
-}
-</code></pre>
-]]></content>
-      <categories>
-        <category>计算机基础</category>
-      </categories>
+    <title>学习笔记</title>
+    <url>/2026/03/22/DecLog/</url>
+    <content><![CDATA[]]></content>
       <tags>
-        <tag>数据结构</tag>
-        <tag>C语言</tag>
-        <tag>大一课程</tag>
+        <tag>-烟花算法 -数据结构</tag>
       </tags>
   </entry>
 </search>
