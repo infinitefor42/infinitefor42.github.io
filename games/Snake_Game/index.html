@@ -29,8 +29,8 @@
 <meta property="og:site_name" content="DevLog">
 <meta property="og:description" content="贪吃蛇游戏              body {             font-family: Arial, sans-serif;             display: flex;             flex-direction: column;             align-items: center;             backg">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-25T09:01:10.451Z">
-<meta property="article:modified_time" content="2026-03-25T09:01:10.451Z">
+<meta property="article:published_time" content="2026-03-25T09:07:14.058Z">
+<meta property="article:modified_time" content="2026-03-25T09:07:14.058Z">
 <meta property="article:author" content="Bowen Cao">
 <meta name="twitter:card" content="summary">
 
@@ -528,24 +528,23 @@
         </div>
     </div>
     
-    <div id="game-container">
-    <div id="game-board"></div>
+   <div id="controls" style="display: flex; flex-direction: column; align-items: center; gap: 20px; margin: 25px auto; width: 400px;">
+
+    <div style="display: flex; justify-content: center; gap: 10px; width: 100%;">
+        <button id="start" class="control-btn" style="padding: 10px 20px;">开始</button>
+        <button id="pause" class="control-btn" style="padding: 10px 20px;">暂停</button>
+        <button id="restart" class="control-btn" style="background-color: #4CAF50; color: white; padding: 10px 20px;">重新开始</button>
     </div>
 
-<div id="controls" style="display: flex; flex-direction: column; align-items: center; width: 400px; margin: 25px auto 0 auto;">
-    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-        <button id="start" class="control-btn">开始</button>
-        <button id="pause" class="control-btn">暂停</button>
-        <button id="restart" class="control-btn" style="background-color: #4CAF50;">重新开始</button>
+    <div style="display: grid; grid-template-areas: '. up .' 'left down right'; gap: 10px; justify-content: center;">
+        <button id="up" class="control-btn" style="grid-area: up; width: 50px; height: 50px;">↑</button>
+        <button id="left" class="control-btn" style="grid-area: left; width: 50px; height: 50px;">←</button>
+        <button id="down" class="control-btn" style="grid-area: down; width: 50px; height: 50px;">↓</button>
+        <button id="right" class="control-btn" style="grid-area: right; width: 50px; height: 50px;">→</button>
     </div>
 
-    <div style="display: grid; grid-template-areas: '. up .' 'left down right'; gap: 5px;">
-        <button id="up" class="control-btn" style="grid-area: up;">↑</button>
-        <button id="left" class="control-btn" style="grid-area: left;">←</button>
-        <button id="down" class="control-btn" style="grid-area: down;">↓</button>
-        <button id="right" class="control-btn" style="grid-area: right;">→</button>
-    </div>
 </div>
+
     
     <div id="keyboard-info">
         <h3>键盘控制规则:</h3>
