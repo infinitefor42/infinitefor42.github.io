@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="贪吃蛇游戏              body {             font-family: Arial, sans-serif;             display: flex;             flex-direction: column;             align-items: center;             backg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DevLog">
+<meta property="og:url" content="http://caobowen.top/games/Snake_Game/index.html">
+<meta property="og:site_name" content="DevLog">
+<meta property="og:description" content="贪吃蛇游戏              body {             font-family: Arial, sans-serif;             display: flex;             flex-direction: column;             align-items: center;             backg">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-25T02:58:01.531Z">
+<meta property="article:modified_time" content="2026-02-27T04:37:25.779Z">
+<meta property="article:author" content="Bowen Cao">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://caobowen.top/games/Snake_Game/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":true,"permalink":"http://caobowen.top/games/Snake_Game/index.html","path":"games/Snake_Game/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | DevLog
+</title>
+  
+
+
+
+
+
+  <script class="next-config" data-name="matomo" type="application/json">{"enable":true,"server_url":null,"site_id":null}</script>
+  <script src="/js/third-party/analytics/matomo.js" defer></script>
+
+  <script async defer data-website-id="" src=""></script>
+
+  <script defer data-domain="" src=""></script>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/5.36.0/lite/builds/browser.umd.js" integrity="sha256-o49zoHLDPBm9WLg6AiliAVi3axCRTqe3ltTxLvhzAVg=" crossorigin="anonymous" defer></script><script src="/js/third-party/search/algolia-search.js" defer></script>
+<script class="next-config" data-name="chatra" type="application/json">{"enable":true,"async":true,"id":null}</script>
+<script src="/js/third-party/chat/chatra.js" defer></script>
+<script async src="https://call.chatra.io/chatra.js"></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.10.1/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/wavedrom/3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js" defer></script>
+
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/12.2.1/firebase-app-compat.js" integrity="sha256-d21UgtIcA6c6qwr8nWk6lxs/KrpbWhknQN7qBjWA2Kk=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/12.2.1/firebase-firestore-compat.js" integrity="sha256-leHatffkFuVGIg7ABaA5BDsqsEUtktL4tftb3OdQfg0=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":null,"projectId":null}</script>
+  <script src="/js/third-party/statistics/firestore.js" defer></script>
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://caobowen.top/games/Snake_Game/"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">DevLog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-games"><a href="/games/" rel="section"><i class="fa fa-gamepad fa-fw"></i>games</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fab fa-algolia fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">贪吃蛇游戏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#keyboard-info"><span class="nav-number">1.1.</span> <span class="nav-text">键盘控制规则:</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Bowen Cao</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="sidebar-button animated">
+    <button><i class="fa fa-comment"></i>
+      聊天
+    </button>
+  </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/infinitefor42" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infinitefor42" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:548620473@qq.com" title="E-Mail → mailto:548620473@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner page posts-expand">
+
+
+    
+    
+    
+    <div class="post-block" lang="zh-CN"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline"><a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/games/Snake_Game/index.html" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/games/">GAMES</a></li>
+          <li>SNAKE_GAME</li>
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇游戏</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        #game-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        #game-board {
+            border: 2px solid #333;
+            background-color: #222;
+            display: grid;
+            grid-template-columns: repeat(20, 20px);
+            grid-template-rows: repeat(20, 20px);
+        }
+        
+        .cell {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .snake-head {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 8px 8px 4px 4px;
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        
+        .snake-head::before,
+        .snake-head::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #333;
+            border-radius: 50%;
+            top: 30%;
+        }
+        
+        .snake-head::before {
+            left: 20%;
+        }
+        
+        .snake-head::after {
+            right: 20%;
+        }
+        
+        .snake-body {
+            background: linear-gradient(135deg, #45a049, #3d8b40);
+            border-radius: 6px;
+            box-shadow: inset 0 0 3px rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+            animation: slither 0.5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slither {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(1px);
+            }
+        }
+        
+        .snake-body:nth-child(even) {
+            animation-delay: 0.1s;
+        }
+        
+        .snake-body:nth-child(3n) {
+            animation-delay: 0.2s;
+        }
+        
+        .snake-body:nth-child(4n) {
+            animation-delay: 0.3s;
+        }
+        
+        .food {
+            background-color: #ff4444;
+            border-radius: 50%;
+        }
+        
+        #game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        #score {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 24px;
+            display: none;
+        }
+        
+        #controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+            width: 200px;
+            margin-top: 20px;
+        }
+        
+        .control-btn {
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .control-btn:hover {
+            background-color: #555;
+        }
+        
+        .control-btn:active {
+            background-color: #777;
+        }
+        
+        #up {
+            grid-row: 1;
+            grid-column: 2;
+        }
+        
+        #left {
+            grid-row: 2;
+            grid-column: 1;
+        }
+        
+        #down {
+            grid-row: 3;
+            grid-column: 2;
+        }
+        
+        #right {
+            grid-row: 2;
+            grid-column: 3;
+        }
+        
+        #restart {
+            grid-row: 2;
+            grid-column: 2;
+            background-color: #4CAF50;
+        }
+        
+        #restart:hover {
+            background-color: #45a049;
+        }
+        
+        #keyboard-info {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            max-width: 400px;
+        }
+        
+        #keyboard-info h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        #keyboard-info ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        
+        #keyboard-info li {
+            margin: 5px 0;
+        }
+        
+        #keyboard-info li:before {
+            content: "• ";
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>贪吃蛇游戏</h1>
+    
+    <div id="game-info">
+        <div>分数: <span id="score">0</span></div>
+        <div>历史最高分: <span id="high-score">0</span></div>
+        <div>控制: W/A/S/D 或 方向键</div>
+        <div>倍速: 
+            <select id="speed-select">
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+                <option value="3">3x</option>
+            </select>
+        </div>
+    </div>
+    
+    <div id="game-container">
+        <div id="game-board"></div>
+        <div id="game-over">
+            <div>游戏结束!</div>
+            <div>最终分数: <span id="final-score">0</span></div>
+            <button id="restart-btn" class="control-btn">重新开始</button>
+        </div>
+    </div>
+    
+    <div id="controls">
+        <button id="up" class="control-btn">↑</button>
+        <button id="left" class="control-btn">←</button>
+        <button id="down" class="control-btn">↓</button>
+        <button id="right" class="control-btn">→</button>
+        <button id="restart" class="control-btn">重新开始</button>
+        <button id="start" class="control-btn">开始</button>
+        <button id="pause" class="control-btn">暂停</button>
+    </div>
+    
+    <div id="keyboard-info">
+        <h3>键盘控制规则:</h3>
+        <ul>
+            <li>W/↑: 向上移动</li>
+            <li>S/↓: 向下移动</li>
+            <li>A/←: 向左移动</li>
+            <li>D/→: 向右移动</li>
+            <li>Q: 开始游戏</li>
+            <li>E: 暂停游戏</li>
+            <li>R: 重新开始</li>
+        </ul>
+        <p>提示: 您也可以使用屏幕上的按钮来控制游戏</p>
+    </div>
+
+    <!-- 初始化WebAssembly模块 -->
+    <script>
+        // 初始化WebAssembly模块
+        var Module = {
+            onRuntimeInitialized: function() {
+                console.log('WebAssembly模块已初始化');
+                
+                // 初始化游戏
+                initGame();
+                
+                // 开始游戏循环
+                gameLoop();
+            }
+        };
+    </script>
+    
+    <!-- 加载WebAssembly模块 -->
+    <script src="snake.js"></script>
+    
+    <script>
+        // 游戏状态
+        let gameState = {
+            game_over: false,
+            score: 0,
+            snake: [],
+            food: { x: 0, y: 0 }
+        };
+        
+        // 游戏运行状态
+        let isRunning = false;
+        let gameLoopId = null;
+        let gameSpeed = 1; // 默认倍速为1
+        
+        // 游戏板元素
+        const gameBoard = document.getElementById('game-board');
+        const scoreElement = document.getElementById('score');
+        const highScoreElement = document.getElementById('high-score');
+        const gameOverElement = document.getElementById('game-over');
+        const finalScoreElement = document.getElementById('final-score');
+        
+        // 控制按钮
+        const upBtn = document.getElementById('up');
+        const leftBtn = document.getElementById('left');
+        const downBtn = document.getElementById('down');
+        const rightBtn = document.getElementById('right');
+        const restartBtn = document.getElementById('restart');
+        const startBtn = document.getElementById('start');
+        const pauseBtn = document.getElementById('pause');
+        const speedSelect = document.getElementById('speed-select');
+        const gameOverRestartBtn = document.getElementById('restart-btn');
+        
+        // 初始化游戏板
+        function initGameBoard() {
+            gameBoard.innerHTML = '';
+            for (let y = 0; y < 20; y++) {
+                for (let x = 0; x < 20; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+        
+        // 更新游戏板
+        function updateGameBoard() {
+            // 清空所有单元格
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.className = 'cell';
+            });
+            
+            // 绘制蛇
+            gameState.snake.forEach((segment, index) => {
+                const cell = document.querySelector(`.cell[data-x="${segment.x}"][data-y="${segment.y}"]`);
+                if (cell) {
+                    if (index === 0) {
+                        cell.classList.add('snake-head');
+                    } else {
+                        cell.classList.add('snake-body');
+                    }
+                }
+            });
+            
+            // 绘制食物
+            const foodCell = document.querySelector(`.cell[data-x="${gameState.food.x}"][data-y="${gameState.food.y}"]`);
+            if (foodCell) {
+                foodCell.classList.add('food');
+            }
+            
+            // 更新分数
+            scoreElement.textContent = gameState.score;
+            
+            // 显示/隐藏游戏结束界面
+            if (gameState.game_over) {
+                finalScoreElement.textContent = gameState.score;
+                gameOverElement.style.display = 'block';
+            } else {
+                gameOverElement.style.display = 'none';
+            }
+        }
+        
+        // 处理键盘输入
+        function handleKeyPress(event) {
+            console.log('Key pressed:', event.key); // 添加调试信息
+            switch (event.key) {
+                case 'w':
+                case 'W':
+                case 'ArrowUp':
+                    Module.ccall('handle_key', null, ['number'], ['W'.charCodeAt(0)]);
+                    console.log('Move up');
+                    break;
+                case 's':
+                case 'S':
+                case 'ArrowDown':
+                    Module.ccall('handle_key', null, ['number'], ['S'.charCodeAt(0)]);
+                    console.log('Move down');
+                    break;
+                case 'a':
+                case 'A':
+                case 'ArrowLeft':
+                    Module.ccall('handle_key', null, ['number'], ['A'.charCodeAt(0)]);
+                    console.log('Move left');
+                    break;
+                case 'd':
+                case 'D':
+                case 'ArrowRight':
+                    Module.ccall('handle_key', null, ['number'], ['D'.charCodeAt(0)]);
+                    console.log('Move right');
+                    break;
+                case 'r':
+                case 'R':
+                    initGame();
+                    console.log('Restart game');
+                    break;
+                case 'q':
+                case 'Q':
+                    startGame();
+                    console.log('Start game');
+                    break;
+                case 'e':
+                case 'E':
+                    pauseGame();
+                    console.log('Pause game');
+                    break;
+            }
+        }
+        
+        // 初始化游戏
+        function initGame() {
+            // 初始化游戏板
+            initGameBoard();
+            
+            // 初始化游戏状态
+            Module.ccall('init_game', null, [], []);
+            
+            // 更新游戏状态
+            updateGameState();
+            
+            // 重置运行状态
+            isRunning = false;
+            
+            // 加载历史最高分
+            loadHighScore();
+        }
+        
+        // 加载历史最高分
+        function loadHighScore() {
+            const highScore = localStorage.getItem('snakeHighScore') || 0;
+            highScoreElement.textContent = highScore;
+        }
+        
+        // 更新历史最高分
+        function updateHighScore(score) {
+            const currentHighScore = parseInt(localStorage.getItem('snakeHighScore') || 0);
+            if (score > currentHighScore) {
+                localStorage.setItem('snakeHighScore', score);
+                highScoreElement.textContent = score;
+                console.log('新的历史最高分:', score);
+            }
+        }
+        
+        // 更新游戏状态
+        function updateGameState() {
+            // 从C模块获取游戏状态
+            const stateStr = Module.ccall('get_game_state', 'string', [], []);
+            console.log('Game state:', stateStr); // 添加调试信息
+            gameState = JSON.parse(stateStr);
+            
+            // 更新游戏板
+            updateGameBoard();
+            
+            // 如果游戏结束，检查是否更新历史最高分
+            if (gameState.game_over) {
+                updateHighScore(gameState.score);
+            }
+        }
+        
+        // 设置游戏循环
+        function gameLoop() {
+            if (!isRunning) return; // 如果游戏暂停，不执行游戏逻辑
+            
+            console.log('Game loop running'); // 添加调试信息
+            // 运行游戏逻辑
+            Module.ccall('game_loop', null, [], []);
+            
+            // 更新游戏状态
+            updateGameState();
+            
+            // 继续游戏循环
+            if (!gameState.game_over && isRunning) {
+                // 根据倍速调整游戏循环间隔，增加基础值使蛇移动速度变慢
+                const interval = 150 / gameSpeed;
+                gameLoopId = setTimeout(gameLoop, interval); // 使用setTimeout代替requestAnimationFrame，更稳定
+            }
+        }
+        
+        // 更改游戏倍速
+        function changeSpeed() {
+            gameSpeed = parseFloat(speedSelect.value);
+            console.log('Game speed changed to:', gameSpeed, 'x');
+        }
+        
+        // 开始游戏
+        function startGame() {
+            if (!isRunning) {
+                isRunning = true;
+                gameLoop();
+                console.log('Game started');
+            }
+        }
+        
+        // 暂停游戏
+        function pauseGame() {
+            if (isRunning) {
+                isRunning = false;
+                if (gameLoopId) {
+                    clearTimeout(gameLoopId);
+                    gameLoopId = null;
+                }
+                console.log('Game paused');
+            }
+        }
+        
+        // 添加事件监听器
+        document.addEventListener('keydown', handleKeyPress);
+        
+        // 控制按钮事件
+        upBtn.addEventListener('click', () => Module.ccall('handle_key', null, ['number'], ['W'.charCodeAt(0)]));
+        leftBtn.addEventListener('click', () => Module.ccall('handle_key', null, ['number'], ['A'.charCodeAt(0)]));
+        downBtn.addEventListener('click', () => Module.ccall('handle_key', null, ['number'], ['S'.charCodeAt(0)]));
+        rightBtn.addEventListener('click', () => Module.ccall('handle_key', null, ['number'], ['D'.charCodeAt(0)]));
+        restartBtn.addEventListener('click', initGame);
+        startBtn.addEventListener('click', startGame);
+        pauseBtn.addEventListener('click', pauseGame);
+        speedSelect.addEventListener('change', changeSpeed);
+        gameOverRestartBtn.addEventListener('click', initGame);
+    </script>
+</body>
+</html>
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/games/">GAMES</a></li>
+          <li>SNAKE_GAME</li>
+  </ul>
+
+    
+    
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">null </a>
+  </div>
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Bowen Cao</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"infinitefor42/infinitefor42.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js" defer></script>
+
+</body>
+</html>
