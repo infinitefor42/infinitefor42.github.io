@@ -22,15 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="这是我的个人游戏开发实验室，未来会在这里上线更多有趣的小项目。 1. 经典贪吃蛇（Snake Game）                       点击进入游戏              const container &#x3D; document.getElementById(&#39;game-container&#39;);     const canvas &#x3D; document.getElementById(&#39;">
+    <meta name="description" content="这是我的个人游戏开发实验室，未来会在这里上线更多有趣的小项目。 1. 经典贪吃蛇 (Snake Game)     &times;      &lt;div style&#x3D;&quot;background: #000; padding: 10px; border: 2px solid #4a90e2; border-radius: 8px;&quot;&gt;     &lt;canvas id&#x3D;&amp;">
 <meta property="og:type" content="website">
 <meta property="og:title" content="games">
 <meta property="og:url" content="http://caobowen.top/games/index.html">
 <meta property="og:site_name" content="DevLog">
-<meta property="og:description" content="这是我的个人游戏开发实验室，未来会在这里上线更多有趣的小项目。 1. 经典贪吃蛇（Snake Game）                       点击进入游戏              const container &#x3D; document.getElementById(&#39;game-container&#39;);     const canvas &#x3D; document.getElementById(&#39;">
+<meta property="og:description" content="这是我的个人游戏开发实验室，未来会在这里上线更多有趣的小项目。 1. 经典贪吃蛇 (Snake Game)     &times;      &lt;div style&#x3D;&quot;background: #000; padding: 10px; border: 2px solid #4a90e2; border-radius: 8px;&quot;&gt;     &lt;canvas id&#x3D;&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-25T02:35:37.000Z">
-<meta property="article:modified_time" content="2026-03-25T03:07:17.095Z">
+<meta property="article:modified_time" content="2026-03-25T04:31:24.387Z">
 <meta property="article:author" content="Bowen Cao">
 <meta name="twitter:card" content="summary">
 
@@ -190,7 +190,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BB%8F%E5%85%B8%E8%B4%AA%E5%90%83%E8%9B%87%EF%BC%88Snake-Game%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">1. 经典贪吃蛇（Snake Game）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%95%AC%E8%AF%B7%E6%9C%9F%E5%BE%85%E2%80%A6"><span class="nav-number">2.</span> <span class="nav-text">2. 敬请期待…</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%BB%8F%E5%85%B8%E8%B4%AA%E5%90%83%E8%9B%87-Snake-Game"><span class="nav-number">1.</span> <span class="nav-text">1. 经典贪吃蛇 (Snake Game)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -259,30 +259,33 @@
       
       <div class="post-body">
           <p>这是我的个人游戏开发实验室，未来会在这里上线更多有趣的小项目。</p>
-<h2 id="1-经典贪吃蛇（Snake-Game）"><a href="#1-经典贪吃蛇（Snake-Game）" class="headerlink" title="1. 经典贪吃蛇（Snake Game）"></a>1. 经典贪吃蛇（Snake Game）</h2><div id="game-container" style="width: 400px; height: 400px; background: #222; margin: 20px auto; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid #555; border-radius: 8px; transition: 0.3s;">
-    <div style="text-align: center; color: #fff;">
-        <i class="fa fa-play-circle" style="font-size: 50px; margin-bottom: 10px;"></i>
-        <p style="font-size: 18px;">点击进入游戏</p>
-    </div>
+<h2 id="1-经典贪吃蛇-Snake-Game"><a href="#1-经典贪吃蛇-Snake-Game" class="headerlink" title="1. 经典贪吃蛇 (Snake Game)"></a>1. <a href="javascript:void(0)" id="open-snake-game" style="text-decoration: none; color: inherit;">经典贪吃蛇 (Snake Game)</a></h2><div id="game-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; flex-direction: column;">
+    <div id="close-game" style="position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; cursor: pointer;">&times;</div>
+    
+<pre><code>&lt;div style=&quot;background: #000; padding: 10px; border: 2px solid #4a90e2; border-radius: 8px;&quot;&gt;
+    &lt;canvas id=&quot;snake&quot; width=&quot;400&quot; height=&quot;400&quot;&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;p style=&quot;color: #fff; margin-top: 15px;&quot;&gt;按任意方向键开始游戏&lt;/p&gt;
+</code></pre>
 </div>
 
-<p><canvas id="snake" width="400" height="400" style="background: #000; display: none; margin: 20px auto; border: 2px solid #fff;"></canvas></p>
-<script>
-    const container = document.getElementById('game-container');
-    const canvas = document.getElementById('snake');
+<script src="./snake.js"></script>
 
-    container.onclick = function() {
-        // 隐藏封面，显示画布
-        container.style.display = 'none';
-        canvas.style.display = 'block';
-        
-        // 动态加载并启动你的 snake.js
-        const script = document.createElement('script');
-        script.src = "./snake.js"; 
-        document.body.appendChild(script);
-    };
+<script>
+    const modal = document.getElementById('game-modal');
+    const openBtn = document.getElementById('open-snake-game');
+    const closeBtn = document.getElementById('close-game');
+
+    openBtn.onclick = function() {
+        modal.style.display = 'flex';
+        // 如果你的 snake.js 里有一个 init() 函数，记得在这里调用它
+    }
+
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    }
 </script>
-<h2 id="2-敬请期待…"><a href="#2-敬请期待…" class="headerlink" title="2. 敬请期待…"></a>2. 敬请期待…</h2>
+
       </div>
       
       
