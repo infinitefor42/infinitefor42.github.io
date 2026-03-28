@@ -14,8 +14,8 @@
     <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
   </entry>
   <entry>
-    <title>烟花算法深度解析</title>
-    <url>/2026/03/24/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/</url>
+    <title>烟花算法简介</title>
+    <url>/2026/03/24/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h2 id="1-什么是烟花算法？"><a href="#1-什么是烟花算法？" class="headerlink" title="1.什么是烟花算法？"></a>1.什么是烟花算法？</h2><p>烟花算法(Fireworks Algorithm, FWA)是一种模拟烟花爆炸过程的群体智能优化算法。</p>
 <h2 id="2-核心思想"><a href="#2-核心思想" class="headerlink" title="2.核心思想"></a>2.核心思想</h2><p>模拟“烟花爆炸生成火花”的自然现象：<br>· 烟花对应“待优化问题的候选解”；<br>· 爆炸生成火花对应“基于当前解生成新解”；<br>· 通过差异化的爆炸规则（不同烟花生成不同数量、不同范围的火花），实现局部精细搜索与全局广泛搜索的平衡。<br>烟花算法具体包括以下几个步骤:</p>
 <ol>
