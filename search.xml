@@ -40,10 +40,50 @@
      return 1;
  }
 </code></pre><p> }</p>
-<p> return 0; // 快指针走到尽头，说明无环<br>}</p>
-<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2></li>
+<p> return 0; // 快指针走到尽头，说明无环<br>}<br>/**</p>
+</li>
+<li>找到链表环的入口</li>
+<li><p>返回环的起始节点指针<br><em>/<br>Node</em> findBegin(Node <em>head)<br>{<br> Node </em>fast = head;<br> Node *slow = head;</p>
+<p> // 第一步：利用快慢指针判断是否有环<br> while (fast != NULL &amp;&amp; fast-&gt;next != NULL)<br> {</p>
+<pre><code> fast = fast-&gt;next-&gt;next;
+ slow = slow.next;
+
+ // 如果相遇，说明有环
+ if (fast == slow)
+ {
+     // 第二步：计算环中节点的个数 count
+     Node *p = fast;
+     int count = 1;
+     while (p-&gt;next != slow)
+     {
+         count++;
+         p = p-&gt;next;
+     }
+
+     // 第三步：寻找环的入口
+     fast = head;
+     slow = head;
+
+     // 让 fast 指针先走 count 步
+     for (int i = 0; i &lt; count; i++)
+     {
+         fast = fast-&gt;next;
+     }
+
+     // 然后 fast 和 slow 同步前进，相遇点即为入口
+     while (fast != slow)
+     {
+         fast = fast-&gt;next;
+         slow = slow.next;
+     }
+
+     return slow;
+ }
+</code></pre><p> }</p>
+<p> return NULL; // 无环<br>}</p>
+</li>
 </ul>
-<ul>
+<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2><ul>
 <li><strong>极高的空间效率</strong>：它能将原本需要 <strong>O(n)</strong> 空间的算法（例如使用哈希表或集合来记录已访问节点）降低到 <strong>O(1)</strong> 的常数级空间。</li>
 <li><strong>打破思维定式</strong>：它提醒我们，遍历数据结构时不一定只有一种速度。通过制造“速度差”，我们可以巧妙地挖掘出链表或数组中隐藏的几何属性（如中点、环路等）。</li>
 </ul>
