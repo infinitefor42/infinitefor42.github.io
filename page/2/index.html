@@ -197,13 +197,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -242,7 +242,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://caobowen.top/2026/03/24/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://caobowen.top/2026/03/24/about-me/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -260,7 +260,10 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/24/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">烟花算法深度解析</a>
+          
+              <span class="post-sticky-flag" title="置顶">
+                <i class="fa fa-thumbtack"></i>
+              </span><a href="/2026/03/24/about-me/" class="post-title-link" itemprop="url">个人简介</a>
         </h2>
 
         <div class="post-meta-container">
@@ -271,14 +274,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-03-24 18:03:39" itemprop="dateCreated datePublished" datetime="2026-03-24T18:03:39+08:00">2026-03-24</time>
+      <time title="创建时间：2026-03-24 21:35:48" itemprop="dateCreated datePublished" datetime="2026-03-24T21:35:48+08:00">2026-03-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-26 09:14:23" itemprop="dateModified" datetime="2026-03-26T09:14:23+08:00">2026-03-26</time>
+      <time title="修改时间：2026-03-25 10:33:19" itemprop="dateModified" datetime="2026-03-25T10:33:19+08:00">2026-03-25</time>
     </span>
 
   
@@ -298,18 +301,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="1-什么是烟花算法？"><a href="#1-什么是烟花算法？" class="headerlink" title="1.什么是烟花算法？"></a>1.什么是烟花算法？</h2><p>烟花算法(Fireworks Algorithm, FWA)是一种模拟烟花爆炸过程的群体智能优化算法。</p>
-<h2 id="2-核心思想"><a href="#2-核心思想" class="headerlink" title="2.核心思想"></a>2.核心思想</h2><p>模拟“烟花爆炸生成火花”的自然现象：<br>· 烟花对应“待优化问题的候选解”；<br>· 爆炸生成火花对应“基于当前解生成新解”；<br>· 通过差异化的爆炸规则（不同烟花生成不同数量、不同范围的火花），实现局部精细搜索与全局广泛搜索的平衡。<br>烟花算法具体包括以下几个步骤:</p>
-<ol>
-<li>在可行解空间中随机产生一定数量的烟花，每个烟花代表解空间中的一个可行解。</li>
-<li>根据优化目标函数计算每个烟花的适应度值，并据此确定烟花质量的好坏，以在不同爆炸半径下产生不同数量的火花。在烟花算法中，作者使用了两种形式的火花，分别是爆炸火花和高斯变异火花其中爆炸火花主要负责对烟花邻近区域的搜索，适应度值好的烟花在较小的邻近区域内产生较多的火花，反之，适应度值差的烟花在较大的邻近区域内产生较少的火花。相对于爆炸火花，高斯火花的引入增强了种群的多样性（避免算法陷入局部最优）。</li>
-<li>判定是否满足终止条件。如果满足则停止搜索，否则在爆炸火花、高斯变异火花和烟花中选择一定数量的个体作为烟花进入下一代的迭代。<br>烟花算法具有局部搜索能力和全局搜索能力自调节机制。烟花算法中每个烟花的爆炸半径和爆炸火花数是不同的，适应度值差的烟花的爆炸半径较大，使其具有更大的“探索能力”———勘探性。适应度值好的烟花的爆炸半径较小，使其能够在该位置周围具有更大的“挖掘能力”———开采性。此外，高斯变异火花（即高斯火花）的引入可以进一步增加种群的多样性。。</li>
-</ol>
-<h3 id="人文温度：算法背后的绽放哲学"><a href="#人文温度：算法背后的绽放哲学" class="headerlink" title="人文温度：算法背后的绽放哲学"></a>人文温度：算法背后的绽放哲学</h3><p>烟花算法的诗意，不仅在于它模仿烟花绽放的璀璨过程，更在于它传递的 “分级发力、互补共赢” 的人生哲学：</p>
-<h3 id="优质者当有大格局："><a href="#优质者当有大格局：" class="headerlink" title="优质者当有大格局："></a>优质者当有大格局：</h3><p>优质烟花以广阔的爆炸范围照亮未知，恰如优秀的人以开阔的视野探索更多可能 —— 格局越大，探索的边界越远，越容易找到全局最优；</p>
-<h3 id="平凡者需精耕细作："><a href="#平凡者需精耕细作：" class="headerlink" title="平凡者需精耕细作："></a>平凡者需精耕细作：</h3><p>普通烟花以局部精细搜索打磨细节，恰如平凡的人以专注的态度深耕自身领域 —— 把小事做细，把细节做透，同样能抵达局部最优，甚至成为全局最优的重要支撑；</p>
-<h3 id="互补者方能共赢："><a href="#互补者方能共赢：" class="headerlink" title="互补者方能共赢："></a>互补者方能共赢：</h3><p>普通火花与高斯火花的协同，恰如团队中不同角色的配合 —— 有人负责开拓，有人负责深耕，互补的力量才能让优化过程既高效又稳定。</p>
-
+          <p>当“数据科学与大数据技术”这串专业名称第一次出现在我的录取通知书上时，我对它的认知还停留在“会和很多数字打交道”。
+如今真正踏入大学，才慢慢明白：数据不是冰冷的符号，而是藏着世界运行的逻辑；代码不只是敲键盘，更是我们与海量信息对话的方式。
+作为一名刚上路的大一新生，我对该专业的知识充满好奇，也对未来的学习充满期待与忐忑。
+这条路注定要不断踩坑、不断调试、不断复盘，但也正因如此，每一点进步都格外珍贵。
+这个博客，将是我学习路上的小小驿站。
+我会在这里记录课程笔记、刷题心得、踩过的坑、突然想通的瞬间，也会分享一些关于数据、代码、工具和成长的碎碎念。
+不求一步到位，只求日日精进。
+愿以热爱为引，以坚持为伴，在数据的世界里，慢慢成为更靠谱的自己。
+也期待在这里，遇见更多同行的人。
+</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/24/about-me/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -328,7 +337,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
