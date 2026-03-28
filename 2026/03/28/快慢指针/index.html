@@ -22,13 +22,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="算法进阶：彻底搞懂“快慢指针”及其妙用在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 快慢指针（Fast &amp; Slow Pointers），通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。  1. 什么是快慢指针？顾名思义，我们同时使用两个指针在数据结构上移动：  慢指针 (Slow)：每次向前移动 1">
+<meta property="og:type" content="article">
 <meta property="og:title" content="快慢指针">
 <meta property="og:url" content="http://caobowen.top/2026/03/28/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/index.html">
 <meta property="og:site_name" content="DevLog">
+<meta property="og:description" content="算法进阶：彻底搞懂“快慢指针”及其妙用在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 快慢指针（Fast &amp; Slow Pointers），通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。  1. 什么是快慢指针？顾名思义，我们同时使用两个指针在数据结构上移动：  慢指针 (Slow)：每次向前移动 1">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-03-28T08:27:58.000Z">
-<meta property="article:modified_time" content="2026-03-28T08:30:18.790Z">
+<meta property="article:modified_time" content="2026-03-28T12:59:57.963Z">
 <meta property="article:author" content="Bowen Cao">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -176,7 +178,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -189,6 +191,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%BD%BB%E5%BA%95%E6%90%9E%E6%87%82%E2%80%9C%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%E2%80%9D%E5%8F%8A%E5%85%B6%E5%A6%99%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">算法进阶：彻底搞懂“快慢指针”及其妙用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AF%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么是快慢指针？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%A0%B8%E5%BF%83%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">2. 核心应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A0-%E5%88%A4%E5%AE%9A%E9%93%BE%E8%A1%A8%E6%98%AF%E5%90%A6%E6%9C%89%E7%8E%AF-Floyd%E2%80%99s-Cycle-Finding-Algorithm"><span class="nav-number">1.2.1.</span> <span class="nav-text">① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A1-%E5%AF%BB%E6%89%BE%E9%93%BE%E8%A1%A8%E7%9A%84%E4%B8%AD%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">② 寻找链表的中点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%91%A2-%E5%AF%BB%E6%89%BE%E7%8E%AF%E7%9A%84%E5%85%A5%E5%8F%A3%E7%82%B9"><span class="nav-number">1.2.3.</span> <span class="nav-text">③ 寻找环的入口点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BB%A3%E7%A0%81%E6%BC%94%E7%A4%BA-C%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.3.</span> <span class="nav-text">3. 代码演示 (C语言实现)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B8%AA%E6%8A%80%E5%B7%A7%E5%BE%88%E9%87%8D%E8%A6%81%EF%BC%9F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 为什么这个技巧很重要？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">1.5.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -277,7 +280,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2026-03-28 16:27:58 / 修改时间：16:30:18" itemprop="dateCreated datePublished" datetime="2026-03-28T16:27:58+08:00">2026-03-28</time>
+      <time title="创建时间：2026-03-28 16:27:58 / 修改时间：20:59:57" itemprop="dateCreated datePublished" datetime="2026-03-28T16:27:58+08:00">2026-03-28</time>
     </span>
 
   
@@ -303,7 +306,53 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h1 id="算法进阶：彻底搞懂“快慢指针”及其妙用"><a href="#算法进阶：彻底搞懂“快慢指针”及其妙用" class="headerlink" title="算法进阶：彻底搞懂“快慢指针”及其妙用"></a>算法进阶：彻底搞懂“快慢指针”及其妙用</h1><p>在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 <strong>快慢指针（Fast &amp; Slow Pointers）</strong>，通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。</p>
+<hr>
+<h2 id="1-什么是快慢指针？"><a href="#1-什么是快慢指针？" class="headerlink" title="1. 什么是快慢指针？"></a>1. 什么是快慢指针？</h2><p>顾名思义，我们同时使用两个指针在数据结构上移动：</p>
+<ul>
+<li><strong>慢指针 (Slow)</strong>：每次向前移动 <strong>1</strong> 个步长。</li>
+<li><strong>快指针 (Fast)</strong>：每次向前移动 <strong>2</strong> 个（或更多）步长。</li>
+</ul>
+<p>这种步频差就像“龟兔赛跑”，只要路程足够长或存在环路，快指针一定会与慢指针产生特定的相对位置关系，从而帮助我们推导出结构的特征。</p>
+<hr>
+<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
+<ul>
+<li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
+<li><strong>优势</strong>：空间复杂度仅为 $O(1)$，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
+</ul>
+<h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3><p>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</p>
+<ul>
+<li><strong>逻辑</strong>：快指针的速度是慢指针的两倍。当快指针到达链表末尾（<code>null</code>）时，慢指针刚好走到了全长的一半。</li>
+<li><strong>用途</strong>：常用于链表的归并排序（Merge Sort）或判断回文链表。</li>
+</ul>
+<h3 id="③-寻找环的入口点"><a href="#③-寻找环的入口点" class="headerlink" title="③ 寻找环的入口点"></a>③ 寻找环的入口点</h3><p>这是一个进阶的数学问题。</p>
+<ul>
+<li><strong>逻辑</strong>：在快慢指针第一次相遇后，将其中一个指针放回起点（Head），两个指针现在以<strong>相同速度</strong>（步长皆为 1）同时前进。当它们再次相遇时，相遇点即为环的入口。</li>
+</ul>
+<hr>
+<h2 id="3-代码演示-C语言实现"><a href="#3-代码演示-C语言实现" class="headerlink" title="3. 代码演示 (C语言实现)"></a>3. 代码演示 (C语言实现)</h2><p>/**</p>
+<ul>
+<li>判断链表是否有环</li>
+<li><p>返回 1 表示有环，返回 0 表示无环<br><em>/<br>int isCycle(Node </em>head)<br>{<br> Node <em>fast = head;<br> Node </em>slow = head;</p>
+<p> while (fast != NULL &amp;&amp; fast-&gt;next != NULL)   //这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.<br> {</p>
+<pre><code> fast = fast-&gt;next-&gt;next; // 快指针每次走两步
+ slow = slow.next;        // 慢指针每次走一步
+
+ if (fast == slow)        // 快慢指针相遇，说明有环
+ {
+     return 1;
+ }
+</code></pre><p> }</p>
+<p> return 0; // 快指针走到尽头，说明无环<br>}</p>
+<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2></li>
+</ul>
+<ul>
+<li><strong>极高的空间效率</strong>：它能将原本需要 $O(n)$ 空间的算法（例如使用哈希表或集合来记录已访问节点）降低到 <strong>$O(1)$</strong> 的常数级空间。</li>
+<li><strong>打破思维定式</strong>：它提醒我们，遍历数据结构时不一定只有一种速度。通过制造“速度差”，我们可以巧妙地挖掘出链表或数组中隐藏的几何属性（如中点、环路等）。</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>快慢指针是算法面试中的“常客”，也是提升程序效率的利器。下次当你看到链表、循环或需要寻找特定比例位置的问题时，不妨停下来想想：<strong>是不是可以让其中一个指针“跑快点”？</strong></p>
+
     </div>
 
     
