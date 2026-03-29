@@ -15,10 +15,8 @@
 <h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
 <ul>
 <li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
-<li><strong>优势</strong>：空间复杂度仅为 $O(1)$，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
-</ul>
-<h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3><p>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</p>
-<ul>
+<li><strong>优势</strong>：空间复杂度仅为 <strong>O(1)</strong>，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
+<li><h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</li>
 <li><strong>逻辑</strong>：快指针的速度是慢指针的两倍。当快指针到达链表末尾（<code>null</code>）时，慢指针刚好走到了全长的一半。</li>
 <li><strong>用途</strong>：常用于链表的归并排序（Merge Sort）或判断回文链表。</li>
 </ul>
