@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://caobowen.top/2026/03/28/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</loc>
+    <loc>http://caobowen.top/games/index.html</loc>
     
     <lastmod>2026-03-29</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>http://caobowen.top/games/index.html</loc>
+    <loc>http://caobowen.top/2026/03/28/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</loc>
     
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-29</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -73,6 +73,51 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://caobowen.top/games/Games-2VS/index.html</loc>
+    
+    <lastmod>2025-06-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://caobowen.top/games/Games-2VS/games/dama.html</loc>
+    
+    <lastmod>2025-06-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://caobowen.top/games/Games-2VS/games/indovina-coppia.html</loc>
+    
+    <lastmod>2025-06-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://caobowen.top/games/Games-2VS/games/oca.html</loc>
+    
+    <lastmod>2025-06-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://caobowen.top/games/Games-2VS/games/tris.html</loc>
+    
+    <lastmod>2025-06-14</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>http://caobowen.top/</loc>
@@ -83,14 +128,14 @@
 
   
   <url>
-    <loc>http://caobowen.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <loc>http://caobowen.top/tags/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://caobowen.top/tags/%E7%83%9F%E8%8A%B1%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://caobowen.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
     <lastmod>2026-03-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
