@@ -28,57 +28,10 @@
 <h2 id="3-代码演示-C语言实现"><a href="#3-代码演示-C语言实现" class="headerlink" title="3. 代码演示 (C语言实现)"></a>3. 代码演示 (C语言实现)</h2><p>/**</p>
 <ul>
 <li>判断链表是否有环</li>
-<li><p>返回 1 表示有环，返回 0 表示无环<br><em>/<br>int isCycle(Node </em>head)<br>{<br> Node <em>fast = head;<br> Node </em>slow = head;</p>
-<p> while (fast != NULL &amp;&amp; fast-&gt;next != NULL)   //这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.<br> {</p>
-<pre><code> fast = fast-&gt;next-&gt;next; // 快指针每次走两步
- slow = slow.next;        // 慢指针每次走一步
-
- if (fast == slow)        // 快慢指针相遇，说明有环
- {
-     return 1;
- }
-</code></pre><p> }</p>
-<p> return 0; // 快指针走到尽头，说明无环<br>}<br>/**</p>
-</li>
+<li>返回 1 表示有环，返回 0 表示无环<br>*/<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isCycle</span><span class="params">(Node *head)</span> </span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)   <span class="comment">//这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.</span></span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next; <span class="comment">// 快指针每次走两步</span></span><br><span class="line">        slow = slow.next;        <span class="comment">// 慢指针每次走一步</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)        <span class="comment">// 快慢指针相遇，说明有环</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 快指针走到尽头，说明无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+/**</li>
 <li>找到链表环的入口</li>
-<li><p>返回环的起始节点指针<br><em>/<br>Node</em> findBegin(Node <em>head)<br>{<br> Node </em>fast = head;<br> Node *slow = head;</p>
-<p> // 第一步：利用快慢指针判断是否有环<br> while (fast != NULL &amp;&amp; fast-&gt;next != NULL)<br> {</p>
-<pre><code> fast = fast-&gt;next-&gt;next;
- slow = slow-&gt;next;
-
- // 如果相遇，说明有环
- if (fast == slow)
- {
-     // 第二步：计算环中节点的个数 count
-     Node *p = fast;
-     int count = 1;
-     while (p-&gt;next != slow)
-     {
-         count++;
-         p = p-&gt;next;
-     }
-
-     // 第三步：寻找环的入口
-     fast = head;
-     slow = head;
-
-     // 让 fast 指针先走 count 步
-     for (int i = 0; i &lt; count; i++)
-     {
-         fast = fast-&gt;next;
-     }
-
-     // 然后 fast 和 slow 同步前进，相遇点即为入口
-     while (fast != slow)
-     {
-         fast = fast-&gt;next;
-         slow = slow-&gt;next;
-     }
-
-     return slow;
- }
-</code></pre><p> }</p>
-<p> return NULL; // 无环<br>}</p>
+<li>返回环的起始节点指针<br>*/<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Node* <span class="title function_">findBegin</span><span class="params">(Node *head)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一步：利用快慢指针判断是否有环</span></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果相遇，说明有环</span></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 第二步：计算环中节点的个数 count</span></span><br><span class="line">            Node *p = fast;</span><br><span class="line">            <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;next != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                count++;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 第三步：寻找环的入口</span></span><br><span class="line">            fast = head;</span><br><span class="line">            slow = head;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 让 fast 指针先走 count 步</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后 fast 和 slow 同步前进，相遇点即为入口</span></span><br><span class="line">            <span class="keyword">while</span> (fast != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2><ul>
