@@ -44,7 +44,7 @@
 <li><p>返回环的起始节点指针<br><em>/<br>Node</em> findBegin(Node <em>head)<br>{<br> Node </em>fast = head;<br> Node *slow = head;</p>
 <p> // 第一步：利用快慢指针判断是否有环<br> while (fast != NULL &amp;&amp; fast-&gt;next != NULL)<br> {</p>
 <pre><code> fast = fast-&gt;next-&gt;next;
- slow = slow.next;
+ slow = slow-&gt;next;
 
  // 如果相遇，说明有环
  if (fast == slow)
@@ -72,7 +72,7 @@
      while (fast != slow)
      {
          fast = fast-&gt;next;
-         slow = slow.next;
+         slow = slow-&gt;next;
      }
 
      return slow;
