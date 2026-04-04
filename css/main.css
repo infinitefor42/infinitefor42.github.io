@@ -1322,7 +1322,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #3eb45d;
+    background: #e2509d;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2519,9 +2519,6 @@ ul.breadcrumb li:last-child {
 }
 html #dsqjs {
   color-scheme: light;
-}
-.utterances {
-  max-width: unset;
 }
 .search-active {
   overflow: hidden;
