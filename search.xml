@@ -44,11 +44,6 @@
       </tags>
   </entry>
   <entry>
-    <title>个人简介</title>
-    <url>/2026/03/24/about-me/</url>
-    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
-  </entry>
-  <entry>
     <title>高等数学试题</title>
     <url>/2026/03/28/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<p> 1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
@@ -56,6 +51,11 @@
       <tags>
         <tag>高等数学</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>个人简介</title>
+    <url>/2026/03/24/about-me/</url>
+    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
   </entry>
   <entry>
     <title>烟花算法简介</title>
