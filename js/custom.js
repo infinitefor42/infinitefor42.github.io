@@ -1,30 +1,27 @@
-// 监听 NexT 主题切换，同步 Giscus 评论区主题
-function syncGiscusTheme() {
-  const giscusFrame = document.querySelector('iframe.giscus-frame');
-  if (!giscusFrame) return;
+// 监听主题变化，同步给 Giscus
+function updateGiscusTheme() {
+    const isDark = document.documentElement.classList.contains('dark');
+    const giscusFrame = document.querySelector('iframe.giscus-frame');
+    
+    if (!giscusFrame) return;
 
-  // 判断当前主题是亮色还是暗色
-  const isDark = document.documentElement.classList.contains('dark') || 
-                 window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  // 给 Giscus 发送主题切换消息
-  giscusFrame.contentWindow.postMessage({
-    giscus: {
-      setConfig: {
-        theme: isDark ? 'dark' : 'light'
-      }
-    }
-  }, '*');
+    // 发送消息给 Giscus iframe
+    giscusFrame.contentWindow.postMessage({
+        giscus: {
+            setConfig: {
+                // 根据当前网页类名，决定发给 Giscus 哪个主题
+                theme: isDark ? 'dark' : 'light'
+            }
+        }
+    }, 'https://giscus.app');
 }
 
-// 页面加载完成后执行
-document.addEventListener('DOMContentLoaded', syncGiscusTheme);
-// PJAX 跳转后执行（解决你之前的PJAX问题）
-document.addEventListener('pjax:complete', syncGiscusTheme);
-// 监听主题切换按钮点击
+// 页面加载时初始化
+document.addEventListener('DOMContentLoaded', updateGiscusTheme);
+// PJAX 跳转后
+document.addEventListener('pjax:complete', updateGiscusTheme);
+// 监听你点击切换主题的按钮
 document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-  // 延迟100ms，等主题切换完成
-  setTimeout(syncGiscusTheme, 100);
+    // 延时200ms，等网页主题类切换完成后再发送
+    setTimeout(updateGiscusTheme, 200);
 });
-// 监听系统主题变化
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncGiscusTheme);
