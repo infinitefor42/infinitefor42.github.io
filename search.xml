@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>个人简介</title>
-    <url>/2026/03/24/about-me/</url>
-    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
-  </entry>
-  <entry>
     <title>快慢指针</title>
     <url>/2026/03/28/%E5%BF%AB%E6%85%A2%E6%8C%87%E9%92%88/</url>
     <content><![CDATA[<h1 id="算法进阶：彻底搞懂“快慢指针”及其妙用"><a href="#算法进阶：彻底搞懂“快慢指针”及其妙用" class="headerlink" title="算法进阶：彻底搞懂“快慢指针”及其妙用"></a>算法进阶：彻底搞懂“快慢指针”及其妙用</h1><p>在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 <strong>快慢指针（Fast &amp; Slow Pointers）</strong>，通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。</p>
@@ -55,7 +50,8 @@
     <title>高等数学试题</title>
     <url>/2026/03/28/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<p> 1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数<script type="math/tex">f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}</script><br>有 <strong>_</strong> 个第二类间断点（填阿拉伯数字）。</p>
+<p>2.函数</p>
+<script type="math/tex; mode=display">f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}</script><p>有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
 ]]></content>
       <categories>
         <category>数学</category>
@@ -63,6 +59,25 @@
       <tags>
         <tag>高等数学</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>games</title>
+    <url>/2026/03/25/games/</url>
+    <content><![CDATA[<p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
+<h3 id="1-经典贪吃蛇"><a href="#1-经典贪吃蛇" class="headerlink" title="1. 经典贪吃蛇"></a>1. <a href="/games/Snake_Game/index.html" target="_blank" rel="noopener noreferrer">经典贪吃蛇</a></h3><h3 id="2-密阵突围"><a href="#2-密阵突围" class="headerlink" title="2. 密阵突围"></a>2. <a href="https://brain-s13.nano.ac/round2/">密阵突围</a></h3><h3 id="3-扫雷游戏"><a href="#3-扫雷游戏" class="headerlink" title="3. 扫雷游戏"></a>3. <a href="https://www.minesweeper.cn/">扫雷游戏</a></h3><p><br></p>
+<hr>
+<p align="center">
+  <small>🛡️ 本站收录的外部链接均已通过 <b><a href="https://www.virustotal.com/">VirusTotal</a></b> 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。</small>
+</p>
+]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>个人简介</title>
+    <url>/2026/03/24/about-me/</url>
+    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
   </entry>
   <entry>
     <title>烟花算法简介</title>
@@ -81,19 +96,5 @@
       <tags>
         <tag>烟花算法</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>games</title>
-    <url>/2026/03/25/games/</url>
-    <content><![CDATA[<p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
-<h3 id="1-经典贪吃蛇"><a href="#1-经典贪吃蛇" class="headerlink" title="1. 经典贪吃蛇"></a>1. <a href="/games/Snake_Game/index.html" target="_blank" rel="noopener noreferrer">经典贪吃蛇</a></h3><h3 id="2-密阵突围"><a href="#2-密阵突围" class="headerlink" title="2. 密阵突围"></a>2. <a href="https://brain-s13.nano.ac/round2/">密阵突围</a></h3><h3 id="3-扫雷游戏"><a href="#3-扫雷游戏" class="headerlink" title="3. 扫雷游戏"></a>3. <a href="https://www.minesweeper.cn/">扫雷游戏</a></h3><p><br></p>
-<hr>
-<p align="center">
-  <small>🛡️ 本站收录的外部链接均已通过 <b><a href="https://www.virustotal.com/">VirusTotal</a></b> 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。</small>
-</p>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
   </entry>
 </search>
