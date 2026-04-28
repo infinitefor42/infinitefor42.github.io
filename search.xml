@@ -47,20 +47,6 @@
       </tags>
   </entry>
   <entry>
-    <title>高等数学试题</title>
-    <url>/2026/03/28/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<p> 1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数</p>
-<script type="math/tex; mode=display">f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}</script><p>有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
-]]></content>
-      <categories>
-        <category>数学</category>
-      </categories>
-      <tags>
-        <tag>高等数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>games</title>
     <url>/2026/03/25/games/</url>
     <content><![CDATA[<p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
@@ -75,9 +61,18 @@
       </categories>
   </entry>
   <entry>
-    <title>个人简介</title>
-    <url>/2026/03/24/about-me/</url>
-    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
+    <title>高等数学试题</title>
+    <url>/2026/03/28/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<p> 1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
+<p>2.函数</p>
+<script type="math/tex; mode=display">f(x)=\frac{\ln\mid 1+x \mid}{(e^x - 1)(x - 1)}</script><p>有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
+]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>高等数学</tag>
+      </tags>
   </entry>
   <entry>
     <title>烟花算法简介</title>
@@ -96,5 +91,10 @@
       <tags>
         <tag>烟花算法</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>个人简介</title>
+    <url>/2026/03/24/about-me/</url>
+    <content><![CDATA[<h3 id="关于这个博客"><a href="#关于这个博客" class="headerlink" title="关于这个博客"></a>关于这个博客</h3>]]></content>
   </entry>
 </search>
