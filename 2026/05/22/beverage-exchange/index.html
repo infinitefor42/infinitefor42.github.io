@@ -22,26 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"enable":true,"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。 1. 经典贪吃蛇2. 密阵突围3. 扫雷游戏     🛡️ 本站收录的外部链接均已通过 VirusTotal 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。">
+    <meta name="description" content="题目背景与核心痛点这是一道在算法比赛中非常经典的“饮料换购”问题。题目看似是一个需要不断模拟“换饮料 $\rightarrow$ 喝饮料 $\rightarrow$ 产生新瓶盖 $\rightarrow$ 再换饮料”的动态循环过程，但如果我们跳出纯粹的代码模拟，从资源消耗的本质去思考，它其实可以转化为一个极其优雅的数学模型。  解题思路：从循环模拟到数学降维打击方法一：循环模拟法（直观逻辑）我们引">
 <meta property="og:type" content="article">
-<meta property="og:title" content="games">
-<meta property="og:url" content="http://caobowen.top/2026/03/25/games/index.html">
+<meta property="og:title" content="饮料换购">
+<meta property="og:url" content="http://caobowen.top/2026/05/22/beverage-exchange/index.html">
 <meta property="og:site_name" content="DevLog">
-<meta property="og:description" content="这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。 1. 经典贪吃蛇2. 密阵突围3. 扫雷游戏     🛡️ 本站收录的外部链接均已通过 VirusTotal 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。">
+<meta property="og:description" content="题目背景与核心痛点这是一道在算法比赛中非常经典的“饮料换购”问题。题目看似是一个需要不断模拟“换饮料 $\rightarrow$ 喝饮料 $\rightarrow$ 产生新瓶盖 $\rightarrow$ 再换饮料”的动态循环过程，但如果我们跳出纯粹的代码模拟，从资源消耗的本质去思考，它其实可以转化为一个极其优雅的数学模型。  解题思路：从循环模拟到数学降维打击方法一：循环模拟法（直观逻辑）我们引">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-25T02:35:37.000Z">
-<meta property="article:modified_time" content="2026-04-28T06:44:52.940Z">
+<meta property="article:published_time" content="2026-05-22T12:48:35.000Z">
+<meta property="article:modified_time" content="2026-05-22T13:14:43.633Z">
 <meta property="article:author" content="Bowen Cao">
+<meta property="article:tag" content="数论">
+<meta property="article:tag" content="蓝桥杯">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://caobowen.top/2026/03/25/games/">
+<link rel="canonical" href="http://caobowen.top/2026/05/22/beverage-exchange/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://caobowen.top/2026/03/25/games/","path":"2026/03/25/games/","title":"games"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://caobowen.top/2026/05/22/beverage-exchange/","path":"2026/05/22/beverage-exchange/","title":"饮料换购"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>games | DevLog</title>
+<title>饮料换购 | DevLog</title>
   
 
 
@@ -95,7 +97,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://caobowen.top/2026/03/25/games/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://caobowen.top/2026/05/22/beverage-exchange/"}</script>
   <script src="/js/third-party/quicklink.js" defer></script>
 
   <noscript>
@@ -187,7 +189,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BB%8F%E5%85%B8%E8%B4%AA%E5%90%83%E8%9B%87"><span class="nav-number">1.</span> <span class="nav-text">1. 经典贪吃蛇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%AF%86%E9%98%B5%E7%AA%81%E5%9B%B4"><span class="nav-number">2.</span> <span class="nav-text">2. 密阵突围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%89%AB%E9%9B%B7%E6%B8%B8%E6%88%8F"><span class="nav-number">3.</span> <span class="nav-text">3. 扫雷游戏</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E8%83%8C%E6%99%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">题目背景与核心痛点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%EF%BC%9A%E4%BB%8E%E5%BE%AA%E7%8E%AF%E6%A8%A1%E6%8B%9F%E5%88%B0%E6%95%B0%E5%AD%A6%E9%99%8D%E7%BB%B4%E6%89%93%E5%87%BB"><span class="nav-number">2.</span> <span class="nav-text">解题思路：从循环模拟到数学降维打击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E5%BE%AA%E7%8E%AF%E6%A8%A1%E6%8B%9F%E6%B3%95%EF%BC%88%E7%9B%B4%E8%A7%82%E9%80%BB%E8%BE%91%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">方法一：循环模拟法（直观逻辑）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%B3%95%EF%BC%88%E7%AD%89%E6%95%88%E6%9B%BF%E4%BB%A3%E6%80%9D%E7%BB%B4%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">方法二：数学公式法（等效替代思维）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">C 语言代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9A%E5%BE%AA%E7%8E%AF%E6%A8%A1%E6%8B%9F%E5%AE%9E%E7%8E%B0%EF%BC%88%E9%80%82%E5%90%88%E5%88%9D%E5%AD%A6%E8%80%85%EF%BC%8C%E9%80%BB%E8%BE%91%E7%9B%B4%E8%A7%82%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">方案一：循环模拟实现（适合初学者，逻辑直观）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E5%AE%9E%E7%8E%B0%EF%BC%88%E6%95%88%E7%8E%87%E9%AB%98%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">方案二：数学公式实现（效率高）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-%E8%93%9D%E6%A1%A5%E6%9D%AF%E9%80%9A%E5%85%B3%C2%B7%E5%BF%AB%E9%80%9F%E5%A4%8D%E7%9B%98"><span class="nav-number">4.</span> <span class="nav-text">💡 蓝桥杯通关·快速复盘</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -248,7 +250,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://caobowen.top/2026/03/25/games/">
+    <link itemprop="mainEntityOfPage" href="http://caobowen.top/2026/05/22/beverage-exchange/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/android-chrome-512x512.png">
@@ -261,12 +263,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="games | DevLog">
+      <meta itemprop="name" content="饮料换购 | DevLog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          games<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/_posts/games.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          饮料换购<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/_posts/beverage-exchange.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -276,15 +278,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2026-03-25 10:35:37" itemprop="dateCreated datePublished" datetime="2026-03-25T10:35:37+08:00">2026-03-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-04-28 14:44:52" itemprop="dateModified" datetime="2026-04-28T14:44:52+08:00">2026-04-28</time>
+      <time title="创建时间：2026-05-22 20:48:35 / 修改时间：21:14:43" itemprop="dateCreated datePublished" datetime="2026-05-22T20:48:35+08:00">2026-05-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -292,7 +288,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">项目</span></a>
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
     </span>
 
@@ -319,12 +315,36 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
-<h3 id="1-经典贪吃蛇"><a href="#1-经典贪吃蛇" class="headerlink" title="1. 经典贪吃蛇"></a>1. <a href="/games/Snake_Game/index.html" target="_blank" rel="noopener noreferrer">经典贪吃蛇</a></h3><h3 id="2-密阵突围"><a href="#2-密阵突围" class="headerlink" title="2. 密阵突围"></a>2. <a target="_blank" rel="noopener" href="https://brain-s13.nano.ac/round2/">密阵突围</a></h3><h3 id="3-扫雷游戏"><a href="#3-扫雷游戏" class="headerlink" title="3. 扫雷游戏"></a>3. <a target="_blank" rel="noopener" href="https://www.minesweeper.cn/">扫雷游戏</a></h3><p><br></p>
+    <div class="post-body" itemprop="articleBody"><h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道在算法比赛中非常经典的“饮料换购”问题。题目看似是一个需要不断模拟“换饮料 $\rightarrow$ 喝饮料 $\rightarrow$ 产生新瓶盖 $\rightarrow$ 再换饮料”的动态循环过程，但如果我们跳出纯粹的代码模拟，从<strong>资源消耗</strong>的本质去思考，它其实可以转化为一个极其优雅的数学模型。</p>
 <hr>
-<p align="center">
-  <small>🛡️ 本站收录的外部链接均已通过 <b><a target="_blank" rel="noopener" href="https://www.virustotal.com/">VirusTotal</a></b> 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。</small>
-</p>
+<h3 id="解题思路：从循环模拟到数学降维打击"><a href="#解题思路：从循环模拟到数学降维打击" class="headerlink" title="解题思路：从循环模拟到数学降维打击"></a>解题思路：从循环模拟到数学降维打击</h3><h4 id="方法一：循环模拟法（直观逻辑）"><a href="#方法一：循环模拟法（直观逻辑）" class="headerlink" title="方法一：循环模拟法（直观逻辑）"></a>方法一：循环模拟法（直观逻辑）</h4><p>我们引入两个变量：<code>total_drunk</code>（已喝到的饮料总数）和 <code>caps</code>（当前拥有的瓶盖数）。<br>初始状态下，买几瓶就能喝几瓶，并产生同等数量的瓶盖：<code>total_drunk = n; caps = n;</code>。<br>只要满足 <code>caps &gt;= 3</code>，就不断进行如下循环：</p>
+<ol>
+<li>计算本轮可以兑换的新饮料：<code>new_drinks = caps / 3</code></li>
+<li>累加到总饮用量：<code>total_drunk += new_drinks</code></li>
+<li>更新下一轮的瓶盖数：<code>caps = (caps % 3) + new_drinks</code>（即这一轮换饮料剩下的瓶盖 + 新喝完产生的瓶盖）</li>
+</ol>
+<p>该方法在 $n &lt; 1000$ 的情况下执行速度很快，但如果数据量拓展到 $10^9$ 级别，循环机制就会带来额外的计算开销。</p>
+<h4 id="方法二：数学公式法（等效替代思维）"><a href="#方法二：数学公式法（等效替代思维）" class="headerlink" title="方法二：数学公式法（等效替代思维）"></a>方法二：数学公式法（等效替代思维）</h4><p>我们可以通过 <strong>“净消耗分析”</strong> 来实现 $O(1)$ 的降维打击：</p>
+<ol>
+<li><strong>寻找等效关系</strong>：根据规则，3 个瓶盖可以换 1 瓶新饮料。而换回来的新饮料喝完后会退回 1 个瓶盖。这意味着，在这个微型循环里，你每多喝一瓶新饮料，手里实质上<strong>净减少</strong>了 $3 - 1 = 2$ 个瓶盖。</li>
+<li><strong>处理“不能赊账”的边界</strong>：既然每消耗 2 个瓶盖就能多喝 1 瓶，那直接用 $n / 2$ 行不行？<strong>不行</strong>。因为老板不接受赊账，如果你手里只剩 2 个瓶盖，虽然它们“等价”于一瓶饮料，但你由于凑不够 3 个瓶盖的“入场券”，游戏会强制终止。也就是说，在全场的最后，不论如何你手里都会剩下一个注定无法被消耗的“保底”瓶盖。</li>
+<li><strong>推导公式</strong>：既然最后必定剩 1 个瓶盖，那我们索性先把这 1 个瓶盖藏起来。剩下真正能拿去参与“每 2 个净消耗换一瓶”规则的有效瓶盖数就是 $n - 1$ 个。<br>因此，额外能换到的饮料数就是 $\lfloor \frac{n - 1}{2} \rfloor$。</li>
+</ol>
+<p>加上初始购买的 $n$ 瓶，最终能够喝到的饮料总数为：</p>
+<script type="math/tex; mode=display">total\_drunk = n + \lfloor \frac{n - 1}{2} \rfloor</script><hr>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><h4 id="方案一：循环模拟实现（适合初学者，逻辑直观）"><a href="#方案一：循环模拟实现（适合初学者，逻辑直观）" class="headerlink" title="方案一：循环模拟实现（适合初学者，逻辑直观）"></a>方案一：循环模拟实现（适合初学者，逻辑直观）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n) == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">int</span> total_drunk = n; <span class="comment">// 初始喝到的饮料数</span></span><br><span class="line">        <span class="type">int</span> caps = n;        <span class="comment">// 初始拥有的瓶盖数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 只要瓶盖不少于 3 个，就可以继续换</span></span><br><span class="line">        <span class="keyword">while</span> (caps &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="type">int</span> new_drinks = caps / <span class="number">3</span>;   <span class="comment">// 本轮用完所有能换的盖子</span></span><br><span class="line">            total_drunk += new_drinks;   <span class="comment">// 累加喝到的饮料</span></span><br><span class="line">            caps = (caps % <span class="number">3</span>) + new_drinks; <span class="comment">// 剩下的盖子 + 喝完新产生的盖子</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, total_drunk);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="方案二：数学公式实现（效率高）"><a href="#方案二：数学公式实现（效率高）" class="headerlink" title="方案二：数学公式实现（效率高）"></a>方案二：数学公式实现（效率高）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入，确保成功接收到一个整数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n) == <span class="number">1</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 运用数学公式直接计算出最终结果</span></span><br><span class="line">        <span class="type">int</span> total_drunk = n + (n - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 打印输出结果</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, total_drunk);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“等效替代与净消耗”</strong>。3个盖子换1瓶饮料（带1个盖子），等价于 <strong>“每净消耗 2 个盖子就能多喝 1 瓶”</strong>。由于老板不给赊账，最后必定剩 1 个保底盖子无法消耗。因此先扣掉这 1 个盖子，其余套用 $O(1)$ 通项公式直接秒杀：</p>
+<script type="math/tex; mode=display">\text{总数} = n + \lfloor \frac{n - 1}{2} \rfloor</script></li>
+<li><p><strong>防错指南</strong></p>
+<ol>
+<li><strong>输入防御</strong>：严格使用 <code>if (scanf(&quot;%d&quot;, &amp;n) == 1)</code> 进行安全拦截，防止蓝桥杯盲测脏数据。</li>
+<li><strong>大数越界防御</strong>：如果题目涉及大数（如 $n &gt; 10^9$），直接用 <code>int</code> 可能会在计算公式中间整型溢出。稳妥起见，比赛时建议直接开 <code>long long</code> 配合 <code>%lld</code> 读写。</li>
+<li><strong>防范“除零”崩溃</strong>：套用通用拓展公式 $\lfloor \frac{n - B}{A - B} \rfloor$ 时，必须确保分母 $A \neq B$。如果 $A == B$（即等价于无消耗白嫖），需要特判处理，防止程序因“除以 0”直接 Runtime Error。</li>
+</ol>
+</li>
+</ul>
 
     </div>
 
@@ -333,6 +353,10 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag"># 蓝桥杯</a>
+              <a href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag"># 数论</a>
+          </div>
 
         
   <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
@@ -341,13 +365,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/03/24/intro-to-fireworks-algorithm/" rel="prev" title="烟花算法简介">
-                  <i class="fa fa-angle-left"></i> 烟花算法简介
+                <a href="/2026/04/12/fun-math/" rel="prev" title="趣味数学">
+                  <i class="fa fa-angle-left"></i> 趣味数学
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/03/28/advanced-mathematics-quiz/" rel="next" title="高等数学试题">
-                  高等数学试题 <i class="fa fa-angle-right"></i>
+                <a href="/2026/05/22/unbuyable-number/" rel="next" title="无法购买的数字">
+                  无法购买的数字 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
