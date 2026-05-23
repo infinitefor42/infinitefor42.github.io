@@ -1,49 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>无法购买的数字</title>
-    <url>/2026/05/22/unbuyable-number/</url>
-    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道广为人知的经典数论应用题，在各大算法平台上常被称为“买不到的数目”或“麦乐鸡定理（Chicken McNugget Theorem）”。</p>
-<p>题目通常给出两个互质的打包数量 $a$ 和 $b$（例如 4 和 7），要求找出<strong>最大那个无法通过 $a$ 和 $b$ 组合（相加）拼凑出来的正整数</strong>。如果你尝试用暴力搜索（DFS）或者完全背包（DP）去硬刷，由于你不知道搜索的“上限在哪里”，很容易导致程序超时（TLE）或陷入死循环。然而，只要我们揭开它的数论面纱，这道题完全可以用 $O(1)$ 的数学公式直接秒杀。</p>
-<hr>
-<h3 id="解题思路：从数论原理到公式秒杀"><a href="#解题思路：从数论原理到公式秒杀" class="headerlink" title="解题思路：从数论原理到公式秒杀"></a>解题思路：从数论原理到公式秒杀</h3><h4 id="1-为什么一定存在一个“最大买不到的数”？"><a href="#1-为什么一定存在一个“最大买不到的数”？" class="headerlink" title="1. 为什么一定存在一个“最大买不到的数”？"></a>1. 为什么一定存在一个“最大买不到的数”？</h4><p>根据数论中的<strong>裴蜀定理（Bézout’s Identity）</strong>：如果两个正整数 $a$ 和 $b$ 互质（即 $\gcd(a, b) = 1$），那么对于任意整数 $z$，方程 $a \cdot x + b \cdot y = z$ 一定有整数解。</p>
-<p>但是在现实生活中，“买东西”不允许出现负数（即 $x, y \ge 0$）。当 $z$ 足够大时，非负整数解是一定存在的；而当 $z$ 比较小时，由于不能使用负数凑数，就会出现一部分数字无法被组合出来。</p>
-<h4 id="2-麦乐鸡定理（Sylvester-定理）"><a href="#2-麦乐鸡定理（Sylvester-定理）" class="headerlink" title="2. 麦乐鸡定理（Sylvester 定理）"></a>2. 麦乐鸡定理（Sylvester 定理）</h4><p>数学家西尔维斯特（James Joseph Sylvester）早就为我们证明了一个定理：</p>
-<blockquote>
-<p>当两个正整数 $a, b$ 互质时，对于方程 $a \cdot x + b \cdot y = z$ ，使得方程没有非负整数解的<strong>最大正整数</strong> $z$ 的公式为：</p>
-<script type="math/tex; mode=display">z = a \times b - a - b</script></blockquote>
-<h4 id="💡-思维深化：怎么直观理解这个上限？（同余桶理论）"><a href="#💡-思维深化：怎么直观理解这个上限？（同余桶理论）" class="headerlink" title="💡 思维深化：怎么直观理解这个上限？（同余桶理论）"></a>💡 思维深化：怎么直观理解这个上限？（同余桶理论）</h4><p>我们可以把数字按模 $a$ 的余数分成 $a$ 个“桶”（剩余系）。<br>以 $a = 4, b = 7$ 为例，我们看 $7$ 的倍数在模 4 下的分布：</p>
-<ul>
-<li>$7 \times 0 = 0 \equiv 0 \pmod 4$ （此桶齐了，0 之后所有 4 的倍数都能凑出）</li>
-<li>$7 \times 1 = 7 \equiv 3 \pmod 4$ （此桶齐了，7 之后所有余 3 的数都能凑出，如 11, 15…）</li>
-<li>$7 \times 2 = 14 \equiv 2 \pmod 4$ （此桶齐了，14 之后所有余 2 的数都能凑出，如 18, 22…）</li>
-<li>$7 \times 3 = 21 \equiv 1 \pmod 4$ （此桶齐了，21 之后所有余 1 的数都能凑出，如 25, 29…）</li>
-</ul>
-<p>当最后一个桶（余 1 的桶）在 $21$ 被填满时，说明 <strong>$21$ 之后的所有数字都彻底安全了</strong>。<br>而在这最后一个桶开辟（$21$）之前，该桶上一个无法凑出的数就是 $21 - 4 = 17$。<br>这就是公式 $a \times b - a - b$（即 $a \times (b-1) - a$）在数论底层的本质逻辑。</p>
-<hr>
-<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><p>在实际比赛盲测中，我们需要防御<strong>输入非法边界（如负数）</strong>以及<strong>不互质</strong>的恶意数据。为了拿到绝对的满分，严谨的代码应当引入 <strong>辗转相除法（GCD）</strong> 进行前置拦截：</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> m, <span class="type">long</span> <span class="type">long</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? m : gcd(n, m % n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入的两个包装数量</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;a, &amp;b) == <span class="number">2</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 防御性编程：确保输入合法且互质（GCD为1）</span></span><br><span class="line">        <span class="keyword">if</span> (a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> &amp;&amp; gcd(a, b) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 直接套用麦乐鸡定理公式进行计算</span></span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> ans = a * b - a - b;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不互质或数据非法，按题目要求输出特定错误码（如-1）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
-<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“互质数的不定方程非负整数解问题”</strong>（麦乐鸡定理/Sylvester 定理）。当 $a, b$ 互质时，最大无法拼凑的数存在固定边界。无需暴力搜索或动态规划，直接套用 $O(1)$ 公式秒杀：</p>
-<script type="math/tex; mode=display">\text{最大值} = a \times b - a - b</script><p><em>底层逻辑（同余桶理论）</em>：所有数按模 $a$ 的余数分为 $a$ 个桶，利用 $b$ 的倍数将桶逐个填满。当最后一个桶在 $a \times (b-1)$ 被填满时，前一个无法填满的空缺即为最大买不到的数：$a \times (b-1) - a = a \times b - a - b$。</p>
-</li>
-<li><p><strong>防错指南（避坑卡片）</strong></p>
-<ol>
-<li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
-<li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
-<li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>蓝桥杯</tag>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>饮料换购</title>
     <url>/2026/05/22/beverage-exchange/</url>
     <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道在算法比赛中非常经典的“饮料换购”问题。题目看似是一个需要不断模拟“换饮料 $\rightarrow$ 喝饮料 $\rightarrow$ 产生新瓶盖 $\rightarrow$ 再换饮料”的动态循环过程，但如果我们跳出纯粹的代码模拟，从<strong>资源消耗</strong>的本质去思考，它其实可以转化为一个极其优雅的数学模型。</p>
@@ -83,6 +40,66 @@
       <tags>
         <tag>蓝桥杯</tag>
         <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>快慢指针</title>
+    <url>/2026/03/28/fast-slow-pointers/</url>
+    <content><![CDATA[<h1 id="算法进阶：彻底搞懂“快慢指针”及其妙用"><a href="#算法进阶：彻底搞懂“快慢指针”及其妙用" class="headerlink" title="算法进阶：彻底搞懂“快慢指针”及其妙用"></a>算法进阶：彻底搞懂“快慢指针”及其妙用</h1><p>在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 <strong>快慢指针（Fast &amp; Slow Pointers）</strong>，通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。</p>
+<hr>
+<h2 id="1-什么是快慢指针？"><a href="#1-什么是快慢指针？" class="headerlink" title="1. 什么是快慢指针？"></a>1. 什么是快慢指针？</h2><p>顾名思义，我们同时使用两个指针在数据结构上移动：</p>
+<ul>
+<li><strong>慢指针 (Slow)</strong>：每次向前移动 <strong>1</strong> 个步长。</li>
+<li><strong>快指针 (Fast)</strong>：每次向前移动 <strong>2</strong> 个（或更多）步长。</li>
+</ul>
+<p>这种步频差就像“龟兔赛跑”，只要路程足够长或存在环路，快指针一定会与慢指针产生特定的相对位置关系，从而帮助我们推导出结构的特征。</p>
+<hr>
+<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
+<ul>
+<li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
+<li><strong>优势</strong>：空间复杂度仅为 <strong>O(1)</strong>，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
+<li><h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</li>
+<li><strong>逻辑</strong>：快指针的速度是慢指针的两倍。当快指针到达链表末尾（<code>null</code>）时，慢指针刚好走到了全长的一半。</li>
+<li><strong>用途</strong>：常用于链表的归并排序（Merge Sort）或判断回文链表。</li>
+</ul>
+<h3 id="③-寻找环的入口点"><a href="#③-寻找环的入口点" class="headerlink" title="③ 寻找环的入口点"></a>③ 寻找环的入口点</h3><p>这是一个进阶的数学问题。</p>
+<ul>
+<li><strong>逻辑</strong>：在快慢指针第一次相遇后，将其中一个指针放回起点（Head），两个指针现在以<strong>相同速度</strong>（步长皆为 1）同时前进。当它们再次相遇时，相遇点即为环的入口。</li>
+</ul>
+<hr>
+<h2 id="3-代码演示-C语言实现"><a href="#3-代码演示-C语言实现" class="headerlink" title="3. 代码演示 (C语言实现)"></a>3. 代码演示 (C语言实现)</h2><ul>
+<li>判断链表是否有环</li>
+<li>返回 1 表示有环，返回 0 表示无环<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isCycle</span><span class="params">(Node *head)</span> </span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)   <span class="comment">//这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.</span></span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next; <span class="comment">// 快指针每次走两步</span></span><br><span class="line">        slow = slow-&gt;next;        <span class="comment">// 慢指针每次走一步</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)        <span class="comment">// 快慢指针相遇，说明有环</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 快指针走到尽头，说明无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>找到链表环的入口</li>
+<li>返回环的起始节点指针<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Node* <span class="title function_">findBegin</span><span class="params">(Node *head)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一步：利用快慢指针判断是否有环</span></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果相遇，说明有环</span></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 第二步：计算环中节点的个数 count</span></span><br><span class="line">            Node *p = fast;</span><br><span class="line">            <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;next != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                count++;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 第三步：寻找环的入口</span></span><br><span class="line">            fast = head;</span><br><span class="line">            slow = head;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 让 fast 指针先走 count 步</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后 fast 和 slow 同步前进，相遇点即为入口</span></span><br><span class="line">            <span class="keyword">while</span> (fast != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2><ul>
+<li><strong>极高的空间效率</strong>：它能将原本需要 <strong>O(n)</strong> 空间的算法（例如使用哈希表或集合来记录已访问节点）降低到 <strong>O(1)</strong> 的常数级空间。</li>
+<li><strong>打破思维定式</strong>：它提醒我们，遍历数据结构时不一定只有一种速度。通过制造“速度差”，我们可以巧妙地挖掘出链表或数组中隐藏的几何属性（如中点、环路等）。</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>快慢指针是算法面试中的“常客”，也是提升程序效率的利器。下次当你看到链表、循环或需要寻找特定比例位置的问题时，不妨停下来想想：<strong>是不是可以让其中一个指针“跑快点”？</strong></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高等数学试题</title>
+    <url>/2026/03/28/advanced-mathematics-quiz/</url>
+    <content><![CDATA[<p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
+<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
+<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
+]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>高等数学</tag>
       </tags>
   </entry>
   <entry>
@@ -170,66 +187,6 @@
       </categories>
   </entry>
   <entry>
-    <title>快慢指针</title>
-    <url>/2026/03/28/fast-slow-pointers/</url>
-    <content><![CDATA[<h1 id="算法进阶：彻底搞懂“快慢指针”及其妙用"><a href="#算法进阶：彻底搞懂“快慢指针”及其妙用" class="headerlink" title="算法进阶：彻底搞懂“快慢指针”及其妙用"></a>算法进阶：彻底搞懂“快慢指针”及其妙用</h1><p>在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 <strong>快慢指针（Fast &amp; Slow Pointers）</strong>，通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。</p>
-<hr>
-<h2 id="1-什么是快慢指针？"><a href="#1-什么是快慢指针？" class="headerlink" title="1. 什么是快慢指针？"></a>1. 什么是快慢指针？</h2><p>顾名思义，我们同时使用两个指针在数据结构上移动：</p>
-<ul>
-<li><strong>慢指针 (Slow)</strong>：每次向前移动 <strong>1</strong> 个步长。</li>
-<li><strong>快指针 (Fast)</strong>：每次向前移动 <strong>2</strong> 个（或更多）步长。</li>
-</ul>
-<p>这种步频差就像“龟兔赛跑”，只要路程足够长或存在环路，快指针一定会与慢指针产生特定的相对位置关系，从而帮助我们推导出结构的特征。</p>
-<hr>
-<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
-<ul>
-<li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
-<li><strong>优势</strong>：空间复杂度仅为 <strong>O(1)</strong>，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
-<li><h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</li>
-<li><strong>逻辑</strong>：快指针的速度是慢指针的两倍。当快指针到达链表末尾（<code>null</code>）时，慢指针刚好走到了全长的一半。</li>
-<li><strong>用途</strong>：常用于链表的归并排序（Merge Sort）或判断回文链表。</li>
-</ul>
-<h3 id="③-寻找环的入口点"><a href="#③-寻找环的入口点" class="headerlink" title="③ 寻找环的入口点"></a>③ 寻找环的入口点</h3><p>这是一个进阶的数学问题。</p>
-<ul>
-<li><strong>逻辑</strong>：在快慢指针第一次相遇后，将其中一个指针放回起点（Head），两个指针现在以<strong>相同速度</strong>（步长皆为 1）同时前进。当它们再次相遇时，相遇点即为环的入口。</li>
-</ul>
-<hr>
-<h2 id="3-代码演示-C语言实现"><a href="#3-代码演示-C语言实现" class="headerlink" title="3. 代码演示 (C语言实现)"></a>3. 代码演示 (C语言实现)</h2><ul>
-<li>判断链表是否有环</li>
-<li>返回 1 表示有环，返回 0 表示无环<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isCycle</span><span class="params">(Node *head)</span> </span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)   <span class="comment">//这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.</span></span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next; <span class="comment">// 快指针每次走两步</span></span><br><span class="line">        slow = slow-&gt;next;        <span class="comment">// 慢指针每次走一步</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)        <span class="comment">// 快慢指针相遇，说明有环</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 快指针走到尽头，说明无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>找到链表环的入口</li>
-<li>返回环的起始节点指针<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Node* <span class="title function_">findBegin</span><span class="params">(Node *head)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一步：利用快慢指针判断是否有环</span></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果相遇，说明有环</span></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 第二步：计算环中节点的个数 count</span></span><br><span class="line">            Node *p = fast;</span><br><span class="line">            <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;next != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                count++;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 第三步：寻找环的入口</span></span><br><span class="line">            fast = head;</span><br><span class="line">            slow = head;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 让 fast 指针先走 count 步</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后 fast 和 slow 同步前进，相遇点即为入口</span></span><br><span class="line">            <span class="keyword">while</span> (fast != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2><ul>
-<li><strong>极高的空间效率</strong>：它能将原本需要 <strong>O(n)</strong> 空间的算法（例如使用哈希表或集合来记录已访问节点）降低到 <strong>O(1)</strong> 的常数级空间。</li>
-<li><strong>打破思维定式</strong>：它提醒我们，遍历数据结构时不一定只有一种速度。通过制造“速度差”，我们可以巧妙地挖掘出链表或数组中隐藏的几何属性（如中点、环路等）。</li>
-</ul>
-<hr>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>快慢指针是算法面试中的“常客”，也是提升程序效率的利器。下次当你看到链表、循环或需要寻找特定比例位置的问题时，不妨停下来想想：<strong>是不是可以让其中一个指针“跑快点”？</strong></p>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高等数学试题</title>
-    <url>/2026/03/28/advanced-mathematics-quiz/</url>
-    <content><![CDATA[<p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
-<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
-]]></content>
-      <categories>
-        <category>数学</category>
-      </categories>
-      <tags>
-        <tag>高等数学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>games</title>
     <url>/2026/03/25/games/</url>
     <content><![CDATA[<p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
@@ -242,6 +199,49 @@
       <categories>
         <category>项目</category>
       </categories>
+  </entry>
+  <entry>
+    <title>无法购买的数字</title>
+    <url>/2026/05/22/unbuyable-number/</url>
+    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道广为人知的经典数论应用题，在各大算法平台上常被称为“买不到的数目”或“麦乐鸡定理（Chicken McNugget Theorem）”。</p>
+<p>题目通常给出两个互质的打包数量 $a$ 和 $b$（例如 4 和 7），要求找出<strong>最大那个无法通过 $a$ 和 $b$ 组合（相加）拼凑出来的正整数</strong>。如果你尝试用暴力搜索（DFS）或者完全背包（DP）去硬刷，由于你不知道搜索的“上限在哪里”，很容易导致程序超时（TLE）或陷入死循环。然而，只要我们揭开它的数论面纱，这道题完全可以用 $O(1)$ 的数学公式直接秒杀。</p>
+<hr>
+<h3 id="解题思路：从数论原理到公式秒杀"><a href="#解题思路：从数论原理到公式秒杀" class="headerlink" title="解题思路：从数论原理到公式秒杀"></a>解题思路：从数论原理到公式秒杀</h3><h4 id="1-为什么一定存在一个“最大买不到的数”？"><a href="#1-为什么一定存在一个“最大买不到的数”？" class="headerlink" title="1. 为什么一定存在一个“最大买不到的数”？"></a>1. 为什么一定存在一个“最大买不到的数”？</h4><p>根据数论中的<strong>裴蜀定理（Bézout’s Identity）</strong>：如果两个正整数 $a$ 和 $b$ 互质（即 $\gcd(a, b) = 1$），那么对于任意整数 $z$，方程 $a \cdot x + b \cdot y = z$ 一定有整数解。</p>
+<p>但是在现实生活中，“买东西”不允许出现负数（即 $x, y \ge 0$）。当 $z$ 足够大时，非负整数解是一定存在的；而当 $z$ 比较小时，由于不能使用负数凑数，就会出现一部分数字无法被组合出来。</p>
+<h4 id="2-麦乐鸡定理（Sylvester-定理）"><a href="#2-麦乐鸡定理（Sylvester-定理）" class="headerlink" title="2. 麦乐鸡定理（Sylvester 定理）"></a>2. 麦乐鸡定理（Sylvester 定理）</h4><p>数学家西尔维斯特（James Joseph Sylvester）早就为我们证明了一个定理：</p>
+<blockquote>
+<p>当两个正整数 $a, b$ 互质时，对于方程 $a \cdot x + b \cdot y = z$ ，使得方程没有非负整数解的<strong>最大正整数</strong> $z$ 的公式为：</p>
+<script type="math/tex; mode=display">z = a \times b - a - b</script></blockquote>
+<h4 id="💡-思维深化：怎么直观理解这个上限？（同余桶理论）"><a href="#💡-思维深化：怎么直观理解这个上限？（同余桶理论）" class="headerlink" title="💡 思维深化：怎么直观理解这个上限？（同余桶理论）"></a>💡 思维深化：怎么直观理解这个上限？（同余桶理论）</h4><p>我们可以把数字按模 $a$ 的余数分成 $a$ 个“桶”（剩余系）。<br>以 $a = 4, b = 7$ 为例，我们看 $7$ 的倍数在模 4 下的分布：</p>
+<ul>
+<li>$7 \times 0 = 0 \equiv 0 \pmod 4$ （此桶齐了，0 之后所有 4 的倍数都能凑出）</li>
+<li>$7 \times 1 = 7 \equiv 3 \pmod 4$ （此桶齐了，7 之后所有余 3 的数都能凑出，如 11, 15…）</li>
+<li>$7 \times 2 = 14 \equiv 2 \pmod 4$ （此桶齐了，14 之后所有余 2 的数都能凑出，如 18, 22…）</li>
+<li>$7 \times 3 = 21 \equiv 1 \pmod 4$ （此桶齐了，21 之后所有余 1 的数都能凑出，如 25, 29…）</li>
+</ul>
+<p>当最后一个桶（余 1 的桶）在 $21$ 被填满时，说明 <strong>$21$ 之后的所有数字都彻底安全了</strong>。<br>而在这最后一个桶开辟（$21$）之前，该桶上一个无法凑出的数就是 $21 - 4 = 17$。<br>这就是公式 $a \times b - a - b$（即 $a \times (b-1) - a$）在数论底层的本质逻辑。</p>
+<hr>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><p>在实际比赛盲测中，我们需要防御<strong>输入非法边界（如负数）</strong>以及<strong>不互质</strong>的恶意数据。为了拿到绝对的满分，严谨的代码应当引入 <strong>辗转相除法（GCD）</strong> 进行前置拦截：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> m, <span class="type">long</span> <span class="type">long</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? m : gcd(n, m % n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入的两个包装数量</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;a, &amp;b) == <span class="number">2</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 防御性编程：确保输入合法且互质（GCD为1）</span></span><br><span class="line">        <span class="keyword">if</span> (a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> &amp;&amp; gcd(a, b) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 直接套用麦乐鸡定理公式进行计算</span></span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> ans = a * b - a - b;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不互质或数据非法，按题目要求输出特定错误码（如-1）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“互质数的不定方程非负整数解问题”</strong>（麦乐鸡定理/Sylvester 定理）。当 $a, b$ 互质时，最大无法拼凑的数存在固定边界。无需暴力搜索或动态规划，直接套用 $O(1)$ 公式秒杀：</p>
+<script type="math/tex; mode=display">\text{最大值} = a \times b - a - b</script><p><em>底层逻辑（同余桶理论）</em>：所有数按模 $a$ 的余数分为 $a$ 个桶，利用 $b$ 的倍数将桶逐个填满。当最后一个桶在 $a \times (b-1)$ 被填满时，前一个无法填满的空缺即为最大买不到的数：$a \times (b-1) - a = a \times b - a - b$。</p>
+</li>
+<li><p><strong>防错指南（避坑卡片）</strong></p>
+<ol>
+<li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
+<li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
+<li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>蓝桥杯</tag>
+        <tag>数论</tag>
+      </tags>
   </entry>
   <entry>
     <title>烟花算法简介</title>
