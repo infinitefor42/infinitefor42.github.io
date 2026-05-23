@@ -305,9 +305,9 @@
         data-mapping="title"
         data-strict="0"
         data-reactions-enabled="1"
-        data-emit-metadata="0"
+        data-emit-metadata="1"
         data-input-position="bottom"
-        data-theme="light"
+        data-theme="preferred_color_scheme"
         data-lang="zh-CN"
         crossorigin="anonymous"
         async>
@@ -393,53 +393,44 @@ darkmode.showWidget();
 (function() {
   'use strict';
 
-  function updateGiscusTheme(isDark) {
-    var theme = isDark ? 'dark_dimmed' : 'light';
+  function getGiscusTheme() {
+    return document.documentElement.classList.contains('darkmode--activated') 
+      ? 'dark_dimmed' 
+      : 'light';
+  }
+
+  function sendGiscusTheme() {
     var iframe = document.querySelector('iframe.giscus-frame');
     if (iframe && iframe.contentWindow) {
       iframe.contentWindow.postMessage({
-        giscus: { setConfig: { theme: theme } }
-      }, 'https://giscus.app');
+        giscus: {
+          setConfig: {
+            theme: getGiscusTheme()
+          }
+        }
+      }, '*');
     }
   }
 
-  function isDarkMode() {
-    return document.documentElement.classList.contains('darkmode--activated');
-  }
-
-  function initGiscusTheme() {
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'childList') {
-          var iframe = document.querySelector('iframe.giscus-frame');
-          if (iframe) {
-            observer.disconnect();
-            updateGiscusTheme(isDarkMode());
-          }
-        }
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    var htmlObserver = new MutationObserver(function() {
-      updateGiscusTheme(isDarkMode());
-    });
-    htmlObserver.observe(document.documentElement, {
+  function init() {
+    var observer = new MutationObserver(sendGiscusTheme);
+    observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
     });
 
     window.addEventListener('message', function(event) {
-      if (event.origin === 'https://giscus.app') {
-        updateGiscusTheme(isDarkMode());
+      if (event.origin !== 'https://giscus.app') return;
+      if (event.data && event.data.giscus) {
+        sendGiscusTheme();
       }
     });
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initGiscusTheme);
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    initGiscusTheme();
+    init();
   }
 })();
 </script>
