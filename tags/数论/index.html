@@ -390,45 +390,59 @@ darkmode.showWidget();
 </script>
 
 <script>
-  // 监听 darkmode_js 的主题变化，同步更新 giscus 主题
-  document.addEventListener('DOMContentLoaded', function() {
-    // 用于更新 giscus 主题的函数
-    function updateGiscusTheme(isDark) {
-      const iframe = document.querySelector('iframe.giscus-frame');
-      if (iframe && iframe.contentWindow && iframe.contentWindow.postMessage) {
-        iframe.contentWindow.postMessage({
-          giscus: {
-            setConfig: {
-              theme: isDark ? 'dark_dimmed' : 'light'
-            }
+(function() {
+  'use strict';
+
+  function updateGiscusTheme(isDark) {
+    var theme = isDark ? 'dark_dimmed' : 'light';
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage({
+        giscus: { setConfig: { theme: theme } }
+      }, 'https://giscus.app');
+    }
+  }
+
+  function isDarkMode() {
+    return document.documentElement.classList.contains('darkmode--activated');
+  }
+
+  function initGiscusTheme() {
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList') {
+          var iframe = document.querySelector('iframe.giscus-frame');
+          if (iframe) {
+            observer.disconnect();
+            updateGiscusTheme(isDarkMode());
           }
-        }, 'https://giscus.app');
-      }
-    }
+        }
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
 
-    // 检查当前是否是暗色模式
-    function isDarkMode() {
-      return document.documentElement.classList.contains('dark') || 
-             document.body.classList.contains('dark');
-    }
-
-    // 监听页面变化，检测主题是否改变
-    const observer = new MutationObserver(function() {
+    var htmlObserver = new MutationObserver(function() {
       updateGiscusTheme(isDarkMode());
     });
-
-    observer.observe(document.documentElement, {
+    htmlObserver.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
     });
 
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ['class']
+    window.addEventListener('message', function(event) {
+      if (event.origin === 'https://giscus.app') {
+        updateGiscusTheme(isDarkMode());
+      }
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGiscusTheme);
+  } else {
+    initGiscusTheme();
+  }
+})();
 </script>
-
 
 </body>
 </html>

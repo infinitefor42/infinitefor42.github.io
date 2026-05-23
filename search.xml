@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>无法购买的数字</title>
-    <url>/2026/05/22/unbuyable-number/</url>
-    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道广为人知的经典数论应用题，在各大算法平台上常被称为“买不到的数目”或“麦乐鸡定理（Chicken McNugget Theorem）”。</p>
-<p>题目通常给出两个互质的打包数量 $a$ 和 $b$（例如 4 和 7），要求找出<strong>最大那个无法通过 $a$ 和 $b$ 组合（相加）拼凑出来的正整数</strong>。如果你尝试用暴力搜索（DFS）或者完全背包（DP）去硬刷，由于你不知道搜索的“上限在哪里”，很容易导致程序超时（TLE）或陷入死循环。然而，只要我们揭开它的数论面纱，这道题完全可以用 $O(1)$ 的数学公式直接秒杀。</p>
+    <title>games</title>
+    <url>/2026/03/25/games/</url>
+    <content><![CDATA[<p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
+<h3 id="1-经典贪吃蛇"><a href="#1-经典贪吃蛇" class="headerlink" title="1. 经典贪吃蛇"></a>1. <a href="/games/Snake_Game/index.html" target="_blank" rel="noopener noreferrer">经典贪吃蛇</a></h3><h3 id="2-密阵突围"><a href="#2-密阵突围" class="headerlink" title="2. 密阵突围"></a>2. <a href="https://brain-s13.nano.ac/round2/">密阵突围</a></h3><h3 id="3-扫雷游戏"><a href="#3-扫雷游戏" class="headerlink" title="3. 扫雷游戏"></a>3. <a href="https://www.minesweeper.cn/">扫雷游戏</a></h3><p><br></p>
 <hr>
-<h3 id="解题思路：从数论原理到公式秒杀"><a href="#解题思路：从数论原理到公式秒杀" class="headerlink" title="解题思路：从数论原理到公式秒杀"></a>解题思路：从数论原理到公式秒杀</h3><h4 id="1-为什么一定存在一个“最大买不到的数”？"><a href="#1-为什么一定存在一个“最大买不到的数”？" class="headerlink" title="1. 为什么一定存在一个“最大买不到的数”？"></a>1. 为什么一定存在一个“最大买不到的数”？</h4><p>根据数论中的<strong>裴蜀定理（Bézout’s Identity）</strong>：如果两个正整数 $a$ 和 $b$ 互质（即 $\gcd(a, b) = 1$），那么对于任意整数 $z$，方程 $a \cdot x + b \cdot y = z$ 一定有整数解。</p>
-<p>但是在现实生活中，“买东西”不允许出现负数（即 $x, y \ge 0$）。当 $z$ 足够大时，非负整数解是一定存在的；而当 $z$ 比较小时，由于不能使用负数凑数，就会出现一部分数字无法被组合出来。</p>
-<h4 id="2-麦乐鸡定理（Sylvester-定理）"><a href="#2-麦乐鸡定理（Sylvester-定理）" class="headerlink" title="2. 麦乐鸡定理（Sylvester 定理）"></a>2. 麦乐鸡定理（Sylvester 定理）</h4><p>数学家西尔维斯特（James Joseph Sylvester）早就为我们证明了一个定理：</p>
-<blockquote>
-<p>当两个正整数 $a, b$ 互质时，对于方程 $a \cdot x + b \cdot y = z$ ，使得方程没有非负整数解的<strong>最大正整数</strong> $z$ 的公式为：</p>
-<script type="math/tex; mode=display">z = a \times b - a - b</script></blockquote>
-<h4 id="💡-思维深化：怎么直观理解这个上限？（同余桶理论）"><a href="#💡-思维深化：怎么直观理解这个上限？（同余桶理论）" class="headerlink" title="💡 思维深化：怎么直观理解这个上限？（同余桶理论）"></a>💡 思维深化：怎么直观理解这个上限？（同余桶理论）</h4><p>我们可以把数字按模 $a$ 的余数分成 $a$ 个“桶”（剩余系）。<br>以 $a = 4, b = 7$ 为例，我们看 $7$ 的倍数在模 4 下的分布：</p>
-<ul>
-<li>$7 \times 0 = 0 \equiv 0 \pmod 4$ （此桶齐了，0 之后所有 4 的倍数都能凑出）</li>
-<li>$7 \times 1 = 7 \equiv 3 \pmod 4$ （此桶齐了，7 之后所有余 3 的数都能凑出，如 11, 15…）</li>
-<li>$7 \times 2 = 14 \equiv 2 \pmod 4$ （此桶齐了，14 之后所有余 2 的数都能凑出，如 18, 22…）</li>
-<li>$7 \times 3 = 21 \equiv 1 \pmod 4$ （此桶齐了，21 之后所有余 1 的数都能凑出，如 25, 29…）</li>
-</ul>
-<p>当最后一个桶（余 1 的桶）在 $21$ 被填满时，说明 <strong>$21$ 之后的所有数字都彻底安全了</strong>。<br>而在这最后一个桶开辟（$21$）之前，该桶上一个无法凑出的数就是 $21 - 4 = 17$。<br>这就是公式 $a \times b - a - b$（即 $a \times (b-1) - a$）在数论底层的本质逻辑。</p>
-<hr>
-<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><p>在实际比赛盲测中，我们需要防御<strong>输入非法边界（如负数）</strong>以及<strong>不互质</strong>的恶意数据。为了拿到绝对的满分，严谨的代码应当引入 <strong>辗转相除法（GCD）</strong> 进行前置拦截：</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> m, <span class="type">long</span> <span class="type">long</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? m : gcd(n, m % n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入的两个包装数量</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;a, &amp;b) == <span class="number">2</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 防御性编程：确保输入合法且互质（GCD为1）</span></span><br><span class="line">        <span class="keyword">if</span> (a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> &amp;&amp; gcd(a, b) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 直接套用麦乐鸡定理公式进行计算</span></span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> ans = a * b - a - b;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不互质或数据非法，按题目要求输出特定错误码（如-1）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
-<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“互质数的不定方程非负整数解问题”</strong>（麦乐鸡定理/Sylvester 定理）。当 $a, b$ 互质时，最大无法拼凑的数存在固定边界。无需暴力搜索或动态规划，直接套用 $O(1)$ 公式秒杀：</p>
-<script type="math/tex; mode=display">\text{最大值} = a \times b - a - b</script><p><em>底层逻辑（同余桶理论）</em>：所有数按模 $a$ 的余数分为 $a$ 个桶，利用 $b$ 的倍数将桶逐个填满。当最后一个桶在 $a \times (b-1)$ 被填满时，前一个无法填满的空缺即为最大买不到的数：$a \times (b-1) - a = a \times b - a - b$。</p>
-</li>
-<li><p><strong>防错指南（避坑卡片）</strong></p>
-<ol>
-<li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
-<li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
-<li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
-</ol>
-</li>
-</ul>
+<p align="center">
+  <small>🛡️ 本站收录的外部链接均已通过 <b><a href="https://www.virustotal.com/">VirusTotal</a></b> 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。</small>
+</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>项目</category>
       </categories>
-      <tags>
-        <tag>蓝桥杯</tag>
-        <tag>数论</tag>
-      </tags>
   </entry>
   <entry>
     <title>饮料换购</title>
@@ -73,6 +44,63 @@
 <li><strong>输入防御</strong>：严格使用 <code>if (scanf(&quot;%d&quot;, &amp;n) == 1)</code> 进行安全拦截，防止蓝桥杯盲测脏数据。</li>
 <li><strong>大数越界防御</strong>：如果题目涉及大数（如 $n &gt; 10^9$），直接用 <code>int</code> 可能会在计算公式中间整型溢出。稳妥起见，比赛时建议直接开 <code>long long</code> 配合 <code>%lld</code> 读写。</li>
 <li><strong>防范“除零”崩溃</strong>：套用通用拓展公式 $\lfloor \frac{n - B}{A - B} \rfloor$ 时，必须确保分母 $A \neq B$。如果 $A == B$（即等价于无消耗白嫖），需要特判处理，防止程序因“除以 0”直接 Runtime Error。</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>蓝桥杯</tag>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>高等数学试题</title>
+    <url>/2026/03/28/advanced-mathematics-quiz/</url>
+    <content><![CDATA[<p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
+<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
+<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
+]]></content>
+      <categories>
+        <category>数学</category>
+      </categories>
+      <tags>
+        <tag>高等数学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>无法购买的数字</title>
+    <url>/2026/05/22/unbuyable-number/</url>
+    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道广为人知的经典数论应用题，在各大算法平台上常被称为“买不到的数目”或“麦乐鸡定理（Chicken McNugget Theorem）”。</p>
+<p>题目通常给出两个互质的打包数量 $a$ 和 $b$（例如 4 和 7），要求找出<strong>最大那个无法通过 $a$ 和 $b$ 组合（相加）拼凑出来的正整数</strong>。如果你尝试用暴力搜索（DFS）或者完全背包（DP）去硬刷，由于你不知道搜索的“上限在哪里”，很容易导致程序超时（TLE）或陷入死循环。然而，只要我们揭开它的数论面纱，这道题完全可以用 $O(1)$ 的数学公式直接秒杀。</p>
+<hr>
+<h3 id="解题思路：从数论原理到公式秒杀"><a href="#解题思路：从数论原理到公式秒杀" class="headerlink" title="解题思路：从数论原理到公式秒杀"></a>解题思路：从数论原理到公式秒杀</h3><h4 id="1-为什么一定存在一个“最大买不到的数”？"><a href="#1-为什么一定存在一个“最大买不到的数”？" class="headerlink" title="1. 为什么一定存在一个“最大买不到的数”？"></a>1. 为什么一定存在一个“最大买不到的数”？</h4><p>根据数论中的<strong>裴蜀定理（Bézout’s Identity）</strong>：如果两个正整数 $a$ 和 $b$ 互质（即 $\gcd(a, b) = 1$），那么对于任意整数 $z$，方程 $a \cdot x + b \cdot y = z$ 一定有整数解。</p>
+<p>但是在现实生活中，“买东西”不允许出现负数（即 $x, y \ge 0$）。当 $z$ 足够大时，非负整数解是一定存在的；而当 $z$ 比较小时，由于不能使用负数凑数，就会出现一部分数字无法被组合出来。</p>
+<h4 id="2-麦乐鸡定理（Sylvester-定理）"><a href="#2-麦乐鸡定理（Sylvester-定理）" class="headerlink" title="2. 麦乐鸡定理（Sylvester 定理）"></a>2. 麦乐鸡定理（Sylvester 定理）</h4><p>数学家西尔维斯特（James Joseph Sylvester）早就为我们证明了一个定理：</p>
+<blockquote>
+<p>当两个正整数 $a, b$ 互质时，对于方程 $a \cdot x + b \cdot y = z$ ，使得方程没有非负整数解的<strong>最大正整数</strong> $z$ 的公式为：</p>
+<script type="math/tex; mode=display">z = a \times b - a - b</script></blockquote>
+<h4 id="💡-思维深化：怎么直观理解这个上限？（同余桶理论）"><a href="#💡-思维深化：怎么直观理解这个上限？（同余桶理论）" class="headerlink" title="💡 思维深化：怎么直观理解这个上限？（同余桶理论）"></a>💡 思维深化：怎么直观理解这个上限？（同余桶理论）</h4><p>我们可以把数字按模 $a$ 的余数分成 $a$ 个“桶”（剩余系）。<br>以 $a = 4, b = 7$ 为例，我们看 $7$ 的倍数在模 4 下的分布：</p>
+<ul>
+<li>$7 \times 0 = 0 \equiv 0 \pmod 4$ （此桶齐了，0 之后所有 4 的倍数都能凑出）</li>
+<li>$7 \times 1 = 7 \equiv 3 \pmod 4$ （此桶齐了，7 之后所有余 3 的数都能凑出，如 11, 15…）</li>
+<li>$7 \times 2 = 14 \equiv 2 \pmod 4$ （此桶齐了，14 之后所有余 2 的数都能凑出，如 18, 22…）</li>
+<li>$7 \times 3 = 21 \equiv 1 \pmod 4$ （此桶齐了，21 之后所有余 1 的数都能凑出，如 25, 29…）</li>
+</ul>
+<p>当最后一个桶（余 1 的桶）在 $21$ 被填满时，说明 <strong>$21$ 之后的所有数字都彻底安全了</strong>。<br>而在这最后一个桶开辟（$21$）之前，该桶上一个无法凑出的数就是 $21 - 4 = 17$。<br>这就是公式 $a \times b - a - b$（即 $a \times (b-1) - a$）在数论底层的本质逻辑。</p>
+<hr>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><p>在实际比赛盲测中，我们需要防御<strong>输入非法边界（如负数）</strong>以及<strong>不互质</strong>的恶意数据。为了拿到绝对的满分，严谨的代码应当引入 <strong>辗转相除法（GCD）</strong> 进行前置拦截：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> m, <span class="type">long</span> <span class="type">long</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? m : gcd(n, m % n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入的两个包装数量</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;a, &amp;b) == <span class="number">2</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 防御性编程：确保输入合法且互质（GCD为1）</span></span><br><span class="line">        <span class="keyword">if</span> (a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> &amp;&amp; gcd(a, b) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 直接套用麦乐鸡定理公式进行计算</span></span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> ans = a * b - a - b;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不互质或数据非法，按题目要求输出特定错误码（如-1）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“互质数的不定方程非负整数解问题”</strong>（麦乐鸡定理/Sylvester 定理）。当 $a, b$ 互质时，最大无法拼凑的数存在固定边界。无需暴力搜索或动态规划，直接套用 $O(1)$ 公式秒杀：</p>
+<script type="math/tex; mode=display">\text{最大值} = a \times b - a - b</script><p><em>底层逻辑（同余桶理论）</em>：所有数按模 $a$ 的余数分为 $a$ 个桶，利用 $b$ 的倍数将桶逐个填满。当最后一个桶在 $a \times (b-1)$ 被填满时，前一个无法填满的空缺即为最大买不到的数：$a \times (b-1) - a = a \times b - a - b$。</p>
+</li>
+<li><p><strong>防错指南（避坑卡片）</strong></p>
+<ol>
+<li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
+<li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
+<li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
 </ol>
 </li>
 </ul>
@@ -214,34 +242,6 @@
       <tags>
         <tag>数据结构</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>高等数学试题</title>
-    <url>/2026/03/28/advanced-mathematics-quiz/</url>
-    <content><![CDATA[<p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
-<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
-]]></content>
-      <categories>
-        <category>数学</category>
-      </categories>
-      <tags>
-        <tag>高等数学</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>games</title>
-    <url>/2026/03/25/games/</url>
-    <content><![CDATA[<p>这是我的个人游戏开发实验室，即会发布自己开发的小游戏，也会收录和分享我发现的小游戏，未来会在这里上线更多有趣的小项目。</p>
-<h3 id="1-经典贪吃蛇"><a href="#1-经典贪吃蛇" class="headerlink" title="1. 经典贪吃蛇"></a>1. <a href="/games/Snake_Game/index.html" target="_blank" rel="noopener noreferrer">经典贪吃蛇</a></h3><h3 id="2-密阵突围"><a href="#2-密阵突围" class="headerlink" title="2. 密阵突围"></a>2. <a href="https://brain-s13.nano.ac/round2/">密阵突围</a></h3><h3 id="3-扫雷游戏"><a href="#3-扫雷游戏" class="headerlink" title="3. 扫雷游戏"></a>3. <a href="https://www.minesweeper.cn/">扫雷游戏</a></h3><p><br></p>
-<hr>
-<p align="center">
-  <small>🛡️ 本站收录的外部链接均已通过 <b><a href="https://www.virustotal.com/">VirusTotal</a></b> 多重引擎安全扫描，请放心使用。但游玩时请注意辨别第三方广告，请勿轻易点击。</small>
-</p>
-]]></content>
-      <categories>
-        <category>项目</category>
-      </categories>
   </entry>
   <entry>
     <title>烟花算法简介</title>
