@@ -459,6 +459,67 @@
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
 </noscript>
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+<script>
+  // 监听 darkmode_js 的主题变化，同步更新 giscus 主题
+  document.addEventListener('DOMContentLoaded', function() {
+    // 用于更新 giscus 主题的函数
+    function updateGiscusTheme(isDark) {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (iframe && iframe.contentWindow && iframe.contentWindow.postMessage) {
+        iframe.contentWindow.postMessage({
+          giscus: {
+            setConfig: {
+              theme: isDark ? 'dark_dimmed' : 'light'
+            }
+          }
+        }, 'https://giscus.app');
+      }
+    }
+
+    // 检查当前是否是暗色模式
+    function isDarkMode() {
+      return document.documentElement.classList.contains('dark') || 
+             document.body.classList.contains('dark');
+    }
+
+    // 监听页面变化，检测主题是否改变
+    const observer = new MutationObserver(function() {
+      updateGiscusTheme(isDarkMode());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+  });
+</script>
+
 
 </body>
 </html>
