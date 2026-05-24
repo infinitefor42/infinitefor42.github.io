@@ -369,8 +369,8 @@ darkmode.showWidget();
   'use strict';
 
   function getGiscusTheme() {
-    return document.documentElement.classList.contains('darkmode--activated') 
-      ? 'dark_dimmed' 
+    return document.documentElement.classList.contains('darkmode--activated')
+      ? 'dark_dimmed'
       : 'light';
   }
 
@@ -388,7 +388,13 @@ darkmode.showWidget();
   }
 
   function init() {
-    var observer = new MutationObserver(sendGiscusTheme);
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          sendGiscusTheme();
+        }
+      });
+    });
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
@@ -400,6 +406,25 @@ darkmode.showWidget();
         sendGiscusTheme();
       }
     });
+
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.addEventListener('load', sendGiscusTheme);
+    } else {
+      var bodyObserver = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var nodes = mutations[i].addedNodes;
+          for (var j = 0; j < nodes.length; j++) {
+            if (nodes[j].nodeName === 'IFRAME' && nodes[j].classList.contains('giscus-frame')) {
+              nodes[j].addEventListener('load', sendGiscusTheme);
+              bodyObserver.disconnect();
+              return;
+            }
+          }
+        }
+      });
+      bodyObserver.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   if (document.readyState === 'loading') {

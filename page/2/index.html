@@ -306,7 +306,7 @@
 </ul>
 <p>这种步频差就像“龟兔赛跑”，只要路程足够长或存在环路，快指针一定会与慢指针产生特定的相对位置关系，从而帮助我们推导出结构的特征。</p>
 <hr>
-<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd’s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd’s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
+<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd-39-s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd-39-s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd&#39;s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd&#39;s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
 <ul>
 <li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
 <li><strong>优势</strong>：空间复杂度仅为 <strong>O(1)</strong>，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
@@ -423,21 +423,31 @@
 <p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
 <hr>
 <h2 id="参考解答"><a href="#参考解答" class="headerlink" title="参考解答"></a>参考解答</h2><h3 id="第-1-题"><a href="#第-1-题" class="headerlink" title="第 1 题"></a>第 1 题</h3><p>令 $t = -x$（$t \to +\infty$），原式变为：</p>
-<script type="math/tex; mode=display">\lim_{t \to +\infty} \left( \sqrt{at^2 + bt - 1} - 4t \right) = 1</script><p>分子有理化：</p>
-<script type="math/tex; mode=display">\frac{(a-16)t^2 + bt - 1}{\sqrt{at^2 + bt - 1} + 4t}</script><p>为使极限存在且为有限值，分子中 $t^2$ 的系数必须为零，故 $a = 16$。</p>
+<p>$$\lim_{t \to +\infty} \left( \sqrt{at^2 + bt - 1} - 4t \right) = 1$$</p>
+<p>分子有理化：</p>
+<p>$$\frac{(a-16)t^2 + bt - 1}{\sqrt{at^2 + bt - 1} + 4t}$$</p>
+<p>为使极限存在且为有限值，分子中 $t^2$ 的系数必须为零，故 $a = 16$。</p>
 <p>代入 $a = 16$ 后：</p>
-<script type="math/tex; mode=display">\lim_{t \to +\infty} \frac{bt - 1}{\sqrt{16t^2 + bt - 1} + 4t} = \frac{b}{8} = 1</script><p>因此 $b = 8$。</p>
-<script type="math/tex; mode=display">\boxed{a = 16, \quad b = 8}</script><h3 id="第-2-题"><a href="#第-2-题" class="headerlink" title="第 2 题"></a>第 2 题</h3><p>函数的间断点为分母为零处：$x = -1,\ 0,\ 1$。</p>
+<p>$$\lim_{t \to +\infty} \frac{bt - 1}{\sqrt{16t^2 + bt - 1} + 4t} = \frac{b}{8} = 1$$</p>
+<p>因此 $b = 8$。</p>
+<p>$$\boxed{a = 16, \quad b = 8}$$</p>
+<h3 id="第-2-题"><a href="#第-2-题" class="headerlink" title="第 2 题"></a>第 2 题</h3><p>函数的间断点为分母为零处：$x = -1,\ 0,\ 1$。</p>
 <ul>
 <li><strong>$x = -1$</strong>：$\ln|1+x| \to -\infty$，分母趋于非零有限值，故为无穷间断点（第二类）。</li>
 <li><strong>$x = 0$</strong>：$\ln|1+x| \sim x$，$e^x - 1 \sim x$，极限 $\lim_{x \to 0} \frac{x}{x \cdot (-1)} = -1$ 存在，故为可去间断点（第一类）。</li>
 <li><strong>$x = 1$</strong>：分母趋于 $0$，分子趋于 $\ln 2 \neq 0$，故为无穷间断点（第二类）。</li>
 </ul>
-<script type="math/tex; mode=display">\boxed{1}</script><h3 id="第-3-题"><a href="#第-3-题" class="headerlink" title="第 3 题"></a>第 3 题</h3><p>计算偏导数：</p>
-<script type="math/tex; mode=display">\frac{\partial z}{\partial x} = -\frac{2x}{a^2}, \quad \frac{\partial z}{\partial y} = -\frac{2y}{b^2}</script><p>在点 $\left(\frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}}\right)$ 处：</p>
-<script type="math/tex; mode=display">\frac{\partial z}{\partial x} = -\frac{\sqrt{2}}{a}, \quad \frac{\partial z}{\partial y} = -\frac{\sqrt{2}}{b}</script><p>椭圆在该点的外法线方向（梯度方向）为 $\left(\frac{\sqrt{2}}{a}, \frac{\sqrt{2}}{b}\right)$，内法线方向为其反方向。单位内法线向量为：</p>
-<script type="math/tex; mode=display">\vec{n} = -\frac{1}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} \left(\frac{1}{a}, \frac{1}{b}\right)</script><p>方向导数：</p>
-<script type="math/tex; mode=display">\frac{\partial z}{\partial \vec{n}} = \left(-\frac{\sqrt{2}}{a}, -\frac{\sqrt{2}}{b}\right) \cdot \vec{n} = \frac{\sqrt{2}\left(\frac{1}{a^2}+\frac{1}{b^2}\right)}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} = \sqrt{2} \cdot \sqrt{\frac{1}{a^2}+\frac{1}{b^2}}</script><script type="math/tex; mode=display">\boxed{\frac{\partial z}{\partial \vec{n}} = \frac{\sqrt{2(a^2+b^2)}}{ab}}</script>
+<p>$$\boxed{1}$$</p>
+<h3 id="第-3-题"><a href="#第-3-题" class="headerlink" title="第 3 题"></a>第 3 题</h3><p>计算偏导数：</p>
+<p>$$\frac{\partial z}{\partial x} = -\frac{2x}{a^2}, \quad \frac{\partial z}{\partial y} = -\frac{2y}{b^2}$$</p>
+<p>在点 $\left(\frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}}\right)$ 处：</p>
+<p>$$\frac{\partial z}{\partial x} = -\frac{\sqrt{2}}{a}, \quad \frac{\partial z}{\partial y} = -\frac{\sqrt{2}}{b}$$</p>
+<p>椭圆在该点的外法线方向（梯度方向）为 $\left(\frac{\sqrt{2}}{a}, \frac{\sqrt{2}}{b}\right)$，内法线方向为其反方向。单位内法线向量为：</p>
+<p>$$\vec{n} = -\frac{1}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} \left(\frac{1}{a}, \frac{1}{b}\right)$$</p>
+<p>方向导数：</p>
+<p>$$\frac{\partial z}{\partial \vec{n}} = \left(-\frac{\sqrt{2}}{a}, -\frac{\sqrt{2}}{b}\right) \cdot \vec{n} = \frac{\sqrt{2}\left(\frac{1}{a^2}+\frac{1}{b^2}\right)}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} = \sqrt{2} \cdot \sqrt{\frac{1}{a^2}+\frac{1}{b^2}}$$</p>
+<p>$$\boxed{\frac{\partial z}{\partial \vec{n}} = \frac{\sqrt{2(a^2+b^2)}}{ab}}$$</p>
+
       
     </div>
 
@@ -644,8 +654,8 @@ darkmode.showWidget();
   'use strict';
 
   function getGiscusTheme() {
-    return document.documentElement.classList.contains('darkmode--activated') 
-      ? 'dark_dimmed' 
+    return document.documentElement.classList.contains('darkmode--activated')
+      ? 'dark_dimmed'
       : 'light';
   }
 
@@ -663,7 +673,13 @@ darkmode.showWidget();
   }
 
   function init() {
-    var observer = new MutationObserver(sendGiscusTheme);
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          sendGiscusTheme();
+        }
+      });
+    });
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
@@ -675,6 +691,25 @@ darkmode.showWidget();
         sendGiscusTheme();
       }
     });
+
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.addEventListener('load', sendGiscusTheme);
+    } else {
+      var bodyObserver = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var nodes = mutations[i].addedNodes;
+          for (var j = 0; j < nodes.length; j++) {
+            if (nodes[j].nodeName === 'IFRAME' && nodes[j].classList.contains('giscus-frame')) {
+              nodes[j].addEventListener('load', sendGiscusTheme);
+              bodyObserver.disconnect();
+              return;
+            }
+          }
+        }
+      });
+      bodyObserver.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   if (document.readyState === 'loading') {

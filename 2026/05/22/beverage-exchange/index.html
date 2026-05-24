@@ -320,12 +320,13 @@
 <li><strong>推导公式</strong>：既然最后必定剩 1 个瓶盖，那我们索性先把这 1 个瓶盖藏起来。剩下真正能拿去参与“每 2 个净消耗换一瓶”规则的有效瓶盖数就是 $n - 1$ 个。<br>因此，额外能换到的饮料数就是 $\lfloor \frac{n - 1}{2} \rfloor$。</li>
 </ol>
 <p>加上初始购买的 $n$ 瓶，最终能够喝到的饮料总数为：</p>
-<script type="math/tex; mode=display">total\_drunk = n + \lfloor \frac{n - 1}{2} \rfloor</script><hr>
+<p>$$total_drunk = n + \lfloor \frac{n - 1}{2} \rfloor$$</p>
+<hr>
 <h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><h4 id="方案一：循环模拟实现（适合初学者，逻辑直观）"><a href="#方案一：循环模拟实现（适合初学者，逻辑直观）" class="headerlink" title="方案一：循环模拟实现（适合初学者，逻辑直观）"></a>方案一：循环模拟实现（适合初学者，逻辑直观）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n) == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">int</span> total_drunk = n; <span class="comment">// 初始喝到的饮料数</span></span><br><span class="line">        <span class="type">int</span> caps = n;        <span class="comment">// 初始拥有的瓶盖数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 只要瓶盖不少于 3 个，就可以继续换</span></span><br><span class="line">        <span class="keyword">while</span> (caps &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="type">int</span> new_drinks = caps / <span class="number">3</span>;   <span class="comment">// 本轮用完所有能换的盖子</span></span><br><span class="line">            total_drunk += new_drinks;   <span class="comment">// 累加喝到的饮料</span></span><br><span class="line">            caps = (caps % <span class="number">3</span>) + new_drinks; <span class="comment">// 剩下的盖子 + 喝完新产生的盖子</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, total_drunk);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="方案二：数学公式实现（效率高）"><a href="#方案二：数学公式实现（效率高）" class="headerlink" title="方案二：数学公式实现（效率高）"></a>方案二：数学公式实现（效率高）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入，确保成功接收到一个整数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n) == <span class="number">1</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 运用数学公式直接计算出最终结果</span></span><br><span class="line">        <span class="type">int</span> total_drunk = n + (n - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 打印输出结果</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, total_drunk);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
-<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“等效替代与净消耗”</strong>。3个盖子换1瓶饮料（带1个盖子），等价于 <strong>“每净消耗 2 个盖子就能多喝 1 瓶”</strong>。由于老板不给赊账，最后必定剩 1 个保底盖子无法消耗。因此先扣掉这 1 个盖子，其余套用 $O(1)$ 通项公式直接秒杀：</p>
-<script type="math/tex; mode=display">\text{总数} = n + \lfloor \frac{n - 1}{2} \rfloor</script></li>
+<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“等效替代与净消耗”</strong>。3个盖子换1瓶饮料（带1个盖子），等价于 <strong>“每净消耗 2 个盖子就能多喝 1 瓶”</strong>。由于老板不给赊账，最后必定剩 1 个保底盖子无法消耗。因此先扣掉这 1 个盖子，其余套用 $O(1)$ 通项公式直接秒杀：<br>$$\text{总数} = n + \lfloor \frac{n - 1}{2} \rfloor$$</p>
+</li>
 <li><p><strong>防错指南</strong></p>
 <ol>
 <li><strong>输入防御</strong>：严格使用 <code>if (scanf(&quot;%d&quot;, &amp;n) == 1)</code> 进行安全拦截，防止蓝桥杯盲测脏数据。</li>
@@ -468,8 +469,8 @@ darkmode.showWidget();
   'use strict';
 
   function getGiscusTheme() {
-    return document.documentElement.classList.contains('darkmode--activated') 
-      ? 'dark_dimmed' 
+    return document.documentElement.classList.contains('darkmode--activated')
+      ? 'dark_dimmed'
       : 'light';
   }
 
@@ -487,7 +488,13 @@ darkmode.showWidget();
   }
 
   function init() {
-    var observer = new MutationObserver(sendGiscusTheme);
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          sendGiscusTheme();
+        }
+      });
+    });
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class']
@@ -499,6 +506,25 @@ darkmode.showWidget();
         sendGiscusTheme();
       }
     });
+
+    var iframe = document.querySelector('iframe.giscus-frame');
+    if (iframe) {
+      iframe.addEventListener('load', sendGiscusTheme);
+    } else {
+      var bodyObserver = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var nodes = mutations[i].addedNodes;
+          for (var j = 0; j < nodes.length; j++) {
+            if (nodes[j].nodeName === 'IFRAME' && nodes[j].classList.contains('giscus-frame')) {
+              nodes[j].addEventListener('load', sendGiscusTheme);
+              bodyObserver.disconnect();
+              return;
+            }
+          }
+        }
+      });
+      bodyObserver.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
   if (document.readyState === 'loading') {
