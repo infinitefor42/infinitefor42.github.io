@@ -1,10 +1,20 @@
-const CACHE_NAME = 'devlog-cache-v1';
+const CACHE_NAME = 'devlog-cache-v2';
+const MAX_CACHE_SIZE = 100;
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
   '/images/android-chrome-512x512.png'
 ];
+
+async function trimCache(cacheName, maxSize) {
+  const cache = await caches.open(cacheName);
+  const keys = await cache.keys();
+  if (keys.length > maxSize) {
+    await cache.delete(keys[0]);
+    await trimCache(cacheName, maxSize);
+  }
+}
 
 // Install event
 self.addEventListener('install', event => {
@@ -69,6 +79,7 @@ self.addEventListener('fetch', event => {
           const responseToCache = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, responseToCache);
+            trimCache(CACHE_NAME, MAX_CACHE_SIZE);
           });
         }
         return networkResponse;

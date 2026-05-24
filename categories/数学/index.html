@@ -22,12 +22,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"enable":true,"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta property="og:type" content="website">
+    <meta name="description" content="Bowen Cao 的个人技术博客，记录数据科学、算法与数学学习笔记">
+<meta property="og:type" content="website">
 <meta property="og:title" content="DevLog">
 <meta property="og:url" content="https://caobowen.top/categories/%E6%95%B0%E5%AD%A6/index.html">
 <meta property="og:site_name" content="DevLog">
+<meta property="og:description" content="Bowen Cao 的个人技术博客，记录数据科学、算法与数学学习笔记">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Bowen Cao">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="数据科学">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
 
 
@@ -45,9 +52,7 @@
 
 
 
-  <script async defer data-website-id="" src=""></script>
 
-  <script defer data-domain="" src=""></script>
 
   
   <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js" defer></script>
@@ -56,8 +61,6 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
 <script src="/js/third-party/search/local-search.js" defer></script>
-<script src="//code.tidio.co/.js"></script>
-<script src="/js/third-party/chat/tidio.js" defer></script>
 
   <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
   <script src="/js/third-party/tags/pdf.js" defer></script>
@@ -77,10 +80,6 @@
   
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/12.2.1/firebase-app-compat.js" integrity="sha256-d21UgtIcA6c6qwr8nWk6lxs/KrpbWhknQN7qBjWA2Kk=" crossorigin="anonymous" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/12.2.1/firebase-firestore-compat.js" integrity="sha256-leHatffkFuVGIg7ABaA5BDsqsEUtktL4tftb3OdQfg0=" crossorigin="anonymous" defer></script>
-  <script class="next-config" data-name="firestore" type="application/json">{"enable":true,"collection":"articles","apiKey":null,"projectId":null}</script>
-  <script src="/js/third-party/statistics/firestore.js" defer></script>
 
 
 
@@ -120,6 +119,7 @@
       <p class="site-title">DevLog</p>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">数据科学与算法笔记</p>
   </div>
 
   <div class="site-nav-right">
@@ -191,7 +191,7 @@
     <img class="site-author-image" itemprop="image" alt="Bowen Cao"
       src="/images/android-chrome-512x512.png">
   <p class="site-author-name" itemprop="name">Bowen Cao</p>
-  <div class="site-description" itemprop="description"></div>
+  <div class="site-description" itemprop="description">Bowen Cao 的个人技术博客，记录数据科学、算法与数学学习笔记</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
@@ -216,9 +216,6 @@
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/infinitefor42" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;infinitefor42" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:548620473@qq.com" title="E-Mail → mailto:548620473@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -317,8 +314,6 @@
   <footer class="footer">
     <div class="footer-inner">
 
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">null </a>
-  </div>
   <div class="copyright">
     &copy; 
     <span itemprop="copyrightYear">2026</span>
@@ -408,7 +403,7 @@ darkmode.showWidget();
             theme: getGiscusTheme()
           }
         }
-      }, '*');
+      }, 'https://giscus.app');
     }
   }
 
