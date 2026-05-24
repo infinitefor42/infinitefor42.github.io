@@ -22,27 +22,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"enable":true,"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) &#x3D; 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。 2.函数 $f(x)&#x3D;\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 _个第二类间断点（填阿拉伯数字）。 3.求函数 $z &#x3D; 1 - \left( \frac{x^2}{a^2}">
+    <meta name="description" content="题目背景与核心痛点在算法竞赛中，求某个特定约束下的排列组合方案数是极常见的高频题型。本题要求利用给定数量的字母（A、B、C 分别有有限个），拼凑出一个固定长度为 $n$ 的字符串。 这道题的破局原理虽然是递归（Recursion），但它在本质上属于组合数学在计算机科学中的经典应用——树状分支枚举（决策树模型）。面对带有动态状态约束（字母数量逐渐减少）的排列问题，如果盲目采用高复杂度的全局全排列再进">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高等数学试题">
-<meta property="og:url" content="https://caobowen.top/2026/03/28/advanced-mathematics-quiz/index.html">
+<meta property="og:title" content="基于字母数量限制的字符串递归组合问题">
+<meta property="og:url" content="https://caobowen.top/2026/05/23/string-combination-recursion-md/index.html">
 <meta property="og:site_name" content="DevLog">
-<meta property="og:description" content="1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) &#x3D; 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。 2.函数 $f(x)&#x3D;\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 _个第二类间断点（填阿拉伯数字）。 3.求函数 $z &#x3D; 1 - \left( \frac{x^2}{a^2}">
+<meta property="og:description" content="题目背景与核心痛点在算法竞赛中，求某个特定约束下的排列组合方案数是极常见的高频题型。本题要求利用给定数量的字母（A、B、C 分别有有限个），拼凑出一个固定长度为 $n$ 的字符串。 这道题的破局原理虽然是递归（Recursion），但它在本质上属于组合数学在计算机科学中的经典应用——树状分支枚举（决策树模型）。面对带有动态状态约束（字母数量逐渐减少）的排列问题，如果盲目采用高复杂度的全局全排列再进">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-28T03:21:42.000Z">
-<meta property="article:modified_time" content="2026-05-24T01:23:05.544Z">
+<meta property="article:published_time" content="2026-05-23T12:25:00.000Z">
+<meta property="article:modified_time" content="2026-05-24T03:34:02.556Z">
 <meta property="article:author" content="Bowen Cao">
-<meta property="article:tag" content="高等数学">
+<meta property="article:tag" content="蓝桥杯">
+<meta property="article:tag" content="递归">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://caobowen.top/2026/03/28/advanced-mathematics-quiz/">
+<link rel="canonical" href="https://caobowen.top/2026/05/23/string-combination-recursion-md/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://caobowen.top/2026/03/28/advanced-mathematics-quiz/","path":"2026/03/28/advanced-mathematics-quiz/","title":"高等数学试题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://caobowen.top/2026/05/23/string-combination-recursion-md/","path":"2026/05/23/string-combination-recursion-md/","title":"基于字母数量限制的字符串递归组合问题"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>高等数学试题 | DevLog</title>
+<title>基于字母数量限制的字符串递归组合问题 | DevLog</title>
   
 
 
@@ -88,7 +89,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://caobowen.top/2026/03/28/advanced-mathematics-quiz/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://caobowen.top/2026/05/23/string-combination-recursion-md/"}</script>
   <script src="/js/third-party/quicklink.js" defer></script>
 
   <noscript>
@@ -181,7 +182,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%A7%A3%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">参考解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC-1-%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">第 1 题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC-2-%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">第 2 题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC-3-%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">第 3 题</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E8%83%8C%E6%99%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">题目背景与核心痛点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%EF%BC%9A%E5%8C%96%E6%95%B4%E4%B8%BA%E9%9B%B6%E7%9A%84%E6%A0%91%E7%8A%B6%E5%86%B3%E7%AD%96"><span class="nav-number">2.</span> <span class="nav-text">解题思路：化整为零的树状决策</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%94%8D-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86%E6%8B%86%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">🔍 核心原理拆解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%F0%9F%9B%91-%E9%80%92%E5%BD%92%E7%9A%84%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%EF%BC%88%E2%80%9C%E5%88%B9%E8%BD%A6%E6%9C%BA%E5%88%B6%E2%80%9D%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">🛑 递归的边界条件（“刹车机制”）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">C 语言代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8F%81-%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">🏁 总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -242,7 +243,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://caobowen.top/2026/03/28/advanced-mathematics-quiz/">
+    <link itemprop="mainEntityOfPage" href="https://caobowen.top/2026/05/23/string-combination-recursion-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/android-chrome-512x512.png">
@@ -255,12 +256,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="高等数学试题 | DevLog">
+      <meta itemprop="name" content="基于字母数量限制的字符串递归组合问题 | DevLog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          高等数学试题<a href="https://github.com/infinitefor42/infinitefor42.github.io/tree/main/source/_posts/advanced-mathematics-quiz.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          基于字母数量限制的字符串递归组合问题<a href="https://github.com/infinitefor42/infinitefor42.github.io/tree/main/source/_posts/string-combination-recursion-md.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -271,14 +272,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-03-28 11:21:42" itemprop="dateCreated datePublished" datetime="2026-03-28T11:21:42+08:00">2026-03-28</time>
+      <time title="创建时间：2026-05-23 20:25:00" itemprop="dateCreated datePublished" datetime="2026-05-23T20:25:00+08:00">2026-05-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-24 09:23:05" itemprop="dateModified" datetime="2026-05-24T09:23:05+08:00">2026-05-24</time>
+      <time title="修改时间：2026-05-24 11:34:02" itemprop="dateModified" datetime="2026-05-24T11:34:02+08:00">2026-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,7 +287,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
     </span>
 
@@ -306,35 +307,43 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
-<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
+    <div class="post-body" itemprop="articleBody"><h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>在算法竞赛中，求某个特定约束下的排列组合方案数是极常见的高频题型。本题要求利用给定数量的字母（A、B、C 分别有有限个），拼凑出一个固定长度为 $n$ 的字符串。</p>
+<p>这道题的破局原理虽然是<strong>递归（Recursion）</strong>，但它在本质上属于组合数学在计算机科学中的经典应用——<strong>树状分支枚举（决策树模型）</strong>。面对带有动态状态约束（字母数量逐渐减少）的排列问题，如果盲目采用高复杂度的全局全排列再进行过滤，极易导致时空开销爆炸。而通过决策树递归，我们可以做到“精准剪枝，全自动穷举”。</p>
 <hr>
-<h2 id="参考解答"><a href="#参考解答" class="headerlink" title="参考解答"></a>参考解答</h2><h3 id="第-1-题"><a href="#第-1-题" class="headerlink" title="第 1 题"></a>第 1 题</h3><p>令 $t = -x$（$t \to +\infty$），原式变为：</p>
-<p>$$\lim_{t \to +\infty} \left( \sqrt{at^2 + bt - 1} - 4t \right) = 1$$</p>
-<p>分子有理化：</p>
-<p>$$\frac{(a-16)t^2 + bt - 1}{\sqrt{at^2 + bt - 1} + 4t}$$</p>
-<p>为使极限存在且为有限值，分子中 $t^2$ 的系数必须为零，故 $a = 16$。</p>
-<p>代入 $a = 16$ 后：</p>
-<p>$$\lim_{t \to +\infty} \frac{bt - 1}{\sqrt{16t^2 + bt - 1} + 4t} = \frac{b}{8} = 1$$</p>
-<p>因此 $b = 8$。</p>
-<p>$$\boxed{a = 16, \quad b = 8}$$</p>
-<h3 id="第-2-题"><a href="#第-2-题" class="headerlink" title="第 2 题"></a>第 2 题</h3><p>函数的间断点为分母为零处：$x = -1,\ 0,\ 1$。</p>
-<ul>
-<li><strong>$x = -1$</strong>：$\ln|1+x| \to -\infty$，分母趋于非零有限值，故为无穷间断点（第二类）。</li>
-<li><strong>$x = 0$</strong>：$\ln|1+x| \sim x$，$e^x - 1 \sim x$，极限 $\lim_{x \to 0} \frac{x}{x \cdot (-1)} = -1$ 存在，故为可去间断点（第一类）。</li>
-<li><strong>$x = 1$</strong>：分母趋于 $0$，分子趋于 $\ln 2 \neq 0$，故为无穷间断点（第二类）。</li>
+<h3 id="解题思路：化整为零的树状决策"><a href="#解题思路：化整为零的树状决策" class="headerlink" title="解题思路：化整为零的树状决策"></a>解题思路：化整为零的树状决策</h3><p>该模型的核心思想可以总结为：<strong>“化整为零，逐位决定”</strong>。<br>我们要组成一个长度为 $n$ 的字符串，可以将其无缝拆解：先决定“当前第 1 位”放什么字母，再让递归函数去搞定“剩下的 $n-1$ 位”。</p>
+<h4 id="🔍-核心原理拆解"><a href="#🔍-核心原理拆解" class="headerlink" title="🔍 核心原理拆解"></a>🔍 核心原理拆解</h4><p>对于字符串中的任意一个当前位置，我们在合法情况下只有 3 种相互独立的孤立选择：<strong>放 A、放 B、或者放 C</strong>。</p>
+<ol>
+<li><strong>选择放 A</strong>：<ul>
+<li>消耗了 1 个字母 A，剩下的 A 资源随之变更为 $a - 1$ 个。</li>
+<li>字符串的当前位置被填满了一位，所以目标剩余长度变为 $n - 1$ 位。</li>
+<li>后续子问题的可能性：<code>f(a - 1, b, c, n - 1)</code></li>
 </ul>
-<p>$$\boxed{1}$$</p>
-<h3 id="第-3-题"><a href="#第-3-题" class="headerlink" title="第 3 题"></a>第 3 题</h3><p>计算偏导数：</p>
-<p>$$\frac{\partial z}{\partial x} = -\frac{2x}{a^2}, \quad \frac{\partial z}{\partial y} = -\frac{2y}{b^2}$$</p>
-<p>在点 $\left(\frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}}\right)$ 处：</p>
-<p>$$\frac{\partial z}{\partial x} = -\frac{\sqrt{2}}{a}, \quad \frac{\partial z}{\partial y} = -\frac{\sqrt{2}}{b}$$</p>
-<p>椭圆在该点的外法线方向（梯度方向）为 $\left(\frac{\sqrt{2}}{a}, \frac{\sqrt{2}}{b}\right)$，内法线方向为其反方向。单位内法线向量为：</p>
-<p>$$\vec{n} = -\frac{1}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} \left(\frac{1}{a}, \frac{1}{b}\right)$$</p>
-<p>方向导数：</p>
-<p>$$\frac{\partial z}{\partial \vec{n}} = \left(-\frac{\sqrt{2}}{a}, -\frac{\sqrt{2}}{b}\right) \cdot \vec{n} = \frac{\sqrt{2}\left(\frac{1}{a^2}+\frac{1}{b^2}\right)}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} = \sqrt{2} \cdot \sqrt{\frac{1}{a^2}+\frac{1}{b^2}}$$</p>
-<p>$$\boxed{\frac{\partial z}{\partial \vec{n}} = \frac{\sqrt{2(a^2+b^2)}}{ab}}$$</p>
+</li>
+<li><strong>选择放 B</strong>：<ul>
+<li>消耗了 1 个字母 B，剩下的 B 资源随之变更为 $b - 1$ 个。</li>
+<li>目标剩余长度同样变为 $n - 1$ 位。</li>
+<li>后续子问题的可能性：<code>f(a, b - 1, c, n - 1)</code></li>
+</ul>
+</li>
+<li><strong>选择放 C</strong>：<ul>
+<li>消耗了 1 个字母 C，剩下的 C 资源随之变更为 $c - 1$ 个。</li>
+<li>目标剩余长度变为 $n - 1$ 位。</li>
+<li>后续子问题的可能性：<code>f(a, b, c - 1, n - 1)</code></li>
+</ul>
+</li>
+</ol>
+<p>根据组合数学中的<strong>加法原理</strong>，将这三种独立选择派生出的子方案数累加起来，就是当前状态下的总方案数：</p>
+<p>$$\text{返回值} = f(a-1, b, c, n-1) + f(a, b-1, c, n-1) + f(a, b, c-1, n-1)$$</p>
+<h4 id="🛑-递归的边界条件（“刹车机制”）"><a href="#🛑-递归的边界条件（“刹车机制”）" class="headerlink" title="🛑 递归的边界条件（“刹车机制”）"></a>🛑 递归的边界条件（“刹车机制”）</h4><p>在递归程序中，逻辑的底层出口至关重要，代码最前面的两行判断完成了完美的闭环拦截：</p>
+<ul>
+<li><strong><code>if (a &lt; 0 || b &lt; 0 || c &lt; 0) return 0;</code> （此路不通）</strong><br>如果在之前的分支选择中，我们把某一种字母用超标了（例如原先只有 1 个 A，我们在分支中却连着安排了 2 个 A，导致 $a$ 变成了 $-1$），这就说明这是一种<strong>非法组合</strong>。立即返回 0，表示当前决策树分支无效。</li>
+<li><strong><code>if (n == 0) return 1;</code> （成功组完一个串）</strong><br>如果剩余所需填写的长度 $n$ 递减到了 0，说明我们已经成功填满了目标位置，且由于优先通过了上面的“字母超标”检查，这意味着我们完美拼出了一个合法的字符串。返回 1，代表在决策树的叶子节点找到了 1 种有效的排法。</li>
+</ul>
+<hr>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 树状分支枚举函数</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// 刹车机制 1：某种字母使用超标，说明此路径非法</span></span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span> || c &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 刹车机制 2：成功填满目标长度，且字母未超标，计数加 1</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 核心递推：累加放A、放B、放C三种独立决策产生的方案数</span></span><br><span class="line">    <span class="keyword">return</span> f(a - <span class="number">1</span>, b, c, n - <span class="number">1</span>) + </span><br><span class="line">           f(a, b - <span class="number">1</span>, c, n - <span class="number">1</span>) + </span><br><span class="line">           f(a, b, c - <span class="number">1</span>, n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">1</span>, n = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 调用穷举器并输出答案</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Total combinations: %d\n&quot;</span>, f(a, b, c, n));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="🏁-总结"><a href="#🏁-总结" class="headerlink" title="🏁 总结"></a>🏁 总结</h3><p>递归的本质，既不是盲目的套娃，也不是无穷的循环，而是 <strong>“用不变的逻辑，去包容千变万化的状态”</strong>。</p>
+<p>在这道题里，不管后续需要生成的字符串有多长、手里的字母有多少种组合，我们在当前这一步的底线和逻辑永远是固定的——<strong>只做好眼前的三次抉择（放A、放B、或放C）</strong>。这种“老老实实过好当下，剩下的脏活累活丢给未来的自己（下一层递归）”的思维，正是递归最优雅的浪漫。</p>
+<p>在备战蓝桥杯的路上，我们会遇到无数复杂的搜索、剪枝和动态规划。请记住：<strong>把宏观的宏大目标拆解为微观的局部决策，再用严格的边界进行防御拦截</strong>，你就握住了通往所有高级搜索算法的通关钥匙。</p>
 
     </div>
 
@@ -344,7 +353,8 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag"># 高等数学</a>
+              <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag"># 蓝桥杯</a>
+              <a href="/tags/%E9%80%92%E5%BD%92/" rel="tag"># 递归</a>
           </div>
 
         
@@ -354,14 +364,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/03/25/games/" rel="prev" title="games">
-                  <i class="fa fa-angle-left"></i> games
+                <a href="/2026/05/22/unbuyable-number/" rel="prev" title="无法购买的数字">
+                  <i class="fa fa-angle-left"></i> 无法购买的数字
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/03/28/fast-slow-pointers/" rel="next" title="快慢指针">
-                  快慢指针 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
