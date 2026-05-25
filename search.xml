@@ -1,93 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>基于字母数量限制的字符串递归组合问题</title>
-    <url>/2026/05/23/string-combination-recursion-md/</url>
-    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>在算法竞赛中，求某个特定约束下的排列组合方案数是极常见的高频题型。本题要求利用给定数量的字母（A、B、C 分别有有限个），拼凑出一个固定长度为 $n$ 的字符串。</p>
-<p>这道题的破局原理虽然是<strong>递归（Recursion）</strong>，但它在本质上属于组合数学在计算机科学中的经典应用——<strong>树状分支枚举（决策树模型）</strong>。面对带有动态状态约束（字母数量逐渐减少）的排列问题，如果盲目采用高复杂度的全局全排列再进行过滤，极易导致时空开销爆炸。而通过决策树递归，我们可以做到“精准剪枝，全自动穷举”。</p>
+    <title>高等数学试题</title>
+    <url>/2026/03/28/advanced-mathematics-quiz/</url>
+    <content><![CDATA[<p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
+<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
+<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
 <hr>
-<h3 id="解题思路：化整为零的树状决策"><a href="#解题思路：化整为零的树状决策" class="headerlink" title="解题思路：化整为零的树状决策"></a>解题思路：化整为零的树状决策</h3><p>该模型的核心思想可以总结为：<strong>“化整为零，逐位决定”</strong>。<br>我们要组成一个长度为 $n$ 的字符串，可以将其无缝拆解：先决定“当前第 1 位”放什么字母，再让递归函数去搞定“剩下的 $n-1$ 位”。</p>
-<h4 id="🔍-核心原理拆解"><a href="#🔍-核心原理拆解" class="headerlink" title="🔍 核心原理拆解"></a>🔍 核心原理拆解</h4><p>对于字符串中的任意一个当前位置，我们在合法情况下只有 3 种相互独立的孤立选择：<strong>放 A、放 B、或者放 C</strong>。</p>
-<ol>
-<li><strong>选择放 A</strong>：<ul>
-<li>消耗了 1 个字母 A，剩下的 A 资源随之变更为 $a - 1$ 个。</li>
-<li>字符串的当前位置被填满了一位，所以目标剩余长度变为 $n - 1$ 位。</li>
-<li>后续子问题的可能性：<code>f(a - 1, b, c, n - 1)</code></li>
-</ul>
-</li>
-<li><strong>选择放 B</strong>：<ul>
-<li>消耗了 1 个字母 B，剩下的 B 资源随之变更为 $b - 1$ 个。</li>
-<li>目标剩余长度同样变为 $n - 1$ 位。</li>
-<li>后续子问题的可能性：<code>f(a, b - 1, c, n - 1)</code></li>
-</ul>
-</li>
-<li><strong>选择放 C</strong>：<ul>
-<li>消耗了 1 个字母 C，剩下的 C 资源随之变更为 $c - 1$ 个。</li>
-<li>目标剩余长度变为 $n - 1$ 位。</li>
-<li>后续子问题的可能性：<code>f(a, b, c - 1, n - 1)</code></li>
-</ul>
-</li>
-</ol>
-<p>根据组合数学中的<strong>加法原理</strong>，将这三种独立选择派生出的子方案数累加起来，就是当前状态下的总方案数：</p>
-<p>$$\text{返回值} = f(a-1, b, c, n-1) + f(a, b-1, c, n-1) + f(a, b, c-1, n-1)$$</p>
-<h4 id="🛑-递归的边界条件（“刹车机制”）"><a href="#🛑-递归的边界条件（“刹车机制”）" class="headerlink" title="🛑 递归的边界条件（“刹车机制”）"></a>🛑 递归的边界条件（“刹车机制”）</h4><p>在递归程序中，逻辑的底层出口至关重要，代码最前面的两行判断完成了完美的闭环拦截：</p>
+<h2 id="参考解答"><a href="#参考解答" class="headerlink" title="参考解答"></a>参考解答</h2><h3 id="第-1-题"><a href="#第-1-题" class="headerlink" title="第 1 题"></a>第 1 题</h3><p>令 $t = -x$（$t \to +\infty$），原式变为：</p>
+<p>$$\lim_{t \to +\infty} \left( \sqrt{at^2 + bt - 1} - 4t \right) = 1$$</p>
+<p>分子有理化：</p>
+<p>$$\frac{(a-16)t^2 + bt - 1}{\sqrt{at^2 + bt - 1} + 4t}$$</p>
+<p>为使极限存在且为有限值，分子中 $t^2$ 的系数必须为零，故 $a = 16$。</p>
+<p>代入 $a = 16$ 后：</p>
+<p>$$\lim_{t \to +\infty} \frac{bt - 1}{\sqrt{16t^2 + bt - 1} + 4t} = \frac{b}{8} = 1$$</p>
+<p>因此 $b = 8$。</p>
+<p>$$\boxed{a = 16, \quad b = 8}$$</p>
+<h3 id="第-2-题"><a href="#第-2-题" class="headerlink" title="第 2 题"></a>第 2 题</h3><p>函数的间断点为分母为零处：$x = -1,\ 0,\ 1$。</p>
 <ul>
-<li><strong><code>if (a &lt; 0 || b &lt; 0 || c &lt; 0) return 0;</code> （此路不通）</strong><br>如果在之前的分支选择中，我们把某一种字母用超标了（例如原先只有 1 个 A，我们在分支中却连着安排了 2 个 A，导致 $a$ 变成了 $-1$），这就说明这是一种<strong>非法组合</strong>。立即返回 0，表示当前决策树分支无效。</li>
-<li><strong><code>if (n == 0) return 1;</code> （成功组完一个串）</strong><br>如果剩余所需填写的长度 $n$ 递减到了 0，说明我们已经成功填满了目标位置，且由于优先通过了上面的“字母超标”检查，这意味着我们完美拼出了一个合法的字符串。返回 1，代表在决策树的叶子节点找到了 1 种有效的排法。</li>
+<li><strong>$x = -1$</strong>：$\ln|1+x| \to -\infty$，分母趋于非零有限值，故为无穷间断点（第二类）。</li>
+<li><strong>$x = 0$</strong>：$\ln|1+x| \sim x$，$e^x - 1 \sim x$，极限 $\lim_{x \to 0} \frac{x}{x \cdot (-1)} = -1$ 存在，故为可去间断点（第一类）。</li>
+<li><strong>$x = 1$</strong>：分母趋于 $0$，分子趋于 $\ln 2 \neq 0$，故为无穷间断点（第二类）。</li>
 </ul>
-<hr>
-<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 树状分支枚举函数</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// 刹车机制 1：某种字母使用超标，说明此路径非法</span></span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span> || c &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 刹车机制 2：成功填满目标长度，且字母未超标，计数加 1</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 核心递推：累加放A、放B、放C三种独立决策产生的方案数</span></span><br><span class="line">    <span class="keyword">return</span> f(a - <span class="number">1</span>, b, c, n - <span class="number">1</span>) + </span><br><span class="line">           f(a, b - <span class="number">1</span>, c, n - <span class="number">1</span>) + </span><br><span class="line">           f(a, b, c - <span class="number">1</span>, n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">1</span>, n = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 调用穷举器并输出答案</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Total combinations: %d\n&quot;</span>, f(a, b, c, n));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="🏁-总结"><a href="#🏁-总结" class="headerlink" title="🏁 总结"></a>🏁 总结</h3><p>递归的本质，既不是盲目的套娃，也不是无穷的循环，而是 <strong>“用不变的逻辑，去包容千变万化的状态”</strong>。</p>
-<p>在这道题里，不管后续需要生成的字符串有多长、手里的字母有多少种组合，我们在当前这一步的底线和逻辑永远是固定的——<strong>只做好眼前的三次抉择（放A、放B、或放C）</strong>。这种“老老实实过好当下，剩下的脏活累活丢给未来的自己（下一层递归）”的思维，正是递归最优雅的浪漫。</p>
-<p>在备战蓝桥杯的路上，我们会遇到无数复杂的搜索、剪枝和动态规划。请记住：<strong>把宏观的宏大目标拆解为微观的局部决策，再用严格的边界进行防御拦截</strong>，你就握住了通往所有高级搜索算法的通关钥匙。</p>
+<p>$$\boxed{1}$$</p>
+<h3 id="第-3-题"><a href="#第-3-题" class="headerlink" title="第 3 题"></a>第 3 题</h3><p>计算偏导数：</p>
+<p>$$\frac{\partial z}{\partial x} = -\frac{2x}{a^2}, \quad \frac{\partial z}{\partial y} = -\frac{2y}{b^2}$$</p>
+<p>在点 $\left(\frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}}\right)$ 处：</p>
+<p>$$\frac{\partial z}{\partial x} = -\frac{\sqrt{2}}{a}, \quad \frac{\partial z}{\partial y} = -\frac{\sqrt{2}}{b}$$</p>
+<p>椭圆在该点的外法线方向（梯度方向）为 $\left(\frac{\sqrt{2}}{a}, \frac{\sqrt{2}}{b}\right)$，内法线方向为其反方向。单位内法线向量为：</p>
+<p>$$\vec{n} = -\frac{1}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} \left(\frac{1}{a}, \frac{1}{b}\right)$$</p>
+<p>方向导数：</p>
+<p>$$\frac{\partial z}{\partial \vec{n}} = \left(-\frac{\sqrt{2}}{a}, -\frac{\sqrt{2}}{b}\right) \cdot \vec{n} = \frac{\sqrt{2}\left(\frac{1}{a^2}+\frac{1}{b^2}\right)}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} = \sqrt{2} \cdot \sqrt{\frac{1}{a^2}+\frac{1}{b^2}}$$</p>
+<p>$$\boxed{\frac{\partial z}{\partial \vec{n}} = \frac{\sqrt{2(a^2+b^2)}}{ab}}$$</p>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>数学</category>
       </categories>
       <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>无法购买的数字</title>
-    <url>/2026/05/22/unbuyable-number/</url>
-    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道广为人知的经典数论应用题，在各大算法平台上常被称为“买不到的数目”或“麦乐鸡定理（Chicken McNugget Theorem）”。</p>
-<p>题目通常给出两个互质的打包数量 $a$ 和 $b$（例如 4 和 7），要求找出<strong>最大那个无法通过 $a$ 和 $b$ 组合（相加）拼凑出来的正整数</strong>。如果你尝试用暴力搜索（DFS）或者完全背包（DP）去硬刷，由于你不知道搜索的“上限在哪里”，很容易导致程序超时（TLE）或陷入死循环。然而，只要我们揭开它的数论面纱，这道题完全可以用 $O(1)$ 的数学公式直接秒杀。</p>
-<hr>
-<h3 id="解题思路：从数论原理到公式秒杀"><a href="#解题思路：从数论原理到公式秒杀" class="headerlink" title="解题思路：从数论原理到公式秒杀"></a>解题思路：从数论原理到公式秒杀</h3><h4 id="1-为什么一定存在一个“最大买不到的数”？"><a href="#1-为什么一定存在一个“最大买不到的数”？" class="headerlink" title="1. 为什么一定存在一个“最大买不到的数”？"></a>1. 为什么一定存在一个“最大买不到的数”？</h4><p>根据数论中的<strong>裴蜀定理（Bézout&#39;s Identity）</strong>：如果两个正整数 $a$ 和 $b$ 互质（即 $\gcd(a, b) = 1$），那么对于任意整数 $z$，方程 $a \cdot x + b \cdot y = z$ 一定有整数解。</p>
-<p>但是在现实生活中，“买东西”不允许出现负数（即 $x, y \ge 0$）。当 $z$ 足够大时，非负整数解是一定存在的；而当 $z$ 比较小时，由于不能使用负数凑数，就会出现一部分数字无法被组合出来。</p>
-<h4 id="2-麦乐鸡定理（Sylvester-定理）"><a href="#2-麦乐鸡定理（Sylvester-定理）" class="headerlink" title="2. 麦乐鸡定理（Sylvester 定理）"></a>2. 麦乐鸡定理（Sylvester 定理）</h4><p>数学家西尔维斯特（James Joseph Sylvester）早就为我们证明了一个定理：</p>
-<blockquote>
-<p>当两个正整数 $a, b$ 互质时，对于方程 $a \cdot x + b \cdot y = z$ ，使得方程没有非负整数解的<strong>最大正整数</strong> $z$ 的公式为：</p>
-<p>$$z = a \times b - a - b$$</p>
-</blockquote>
-<h4 id="💡-思维深化：怎么直观理解这个上限？（同余桶理论）"><a href="#💡-思维深化：怎么直观理解这个上限？（同余桶理论）" class="headerlink" title="💡 思维深化：怎么直观理解这个上限？（同余桶理论）"></a>💡 思维深化：怎么直观理解这个上限？（同余桶理论）</h4><p>我们可以把数字按模 $a$ 的余数分成 $a$ 个“桶”（剩余系）。<br>以 $a = 4, b = 7$ 为例，我们看 $7$ 的倍数在模 4 下的分布：</p>
-<ul>
-<li>$7 \times 0 = 0 \equiv 0 \pmod 4$ （此桶齐了，0 之后所有 4 的倍数都能凑出）</li>
-<li>$7 \times 1 = 7 \equiv 3 \pmod 4$ （此桶齐了，7 之后所有余 3 的数都能凑出，如 11, 15...）</li>
-<li>$7 \times 2 = 14 \equiv 2 \pmod 4$ （此桶齐了，14 之后所有余 2 的数都能凑出，如 18, 22...）</li>
-<li>$7 \times 3 = 21 \equiv 1 \pmod 4$ （此桶齐了，21 之后所有余 1 的数都能凑出，如 25, 29...）</li>
-</ul>
-<p>当最后一个桶（余 1 的桶）在 $21$ 被填满时，说明 <strong>$21$ 之后的所有数字都彻底安全了</strong>。<br>而在这最后一个桶开辟（$21$）之前，该桶上一个无法凑出的数就是 $21 - 4 = 17$。<br>这就是公式 $a \times b - a - b$（即 $a \times (b-1) - a$）在数论底层的本质逻辑。</p>
-<hr>
-<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><p>在实际比赛盲测中，我们需要防御<strong>输入非法边界（如负数）</strong>以及<strong>不互质</strong>的恶意数据。为了拿到绝对的满分，严谨的代码应当引入 <strong>辗转相除法（GCD）</strong> 进行前置拦截：</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> m, <span class="type">long</span> <span class="type">long</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? m : gcd(n, m % n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入的两个包装数量</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;a, &amp;b) == <span class="number">2</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 防御性编程：确保输入合法且互质（GCD为1）</span></span><br><span class="line">        <span class="keyword">if</span> (a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> &amp;&amp; gcd(a, b) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 直接套用麦乐鸡定理公式进行计算</span></span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> ans = a * b - a - b;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不互质或数据非法，按题目要求输出特定错误码（如-1）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
-<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“互质数的不定方程非负整数解问题”</strong>（麦乐鸡定理/Sylvester 定理）。当 $a, b$ 互质时，最大无法拼凑的数存在固定边界。无需暴力搜索或动态规划，直接套用 $O(1)$ 公式秒杀：<br>$$\text{最大值} = a \times b - a - b$$<br><em>底层逻辑（同余桶理论）</em>：所有数按模 $a$ 的余数分为 $a$ 个桶，利用 $b$ 的倍数将桶逐个填满。当最后一个桶在 $a \times (b-1)$ 被填满时，前一个无法填满的空缺即为最大买不到的数：$a \times (b-1) - a = a \times b - a - b$。</p>
-</li>
-<li><p><strong>防错指南（避坑卡片）</strong></p>
-<ol>
-<li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
-<li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
-<li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
+        <tag>高等数学</tag>
       </tags>
   </entry>
   <entry>
@@ -130,6 +80,54 @@
       </categories>
       <tags>
         <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>快慢指针</title>
+    <url>/2026/03/28/fast-slow-pointers/</url>
+    <content><![CDATA[<h1 id="算法进阶：彻底搞懂“快慢指针”及其妙用"><a href="#算法进阶：彻底搞懂“快慢指针”及其妙用" class="headerlink" title="算法进阶：彻底搞懂“快慢指针”及其妙用"></a>算法进阶：彻底搞懂“快慢指针”及其妙用</h1><p>在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 <strong>快慢指针（Fast &amp; Slow Pointers）</strong>，通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。</p>
+<hr>
+<h2 id="1-什么是快慢指针？"><a href="#1-什么是快慢指针？" class="headerlink" title="1. 什么是快慢指针？"></a>1. 什么是快慢指针？</h2><p>顾名思义，我们同时使用两个指针在数据结构上移动：</p>
+<ul>
+<li><strong>慢指针 (Slow)</strong>：每次向前移动 <strong>1</strong> 个步长。</li>
+<li><strong>快指针 (Fast)</strong>：每次向前移动 <strong>2</strong> 个（或更多）步长。</li>
+</ul>
+<p>这种步频差就像“龟兔赛跑”，只要路程足够长或存在环路，快指针一定会与慢指针产生特定的相对位置关系，从而帮助我们推导出结构的特征。</p>
+<hr>
+<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd-39-s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd-39-s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd&#39;s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd&#39;s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
+<ul>
+<li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
+<li><strong>优势</strong>：空间复杂度仅为 <strong>O(1)</strong>，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
+</ul>
+<h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3><p>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</p>
+<ul>
+<li><strong>逻辑</strong>：快指针的速度是慢指针的两倍。当快指针到达链表末尾（<code>null</code>）时，慢指针刚好走到了全长的一半。</li>
+<li><strong>用途</strong>：常用于链表的归并排序（Merge Sort）或判断回文链表。</li>
+</ul>
+<h3 id="③-寻找环的入口点"><a href="#③-寻找环的入口点" class="headerlink" title="③ 寻找环的入口点"></a>③ 寻找环的入口点</h3><p>这是一个进阶的数学问题。</p>
+<ul>
+<li><strong>逻辑</strong>：在快慢指针第一次相遇后，将其中一个指针放回起点（Head），两个指针现在以<strong>相同速度</strong>（步长皆为 1）同时前进。当它们再次相遇时，相遇点即为环的入口。</li>
+</ul>
+<hr>
+<h2 id="3-代码演示-C语言实现"><a href="#3-代码演示-C语言实现" class="headerlink" title="3. 代码演示 (C语言实现)"></a>3. 代码演示 (C语言实现)</h2><ul>
+<li>判断链表是否有环</li>
+<li>返回 1 表示有环，返回 0 表示无环<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isCycle</span><span class="params">(Node *head)</span> </span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)   <span class="comment">//这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.</span></span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next; <span class="comment">// 快指针每次走两步</span></span><br><span class="line">        slow = slow-&gt;next;        <span class="comment">// 慢指针每次走一步</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)        <span class="comment">// 快慢指针相遇，说明有环</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 快指针走到尽头，说明无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>找到链表环的入口</li>
+<li>返回环的起始节点指针<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Node* <span class="title function_">findBegin</span><span class="params">(Node *head)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一步：利用快慢指针判断是否有环</span></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果相遇，说明有环</span></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 第二步：计算环中节点的个数 count</span></span><br><span class="line">            Node *p = fast;</span><br><span class="line">            <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;next != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                count++;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 第三步：寻找环的入口</span></span><br><span class="line">            fast = head;</span><br><span class="line">            slow = head;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 让 fast 指针先走 count 步</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后 fast 和 slow 同步前进，相遇点即为入口</span></span><br><span class="line">            <span class="keyword">while</span> (fast != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2><ul>
+<li><strong>极高的空间效率</strong>：它能将原本需要 <strong>O(n)</strong> 空间的算法（例如使用哈希表或集合来记录已访问节点）降低到 <strong>O(1)</strong> 的常数级空间。</li>
+<li><strong>打破思维定式</strong>：它提醒我们，遍历数据结构时不一定只有一种速度。通过制造“速度差”，我们可以巧妙地挖掘出链表或数组中隐藏的几何属性（如中点、环路等）。</li>
+</ul>
+<hr>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>快慢指针是算法面试中的“常客”，也是提升程序效率的利器。下次当你看到链表、循环或需要寻找特定比例位置的问题时，不妨停下来想想：<strong>是不是可以让其中一个指针“跑快点”？</strong></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -217,91 +215,48 @@
       </categories>
   </entry>
   <entry>
-    <title>快慢指针</title>
-    <url>/2026/03/28/fast-slow-pointers/</url>
-    <content><![CDATA[<h1 id="算法进阶：彻底搞懂“快慢指针”及其妙用"><a href="#算法进阶：彻底搞懂“快慢指针”及其妙用" class="headerlink" title="算法进阶：彻底搞懂“快慢指针”及其妙用"></a>算法进阶：彻底搞懂“快慢指针”及其妙用</h1><p>在处理链表（Linked List）或循环数组问题时，传统的单指针遍历往往显得力不从心。今天我们要聊的 <strong>快慢指针（Fast &amp; Slow Pointers）</strong>，通过“步频差异”这一巧妙设计，能优雅地解决许多看似复杂的时间与空间复杂度挑战。</p>
+    <title>longest-common-substring</title>
+    <url>/2026/05/25/longest-common-substring/</url>
+    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p><strong>最长公共子串（Longest Common Substring</strong>问题要求：求两个字符串的所有子串中能够完全匹配上的最大长度是多少。</p>
+<p>例如：<code>s1 = &quot;abcdkkk&quot;</code> 和 <code>s2 = &quot;baabcdadabc&quot;</code>，它们最长的公共子串是 <code>&quot;abcd&quot;</code>，因此最大长度为 4。</p>
+<p>如果采用暴力的三层循环枚举，时间复杂度会直接飙升到 $O(N^3)$。但如果我们跳出时间维度的纠缠，借用一个二维矩阵表格，利用格子坐标<strong>天然隔离两个字符串各自推进的位置</strong>，就可以用极其内敛的 $O(N^2)$ 递推轻松破局。</p>
 <hr>
-<h2 id="1-什么是快慢指针？"><a href="#1-什么是快慢指针？" class="headerlink" title="1. 什么是快慢指针？"></a>1. 什么是快慢指针？</h2><p>顾名思义，我们同时使用两个指针在数据结构上移动：</p>
+<h3 id="解题思路：二维矩阵的位置隔离与斜向递推"><a href="#解题思路：二维矩阵的位置隔离与斜向递推" class="headerlink" title="解题思路：二维矩阵的位置隔离与斜向递推"></a>解题思路：二维矩阵的位置隔离与斜向递推</h3><p>这道题是“利用二维表格天然隔离状态”的教科书级范例：</p>
+<h4 id="1-坐标即位置，格子即状态"><a href="#1-坐标即位置，格子即状态" class="headerlink" title="1. 坐标即位置，格子即状态"></a>1. 坐标即位置，格子即状态</h4><p>我们引入一个二维数组 <code>int a[N][N]</code>。在这个表格里：</p>
 <ul>
-<li><strong>慢指针 (Slow)</strong>：每次向前移动 <strong>1</strong> 个步长。</li>
-<li><strong>快指针 (Fast)</strong>：每次向前移动 <strong>2</strong> 个（或更多）步长。</li>
+<li>横坐标 $i$ 代表第一个字符串 <code>s1</code> 当前推进到了第 $i$ 个字符（对应下标 <code>s1[i-1]</code>）。</li>
+<li>纵坐标 $j$ 代表第二个字符串 <code>s2</code> 当前推进到了第 $j$ 个字符（对应下标 <code>s2[j-1]</code>）。</li>
+<li>单元格 <code>a[i][j]</code> 的物理含义被严格冻结为：<strong>以 <code>s1[i-1]</code> 和 <code>s2[j-1]</code> 这两个字符作为“结尾”的最长公共子串的长度</strong>。</li>
 </ul>
-<p>这种步频差就像“龟兔赛跑”，只要路程足够长或存在环路，快指针一定会与慢指针产生特定的相对位置关系，从而帮助我们推导出结构的特征。</p>
-<hr>
-<h2 id="2-核心应用场景"><a href="#2-核心应用场景" class="headerlink" title="2. 核心应用场景"></a>2. 核心应用场景</h2><h3 id="①-判定链表是否有环-Floyd-39-s-Cycle-Finding-Algorithm"><a href="#①-判定链表是否有环-Floyd-39-s-Cycle-Finding-Algorithm" class="headerlink" title="① 判定链表是否有环 (Floyd&#39;s Cycle-Finding Algorithm)"></a>① 判定链表是否有环 (Floyd&#39;s Cycle-Finding Algorithm)</h3><p>这是快慢指针最经典的应用，也被称为“龟兔赛跑算法”。</p>
+<h4 id="2-斜向连续性的状态转移"><a href="#2-斜向连续性的状态转移" class="headerlink" title="2. 斜向连续性的状态转移"></a>2. 斜向连续性的状态转移</h4><p>公共子串要求字符必须是<strong>连续匹配</strong>的。这就意味着，当我们在格子 $(i, j)$ 发现当前两个字符相等（<code>s1[i-1] == s2[j-1]</code>）时，能不能让长度加 1，完全取决于<strong>它们各自的前一个字符是否也相等</strong>。</p>
+<p>在二维表格中，<code>s1</code> 的前一个字符和 <code>s2</code> 的前一个字符，其对应的坐标恰好就是当前格子的<strong>左上角斜对角格—— <code>a[i-1][j-1]</code></strong>。</p>
 <ul>
-<li><strong>逻辑</strong>：如果链表中存在环，快指针最终会进入环并在某个时刻“套圈”慢指针，两者在环内相遇。</li>
-<li><strong>优势</strong>：空间复杂度仅为 <strong>O(1)</strong>，不需要额外的哈希表存储访问记录，极大地节省了内存。</li>
+<li>如果左上角是 <code>0</code>，说明前面断掉了，当前格子只能自立门户，长度为 <code>0 + 1 = 1</code>。</li>
+<li>如果左上角是 <code>3</code>，说明前面已经连续接上了 3 个字符，当前格子顺理成章地续上，长度变为 <code>3 + 1 = 4</code>。</li>
 </ul>
-<h3 id="②-寻找链表的中点"><a href="#②-寻找链表的中点" class="headerlink" title="② 寻找链表的中点"></a>② 寻找链表的中点</h3><p>在不预先知道链表长度的情况下，如何仅通过一次遍历找到中点？</p>
+<p>因此，状态转移方程为：<br><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">a[i][j] = a[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 256</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* s1, <span class="type">const</span> <span class="type">char</span>* s2)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[N][N];</span><br><span class="line">    <span class="type">int</span> len1 = <span class="built_in">strlen</span>(s1);</span><br><span class="line">    <span class="type">int</span> len2 = <span class="built_in">strlen</span>(s2);</span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化表格，所有格子置 0，天然作为初始边界</span></span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>) * N * N);</span><br><span class="line">    <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 纵横交错遍历，利用物理位置天然隔离</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= len1; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= len2; j++) &#123;</span><br><span class="line">            <span class="comment">// 如果当前末尾字符匹配成功</span></span><br><span class="line">            <span class="keyword">if</span> (s1[i<span class="number">-1</span>] == s2[j<span class="number">-1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 核心状态转移：当前格子的长度由左上角（前一位置的状态）决定</span></span><br><span class="line">                a[i][j] = a[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>; </span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 动态更新全表最大值</span></span><br><span class="line">                <span class="keyword">if</span> (a[i][j] &gt; max) &#123;</span><br><span class="line">                    max = a[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abcdkkk&quot;</span>, <span class="string">&quot;baabcdadabc&quot;</span>));       <span class="comment">// 输出: 4</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;aaakkkabababa&quot;</span>, <span class="string">&quot;baabababcdadabc&quot;</span>)); <span class="comment">// 输出: 5</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abccbaacbcca&quot;</span>, <span class="string">&quot;ccccbbbbbaaaa&quot;</span>));    <span class="comment">// 输出: 2</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abcd&quot;</span>, <span class="string">&quot;xyz&quot;</span>));                  <span class="comment">// 输出: 0</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;ab&quot;</span>, <span class="string">&quot;ab&quot;</span>));                    <span class="comment">// 输出: 2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（二维表格的几何美学）</strong><br>核心本质是 <strong>“用斜向物理位置的连续性来映射字符串的连续匹配”</strong>。格子的绝对坐标 $(i, j)$ 天然隔离了两个串的字符推进进度。公共子串的“连续性”在二维矩阵里，具象化为了 <strong>“一条从左上向右下延伸的对角线连通路径”</strong>。只有当路径连续不断时，计数才会累加；一旦字符不匹配，对角线瞬间被截断清零。</p>
+</li>
+<li><p><strong>防错指南（填表人守则）</strong></p>
+<ol>
+<li><strong>下标对齐防呆（Offset 陷阱）</strong>：我们在填表格时，为了留出第 0 行和第 0 列作为初始边界，循环是从 <code>1</code> 到 <code>len</code>（表示第 $i$ 个字符）。但在 C 语言中访问字符串数组时，索引是从 <code>0</code> 开始的。因此必须用 <code>s1[i-1]</code> 和 <code>s2[j-1]</code> 进行对齐。切记不要手快写成 <code>s1[i]</code>，否则不仅会漏掉字符串的首字符，还会在访问到最后一个字符时发生<strong>数组越界（Out of Bounds）</strong>。</li>
+<li><p><strong>地表最强易混点：彻底分清“子串（Substring）”与“子序列（Subsequence）”</strong><br>这是各大算法比赛中最容易让人翻车的隐形巨坑。两者的物理机制在二维表格的控制下有着本质的不同：</p>
+<p>| 核心概念 | 连续性要求 | 不相等时的状态转移方程 | 二维矩阵中的物理表现 |<br>| :--- | :--- | :--- | :--- |<br>| <strong>最长公共子串</strong><br>(Substring) | <strong>必须严格连续</strong> | <code>a[i][j] = 0;</code><br>(也就是保持 <code>memset</code> 的初始状态) | <strong>孤立的斜对角线</strong>。<br>一旦断开就原地清零，无法继承历史遗产，各格子相互独立。 |<br>| <strong>最长公共子序列</strong><br>(Subsequence) | <strong>允许非连续</strong> | <code>dp[i][j] = max(dp[i-1][j], dp[i][j-1]);</code> | <strong>全局水流扩散</strong>。<br>即使当前字符不匹配，历史的最大匹配长度也会像水流一样，从左边或上边平移继承过来。 |</p>
 <ul>
-<li><strong>逻辑</strong>：快指针的速度是慢指针的两倍。当快指针到达链表末尾（<code>null</code>）时，慢指针刚好走到了全长的一半。</li>
-<li><strong>用途</strong>：常用于链表的归并排序（Merge Sort）或判断回文链表。</li>
+<li>💡 <strong>深度细节补充</strong>：在写<strong>子串</strong>代码时，由于不相等时格子直接为 0，最大值可能出现在矩阵的<strong>任何一个孤立格</strong>里，所以我们必须在循环内部用 <code>max</code> 变量去实时捕捉全图的最高点；而写<strong>子序列</strong>代码时，由于不匹配时会疯狂继承历史遗产，最终的最大值一定会平移汇聚到矩阵的<strong>最右下角格子</strong> <code>dp[len1][len2]</code>。</li>
 </ul>
-<h3 id="③-寻找环的入口点"><a href="#③-寻找环的入口点" class="headerlink" title="③ 寻找环的入口点"></a>③ 寻找环的入口点</h3><p>这是一个进阶的数学问题。</p>
-<ul>
-<li><strong>逻辑</strong>：在快慢指针第一次相遇后，将其中一个指针放回起点（Head），两个指针现在以<strong>相同速度</strong>（步长皆为 1）同时前进。当它们再次相遇时，相遇点即为环的入口。</li>
-</ul>
-<hr>
-<h2 id="3-代码演示-C语言实现"><a href="#3-代码演示-C语言实现" class="headerlink" title="3. 代码演示 (C语言实现)"></a>3. 代码演示 (C语言实现)</h2><ul>
-<li>判断链表是否有环</li>
-<li>返回 1 表示有环，返回 0 表示无环<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">isCycle</span><span class="params">(Node *head)</span> </span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)   <span class="comment">//这里的while循环条件是fast指针和fast指针的下一个节点都不为NULL,确保fast指针不会越界.</span></span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next; <span class="comment">// 快指针每次走两步</span></span><br><span class="line">        slow = slow-&gt;next;        <span class="comment">// 慢指针每次走一步</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)        <span class="comment">// 快慢指针相遇，说明有环</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 快指针走到尽头，说明无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>找到链表环的入口</li>
-<li>返回环的起始节点指针<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Node* <span class="title function_">findBegin</span><span class="params">(Node *head)</span></span><br><span class="line">&#123;</span><br><span class="line">    Node *fast = head;</span><br><span class="line">    Node *slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一步：利用快慢指针判断是否有环</span></span><br><span class="line">    <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        fast = fast-&gt;next-&gt;next;</span><br><span class="line">        slow = slow-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果相遇，说明有环</span></span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 第二步：计算环中节点的个数 count</span></span><br><span class="line">            Node *p = fast;</span><br><span class="line">            <span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (p-&gt;next != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                count++;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 第三步：寻找环的入口</span></span><br><span class="line">            fast = head;</span><br><span class="line">            slow = head;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 让 fast 指针先走 count 步</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 然后 fast 和 slow 同步前进，相遇点即为入口</span></span><br><span class="line">            <span class="keyword">while</span> (fast != slow)</span><br><span class="line">            &#123;</span><br><span class="line">                fast = fast-&gt;next;</span><br><span class="line">                slow = slow-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> slow;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>; <span class="comment">// 无环</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 </li>
 </ul>
-<h2 id="4-为什么这个技巧很重要？"><a href="#4-为什么这个技巧很重要？" class="headerlink" title="4. 为什么这个技巧很重要？"></a>4. 为什么这个技巧很重要？</h2><ul>
-<li><strong>极高的空间效率</strong>：它能将原本需要 <strong>O(n)</strong> 空间的算法（例如使用哈希表或集合来记录已访问节点）降低到 <strong>O(1)</strong> 的常数级空间。</li>
-<li><strong>打破思维定式</strong>：它提醒我们，遍历数据结构时不一定只有一种速度。通过制造“速度差”，我们可以巧妙地挖掘出链表或数组中隐藏的几何属性（如中点、环路等）。</li>
-</ul>
-<hr>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>快慢指针是算法面试中的“常客”，也是提升程序效率的利器。下次当你看到链表、循环或需要寻找特定比例位置的问题时，不妨停下来想想：<strong>是不是可以让其中一个指针“跑快点”？</strong></p>
 ]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>高等数学试题</title>
-    <url>/2026/03/28/advanced-mathematics-quiz/</url>
-    <content><![CDATA[<p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
-<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
-<hr>
-<h2 id="参考解答"><a href="#参考解答" class="headerlink" title="参考解答"></a>参考解答</h2><h3 id="第-1-题"><a href="#第-1-题" class="headerlink" title="第 1 题"></a>第 1 题</h3><p>令 $t = -x$（$t \to +\infty$），原式变为：</p>
-<p>$$\lim_{t \to +\infty} \left( \sqrt{at^2 + bt - 1} - 4t \right) = 1$$</p>
-<p>分子有理化：</p>
-<p>$$\frac{(a-16)t^2 + bt - 1}{\sqrt{at^2 + bt - 1} + 4t}$$</p>
-<p>为使极限存在且为有限值，分子中 $t^2$ 的系数必须为零，故 $a = 16$。</p>
-<p>代入 $a = 16$ 后：</p>
-<p>$$\lim_{t \to +\infty} \frac{bt - 1}{\sqrt{16t^2 + bt - 1} + 4t} = \frac{b}{8} = 1$$</p>
-<p>因此 $b = 8$。</p>
-<p>$$\boxed{a = 16, \quad b = 8}$$</p>
-<h3 id="第-2-题"><a href="#第-2-题" class="headerlink" title="第 2 题"></a>第 2 题</h3><p>函数的间断点为分母为零处：$x = -1,\ 0,\ 1$。</p>
-<ul>
-<li><strong>$x = -1$</strong>：$\ln|1+x| \to -\infty$，分母趋于非零有限值，故为无穷间断点（第二类）。</li>
-<li><strong>$x = 0$</strong>：$\ln|1+x| \sim x$，$e^x - 1 \sim x$，极限 $\lim_{x \to 0} \frac{x}{x \cdot (-1)} = -1$ 存在，故为可去间断点（第一类）。</li>
-<li><strong>$x = 1$</strong>：分母趋于 $0$，分子趋于 $\ln 2 \neq 0$，故为无穷间断点（第二类）。</li>
-</ul>
-<p>$$\boxed{1}$$</p>
-<h3 id="第-3-题"><a href="#第-3-题" class="headerlink" title="第 3 题"></a>第 3 题</h3><p>计算偏导数：</p>
-<p>$$\frac{\partial z}{\partial x} = -\frac{2x}{a^2}, \quad \frac{\partial z}{\partial y} = -\frac{2y}{b^2}$$</p>
-<p>在点 $\left(\frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}}\right)$ 处：</p>
-<p>$$\frac{\partial z}{\partial x} = -\frac{\sqrt{2}}{a}, \quad \frac{\partial z}{\partial y} = -\frac{\sqrt{2}}{b}$$</p>
-<p>椭圆在该点的外法线方向（梯度方向）为 $\left(\frac{\sqrt{2}}{a}, \frac{\sqrt{2}}{b}\right)$，内法线方向为其反方向。单位内法线向量为：</p>
-<p>$$\vec{n} = -\frac{1}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} \left(\frac{1}{a}, \frac{1}{b}\right)$$</p>
-<p>方向导数：</p>
-<p>$$\frac{\partial z}{\partial \vec{n}} = \left(-\frac{\sqrt{2}}{a}, -\frac{\sqrt{2}}{b}\right) \cdot \vec{n} = \frac{\sqrt{2}\left(\frac{1}{a^2}+\frac{1}{b^2}\right)}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} = \sqrt{2} \cdot \sqrt{\frac{1}{a^2}+\frac{1}{b^2}}$$</p>
-<p>$$\boxed{\frac{\partial z}{\partial \vec{n}} = \frac{\sqrt{2(a^2+b^2)}}{ab}}$$</p>
-]]></content>
-      <categories>
-        <category>数学</category>
-      </categories>
-      <tags>
-        <tag>高等数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -334,6 +289,96 @@
       </categories>
       <tags>
         <tag>烟花算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>基于字母数量限制的字符串递归组合问题</title>
+    <url>/2026/05/23/string-combination-recursion-md/</url>
+    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>在算法竞赛中，求某个特定约束下的排列组合方案数是极常见的高频题型。本题要求利用给定数量的字母（A、B、C 分别有有限个），拼凑出一个固定长度为 $n$ 的字符串。</p>
+<p>这道题的破局原理虽然是<strong>递归（Recursion）</strong>，但它在本质上属于组合数学在计算机科学中的经典应用——<strong>树状分支枚举（决策树模型）</strong>。面对带有动态状态约束（字母数量逐渐减少）的排列问题，如果盲目采用高复杂度的全局全排列再进行过滤，极易导致时空开销爆炸。而通过决策树递归，我们可以做到“精准剪枝，全自动穷举”。</p>
+<hr>
+<h3 id="解题思路：化整为零的树状决策"><a href="#解题思路：化整为零的树状决策" class="headerlink" title="解题思路：化整为零的树状决策"></a>解题思路：化整为零的树状决策</h3><p>该模型的核心思想可以总结为：<strong>“化整为零，逐位决定”</strong>。<br>我们要组成一个长度为 $n$ 的字符串，可以将其无缝拆解：先决定“当前第 1 位”放什么字母，再让递归函数去搞定“剩下的 $n-1$ 位”。</p>
+<h4 id="🔍-核心原理拆解"><a href="#🔍-核心原理拆解" class="headerlink" title="🔍 核心原理拆解"></a>🔍 核心原理拆解</h4><p>对于字符串中的任意一个当前位置，我们在合法情况下只有 3 种相互独立的孤立选择：<strong>放 A、放 B、或者放 C</strong>。</p>
+<ol>
+<li><strong>选择放 A</strong>：<ul>
+<li>消耗了 1 个字母 A，剩下的 A 资源随之变更为 $a - 1$ 个。</li>
+<li>字符串的当前位置被填满了一位，所以目标剩余长度变为 $n - 1$ 位。</li>
+<li>后续子问题的可能性：<code>f(a - 1, b, c, n - 1)</code></li>
+</ul>
+</li>
+<li><strong>选择放 B</strong>：<ul>
+<li>消耗了 1 个字母 B，剩下的 B 资源随之变更为 $b - 1$ 个。</li>
+<li>目标剩余长度同样变为 $n - 1$ 位。</li>
+<li>后续子问题的可能性：<code>f(a, b - 1, c, n - 1)</code></li>
+</ul>
+</li>
+<li><strong>选择放 C</strong>：<ul>
+<li>消耗了 1 个字母 C，剩下的 C 资源随之变更为 $c - 1$ 个。</li>
+<li>目标剩余长度变为 $n - 1$ 位。</li>
+<li>后续子问题的可能性：<code>f(a, b, c - 1, n - 1)</code></li>
+</ul>
+</li>
+</ol>
+<p>根据组合数学中的<strong>加法原理</strong>，将这三种独立选择派生出的子方案数累加起来，就是当前状态下的总方案数：</p>
+<p>$$\text{返回值} = f(a-1, b, c, n-1) + f(a, b-1, c, n-1) + f(a, b, c-1, n-1)$$</p>
+<h4 id="🛑-递归的边界条件（“刹车机制”）"><a href="#🛑-递归的边界条件（“刹车机制”）" class="headerlink" title="🛑 递归的边界条件（“刹车机制”）"></a>🛑 递归的边界条件（“刹车机制”）</h4><p>在递归程序中，逻辑的底层出口至关重要，代码最前面的两行判断完成了完美的闭环拦截：</p>
+<ul>
+<li><strong><code>if (a &lt; 0 || b &lt; 0 || c &lt; 0) return 0;</code> （此路不通）</strong><br>如果在之前的分支选择中，我们把某一种字母用超标了（例如原先只有 1 个 A，我们在分支中却连着安排了 2 个 A，导致 $a$ 变成了 $-1$），这就说明这是一种<strong>非法组合</strong>。立即返回 0，表示当前决策树分支无效。</li>
+<li><strong><code>if (n == 0) return 1;</code> （成功组完一个串）</strong><br>如果剩余所需填写的长度 $n$ 递减到了 0，说明我们已经成功填满了目标位置，且由于优先通过了上面的“字母超标”检查，这意味着我们完美拼出了一个合法的字符串。返回 1，代表在决策树的叶子节点找到了 1 种有效的排法。</li>
+</ul>
+<hr>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 树状分支枚举函数</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> c, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">    <span class="comment">// 刹车机制 1：某种字母使用超标，说明此路径非法</span></span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span> || c &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 刹车机制 2：成功填满目标长度，且字母未超标，计数加 1</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 核心递推：累加放A、放B、放C三种独立决策产生的方案数</span></span><br><span class="line">    <span class="keyword">return</span> f(a - <span class="number">1</span>, b, c, n - <span class="number">1</span>) + </span><br><span class="line">           f(a, b - <span class="number">1</span>, c, n - <span class="number">1</span>) + </span><br><span class="line">           f(a, b, c - <span class="number">1</span>, n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">1</span>, n = <span class="number">2</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 调用穷举器并输出答案</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Total combinations: %d\n&quot;</span>, f(a, b, c, n));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="🏁-总结"><a href="#🏁-总结" class="headerlink" title="🏁 总结"></a>🏁 总结</h3><p>递归的本质，既不是盲目的套娃，也不是无穷的循环，而是 <strong>“用不变的逻辑，去包容千变万化的状态”</strong>。</p>
+<p>在这道题里，不管后续需要生成的字符串有多长、手里的字母有多少种组合，我们在当前这一步的底线和逻辑永远是固定的——<strong>只做好眼前的三次抉择（放A、放B、或放C）</strong>。这种“老老实实过好当下，剩下的脏活累活丢给未来的自己（下一层递归）”的思维，正是递归最优雅的浪漫。</p>
+<p>在备战蓝桥杯的路上，我们会遇到无数复杂的搜索、剪枝和动态规划。请记住：<strong>把宏观的宏大目标拆解为微观的局部决策，再用严格的边界进行防御拦截</strong>，你就握住了通往所有高级搜索算法的通关钥匙。</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>无法购买的数字</title>
+    <url>/2026/05/22/unbuyable-number/</url>
+    <content><![CDATA[<h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道广为人知的经典数论应用题，在各大算法平台上常被称为“买不到的数目”或“麦乐鸡定理（Chicken McNugget Theorem）”。</p>
+<p>题目通常给出两个互质的打包数量 $a$ 和 $b$（例如 4 和 7），要求找出<strong>最大那个无法通过 $a$ 和 $b$ 组合（相加）拼凑出来的正整数</strong>。如果你尝试用暴力搜索（DFS）或者完全背包（DP）去硬刷，由于你不知道搜索的“上限在哪里”，很容易导致程序超时（TLE）或陷入死循环。然而，只要我们揭开它的数论面纱，这道题完全可以用 $O(1)$ 的数学公式直接秒杀。</p>
+<hr>
+<h3 id="解题思路：从数论原理到公式秒杀"><a href="#解题思路：从数论原理到公式秒杀" class="headerlink" title="解题思路：从数论原理到公式秒杀"></a>解题思路：从数论原理到公式秒杀</h3><h4 id="1-为什么一定存在一个“最大买不到的数”？"><a href="#1-为什么一定存在一个“最大买不到的数”？" class="headerlink" title="1. 为什么一定存在一个“最大买不到的数”？"></a>1. 为什么一定存在一个“最大买不到的数”？</h4><p>根据数论中的<strong>裴蜀定理（Bézout&#39;s Identity）</strong>：如果两个正整数 $a$ 和 $b$ 互质（即 $\gcd(a, b) = 1$），那么对于任意整数 $z$，方程 $a \cdot x + b \cdot y = z$ 一定有整数解。</p>
+<p>但是在现实生活中，“买东西”不允许出现负数（即 $x, y \ge 0$）。当 $z$ 足够大时，非负整数解是一定存在的；而当 $z$ 比较小时，由于不能使用负数凑数，就会出现一部分数字无法被组合出来。</p>
+<h4 id="2-麦乐鸡定理（Sylvester-定理）"><a href="#2-麦乐鸡定理（Sylvester-定理）" class="headerlink" title="2. 麦乐鸡定理（Sylvester 定理）"></a>2. 麦乐鸡定理（Sylvester 定理）</h4><p>数学家西尔维斯特（James Joseph Sylvester）早就为我们证明了一个定理：</p>
+<blockquote>
+<p>当两个正整数 $a, b$ 互质时，对于方程 $a \cdot x + b \cdot y = z$ ，使得方程没有非负整数解的<strong>最大正整数</strong> $z$ 的公式为：</p>
+<p>$$z = a \times b - a - b$$</p>
+</blockquote>
+<h4 id="💡-思维深化：怎么直观理解这个上限？（同余桶理论）"><a href="#💡-思维深化：怎么直观理解这个上限？（同余桶理论）" class="headerlink" title="💡 思维深化：怎么直观理解这个上限？（同余桶理论）"></a>💡 思维深化：怎么直观理解这个上限？（同余桶理论）</h4><p>我们可以把数字按模 $a$ 的余数分成 $a$ 个“桶”（剩余系）。<br>以 $a = 4, b = 7$ 为例，我们看 $7$ 的倍数在模 4 下的分布：</p>
+<ul>
+<li>$7 \times 0 = 0 \equiv 0 \pmod 4$ （此桶齐了，0 之后所有 4 的倍数都能凑出）</li>
+<li>$7 \times 1 = 7 \equiv 3 \pmod 4$ （此桶齐了，7 之后所有余 3 的数都能凑出，如 11, 15...）</li>
+<li>$7 \times 2 = 14 \equiv 2 \pmod 4$ （此桶齐了，14 之后所有余 2 的数都能凑出，如 18, 22...）</li>
+<li>$7 \times 3 = 21 \equiv 1 \pmod 4$ （此桶齐了，21 之后所有余 1 的数都能凑出，如 25, 29...）</li>
+</ul>
+<p>当最后一个桶（余 1 的桶）在 $21$ 被填满时，说明 <strong>$21$ 之后的所有数字都彻底安全了</strong>。<br>而在这最后一个桶开辟（$21$）之前，该桶上一个无法凑出的数就是 $21 - 4 = 17$。<br>这就是公式 $a \times b - a - b$（即 $a \times (b-1) - a$）在数论底层的本质逻辑。</p>
+<hr>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><p>在实际比赛盲测中，我们需要防御<strong>输入非法边界（如负数）</strong>以及<strong>不互质</strong>的恶意数据。为了拿到绝对的满分，严谨的代码应当引入 <strong>辗转相除法（GCD）</strong> 进行前置拦截：</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 辗转相除法求最大公约数</span></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">gcd</span><span class="params">(<span class="type">long</span> <span class="type">long</span> m, <span class="type">long</span> <span class="type">long</span> n)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> n == <span class="number">0</span> ? m : gcd(n, m % n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入的两个包装数量</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%lld %lld&quot;</span>, &amp;a, &amp;b) == <span class="number">2</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 防御性编程：确保输入合法且互质（GCD为1）</span></span><br><span class="line">        <span class="keyword">if</span> (a &gt; <span class="number">0</span> &amp;&amp; b &gt; <span class="number">0</span> &amp;&amp; gcd(a, b) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="comment">// 直接套用麦乐鸡定理公式进行计算</span></span><br><span class="line">            <span class="type">long</span> <span class="type">long</span> ans = a * b - a - b;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 如果不互质或数据非法，按题目要求输出特定错误码（如-1）</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></h2><h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“互质数的不定方程非负整数解问题”</strong>（麦乐鸡定理/Sylvester 定理）。当 $a, b$ 互质时，最大无法拼凑的数存在固定边界。无需暴力搜索或动态规划，直接套用 $O(1)$ 公式秒杀：<br>$$\text{最大值} = a \times b - a - b$$<br><em>底层逻辑（同余桶理论）</em>：所有数按模 $a$ 的余数分为 $a$ 个桶，利用 $b$ 的倍数将桶逐个填满。当最后一个桶在 $a \times (b-1)$ 被填满时，前一个无法填满的空缺即为最大买不到的数：$a \times (b-1) - a = a \times b - a - b$。</p>
+</li>
+<li><p><strong>防错指南（避坑卡片）</strong></p>
+<ol>
+<li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
+<li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
+<li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
       </tags>
   </entry>
 </search>

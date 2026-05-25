@@ -22,27 +22,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"caobowen.top","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"highlightjs":true,"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"enable":true,"style":"tabs","active":"giscus","storage":true,"lazyload":false,"nav":null,"activeClass":"giscus"},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) &#x3D; 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。 2.函数 $f(x)&#x3D;\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 _个第二类间断点（填阿拉伯数字）。 3.求函数 $z &#x3D; 1 - \left( \frac{x^2}{a^2}">
+    <meta name="description" content="题目背景与核心痛点最长公共子串（Longest Common Substring问题要求：求两个字符串的所有子串中能够完全匹配上的最大长度是多少。 例如：s1 &#x3D; &quot;abcdkkk&quot; 和 s2 &#x3D; &quot;baabcdadabc&quot;，它们最长的公共子串是 &quot;abcd&quot;，因此最大长度为 4。 如果采用暴力的三层循环枚举，时间复杂度会直接飙升到 $O">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高等数学试题">
-<meta property="og:url" content="https://caobowen.top/2026/03/28/advanced-mathematics-quiz/index.html">
+<meta property="og:title" content="longest-common-substring">
+<meta property="og:url" content="https://caobowen.top/2026/05/25/longest-common-substring/index.html">
 <meta property="og:site_name" content="DevLog">
-<meta property="og:description" content="1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) &#x3D; 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。 2.函数 $f(x)&#x3D;\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 _个第二类间断点（填阿拉伯数字）。 3.求函数 $z &#x3D; 1 - \left( \frac{x^2}{a^2}">
+<meta property="og:description" content="题目背景与核心痛点最长公共子串（Longest Common Substring问题要求：求两个字符串的所有子串中能够完全匹配上的最大长度是多少。 例如：s1 &#x3D; &quot;abcdkkk&quot; 和 s2 &#x3D; &quot;baabcdadabc&quot;，它们最长的公共子串是 &quot;abcd&quot;，因此最大长度为 4。 如果采用暴力的三层循环枚举，时间复杂度会直接飙升到 $O">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-03-28T03:21:42.000Z">
-<meta property="article:modified_time" content="2026-05-24T01:23:05.544Z">
+<meta property="article:published_time" content="2026-05-25T11:36:26.000Z">
+<meta property="article:modified_time" content="2026-05-25T11:41:31.809Z">
 <meta property="article:author" content="Bowen Cao">
-<meta property="article:tag" content="高等数学">
+<meta property="article:tag" content="动态规划">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://caobowen.top/2026/03/28/advanced-mathematics-quiz/">
+<link rel="canonical" href="https://caobowen.top/2026/05/25/longest-common-substring/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://caobowen.top/2026/03/28/advanced-mathematics-quiz/","path":"2026/03/28/advanced-mathematics-quiz/","title":"高等数学试题"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://caobowen.top/2026/05/25/longest-common-substring/","path":"2026/05/25/longest-common-substring/","title":"longest-common-substring"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>高等数学试题 | DevLog</title>
+<title>longest-common-substring | DevLog</title>
   
 
 
@@ -88,7 +88,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/3.0.1/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
-  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://caobowen.top/2026/03/28/advanced-mathematics-quiz/"}</script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"https://caobowen.top/2026/05/25/longest-common-substring/"}</script>
   <script src="/js/third-party/quicklink.js" defer></script>
 
   <noscript>
@@ -181,7 +181,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%A7%A3%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">参考解答</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC-1-%E9%A2%98"><span class="nav-number">1.1.</span> <span class="nav-text">第 1 题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC-2-%E9%A2%98"><span class="nav-number">1.2.</span> <span class="nav-text">第 2 题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC-3-%E9%A2%98"><span class="nav-number">1.3.</span> <span class="nav-text">第 3 题</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E8%83%8C%E6%99%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">题目背景与核心痛点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%EF%BC%9A%E4%BA%8C%E7%BB%B4%E7%9F%A9%E9%98%B5%E7%9A%84%E4%BD%8D%E7%BD%AE%E9%9A%94%E7%A6%BB%E4%B8%8E%E6%96%9C%E5%90%91%E9%80%92%E6%8E%A8"><span class="nav-number">2.</span> <span class="nav-text">解题思路：二维矩阵的位置隔离与斜向递推</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%9D%90%E6%A0%87%E5%8D%B3%E4%BD%8D%E7%BD%AE%EF%BC%8C%E6%A0%BC%E5%AD%90%E5%8D%B3%E7%8A%B6%E6%80%81"><span class="nav-number">2.1.</span> <span class="nav-text">1. 坐标即位置，格子即状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%96%9C%E5%90%91%E8%BF%9E%E7%BB%AD%E6%80%A7%E7%9A%84%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB"><span class="nav-number">2.2.</span> <span class="nav-text">2. 斜向连续性的状态转移</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E8%AF%AD%E8%A8%80%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">C 语言代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%A1-%E8%93%9D%E6%A1%A5%E6%9D%AF%E9%80%9A%E5%85%B3%C2%B7%E5%BF%AB%E9%80%9F%E5%A4%8D%E7%9B%98"><span class="nav-number">4.</span> <span class="nav-text">💡 蓝桥杯通关·快速复盘</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -242,7 +242,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://caobowen.top/2026/03/28/advanced-mathematics-quiz/">
+    <link itemprop="mainEntityOfPage" href="https://caobowen.top/2026/05/25/longest-common-substring/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/android-chrome-512x512.png">
@@ -255,12 +255,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="高等数学试题 | DevLog">
+      <meta itemprop="name" content="longest-common-substring | DevLog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          高等数学试题<a href="https://github.com/infinitefor42/infinitefor42.github.io/tree/main/source/_posts/advanced-mathematics-quiz.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          longest-common-substring<a href="https://github.com/infinitefor42/infinitefor42.github.io/tree/main/source/_posts/longest-common-substring.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -270,15 +270,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2026-03-28 11:21:42" itemprop="dateCreated datePublished" datetime="2026-03-28T11:21:42+08:00">2026-03-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-24 09:23:05" itemprop="dateModified" datetime="2026-05-24T09:23:05+08:00">2026-05-24</time>
+      <time title="创建时间：2026-05-25 19:36:26 / 修改时间：19:41:31" itemprop="dateCreated datePublished" datetime="2026-05-25T19:36:26+08:00">2026-05-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -286,7 +280,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
         </span>
     </span>
 
@@ -306,35 +300,40 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>1.已知 $\lim\limits_{x \to -\infty} (4x + \sqrt{ax^2 - bx - 1}) = 1$，其中 $a &gt; 0$，求 $a$ 和 $b$ 的值。</p>
-<p>2.函数 $f(x)=\frac{\ln|1+x|}{(e^x - 1)(x - 1)}$有 <strong><em>_</em></strong>个第二类间断点（填阿拉伯数字）。</p>
-<p>3.求函数 $z = 1 - \left( \frac{x^2}{a^2} + \frac{y^2}{b^2} \right)$ 在点 $\left( \frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}} \right)$ 处，沿曲线 $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 在该点的内法线方向的方向导数。</p>
+    <div class="post-body" itemprop="articleBody"><h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p><strong>最长公共子串（Longest Common Substring</strong>问题要求：求两个字符串的所有子串中能够完全匹配上的最大长度是多少。</p>
+<p>例如：<code>s1 = &quot;abcdkkk&quot;</code> 和 <code>s2 = &quot;baabcdadabc&quot;</code>，它们最长的公共子串是 <code>&quot;abcd&quot;</code>，因此最大长度为 4。</p>
+<p>如果采用暴力的三层循环枚举，时间复杂度会直接飙升到 $O(N^3)$。但如果我们跳出时间维度的纠缠，借用一个二维矩阵表格，利用格子坐标<strong>天然隔离两个字符串各自推进的位置</strong>，就可以用极其内敛的 $O(N^2)$ 递推轻松破局。</p>
 <hr>
-<h2 id="参考解答"><a href="#参考解答" class="headerlink" title="参考解答"></a>参考解答</h2><h3 id="第-1-题"><a href="#第-1-题" class="headerlink" title="第 1 题"></a>第 1 题</h3><p>令 $t = -x$（$t \to +\infty$），原式变为：</p>
-<p>$$\lim_{t \to +\infty} \left( \sqrt{at^2 + bt - 1} - 4t \right) = 1$$</p>
-<p>分子有理化：</p>
-<p>$$\frac{(a-16)t^2 + bt - 1}{\sqrt{at^2 + bt - 1} + 4t}$$</p>
-<p>为使极限存在且为有限值，分子中 $t^2$ 的系数必须为零，故 $a = 16$。</p>
-<p>代入 $a = 16$ 后：</p>
-<p>$$\lim_{t \to +\infty} \frac{bt - 1}{\sqrt{16t^2 + bt - 1} + 4t} = \frac{b}{8} = 1$$</p>
-<p>因此 $b = 8$。</p>
-<p>$$\boxed{a = 16, \quad b = 8}$$</p>
-<h3 id="第-2-题"><a href="#第-2-题" class="headerlink" title="第 2 题"></a>第 2 题</h3><p>函数的间断点为分母为零处：$x = -1,\ 0,\ 1$。</p>
+<h3 id="解题思路：二维矩阵的位置隔离与斜向递推"><a href="#解题思路：二维矩阵的位置隔离与斜向递推" class="headerlink" title="解题思路：二维矩阵的位置隔离与斜向递推"></a>解题思路：二维矩阵的位置隔离与斜向递推</h3><p>这道题是“利用二维表格天然隔离状态”的教科书级范例：</p>
+<h4 id="1-坐标即位置，格子即状态"><a href="#1-坐标即位置，格子即状态" class="headerlink" title="1. 坐标即位置，格子即状态"></a>1. 坐标即位置，格子即状态</h4><p>我们引入一个二维数组 <code>int a[N][N]</code>。在这个表格里：</p>
 <ul>
-<li><strong>$x = -1$</strong>：$\ln|1+x| \to -\infty$，分母趋于非零有限值，故为无穷间断点（第二类）。</li>
-<li><strong>$x = 0$</strong>：$\ln|1+x| \sim x$，$e^x - 1 \sim x$，极限 $\lim_{x \to 0} \frac{x}{x \cdot (-1)} = -1$ 存在，故为可去间断点（第一类）。</li>
-<li><strong>$x = 1$</strong>：分母趋于 $0$，分子趋于 $\ln 2 \neq 0$，故为无穷间断点（第二类）。</li>
+<li>横坐标 $i$ 代表第一个字符串 <code>s1</code> 当前推进到了第 $i$ 个字符（对应下标 <code>s1[i-1]</code>）。</li>
+<li>纵坐标 $j$ 代表第二个字符串 <code>s2</code> 当前推进到了第 $j$ 个字符（对应下标 <code>s2[j-1]</code>）。</li>
+<li>单元格 <code>a[i][j]</code> 的物理含义被严格冻结为：<strong>以 <code>s1[i-1]</code> 和 <code>s2[j-1]</code> 这两个字符作为“结尾”的最长公共子串的长度</strong>。</li>
 </ul>
-<p>$$\boxed{1}$$</p>
-<h3 id="第-3-题"><a href="#第-3-题" class="headerlink" title="第 3 题"></a>第 3 题</h3><p>计算偏导数：</p>
-<p>$$\frac{\partial z}{\partial x} = -\frac{2x}{a^2}, \quad \frac{\partial z}{\partial y} = -\frac{2y}{b^2}$$</p>
-<p>在点 $\left(\frac{a}{\sqrt{2}}, \frac{b}{\sqrt{2}}\right)$ 处：</p>
-<p>$$\frac{\partial z}{\partial x} = -\frac{\sqrt{2}}{a}, \quad \frac{\partial z}{\partial y} = -\frac{\sqrt{2}}{b}$$</p>
-<p>椭圆在该点的外法线方向（梯度方向）为 $\left(\frac{\sqrt{2}}{a}, \frac{\sqrt{2}}{b}\right)$，内法线方向为其反方向。单位内法线向量为：</p>
-<p>$$\vec{n} = -\frac{1}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} \left(\frac{1}{a}, \frac{1}{b}\right)$$</p>
-<p>方向导数：</p>
-<p>$$\frac{\partial z}{\partial \vec{n}} = \left(-\frac{\sqrt{2}}{a}, -\frac{\sqrt{2}}{b}\right) \cdot \vec{n} = \frac{\sqrt{2}\left(\frac{1}{a^2}+\frac{1}{b^2}\right)}{\sqrt{\frac{1}{a^2}+\frac{1}{b^2}}} = \sqrt{2} \cdot \sqrt{\frac{1}{a^2}+\frac{1}{b^2}}$$</p>
-<p>$$\boxed{\frac{\partial z}{\partial \vec{n}} = \frac{\sqrt{2(a^2+b^2)}}{ab}}$$</p>
+<h4 id="2-斜向连续性的状态转移"><a href="#2-斜向连续性的状态转移" class="headerlink" title="2. 斜向连续性的状态转移"></a>2. 斜向连续性的状态转移</h4><p>公共子串要求字符必须是<strong>连续匹配</strong>的。这就意味着，当我们在格子 $(i, j)$ 发现当前两个字符相等（<code>s1[i-1] == s2[j-1]</code>）时，能不能让长度加 1，完全取决于<strong>它们各自的前一个字符是否也相等</strong>。</p>
+<p>在二维表格中，<code>s1</code> 的前一个字符和 <code>s2</code> 的前一个字符，其对应的坐标恰好就是当前格子的<strong>左上角斜对角格—— <code>a[i-1][j-1]</code></strong>。</p>
+<ul>
+<li>如果左上角是 <code>0</code>，说明前面断掉了，当前格子只能自立门户，长度为 <code>0 + 1 = 1</code>。</li>
+<li>如果左上角是 <code>3</code>，说明前面已经连续接上了 3 个字符，当前格子顺理成章地续上，长度变为 <code>3 + 1 = 4</code>。</li>
+</ul>
+<p>因此，状态转移方程为：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[i][j] = a[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 256</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* s1, <span class="type">const</span> <span class="type">char</span>* s2)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[N][N];</span><br><span class="line">    <span class="type">int</span> len1 = <span class="built_in">strlen</span>(s1);</span><br><span class="line">    <span class="type">int</span> len2 = <span class="built_in">strlen</span>(s2);</span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化表格，所有格子置 0，天然作为初始边界</span></span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>) * N * N);</span><br><span class="line">    <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 纵横交错遍历，利用物理位置天然隔离</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= len1; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= len2; j++) &#123;</span><br><span class="line">            <span class="comment">// 如果当前末尾字符匹配成功</span></span><br><span class="line">            <span class="keyword">if</span> (s1[i<span class="number">-1</span>] == s2[j<span class="number">-1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 核心状态转移：当前格子的长度由左上角（前一位置的状态）决定</span></span><br><span class="line">                a[i][j] = a[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>; </span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 动态更新全表最大值</span></span><br><span class="line">                <span class="keyword">if</span> (a[i][j] &gt; max) &#123;</span><br><span class="line">                    max = a[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abcdkkk&quot;</span>, <span class="string">&quot;baabcdadabc&quot;</span>));       <span class="comment">// 输出: 4</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;aaakkkabababa&quot;</span>, <span class="string">&quot;baabababcdadabc&quot;</span>)); <span class="comment">// 输出: 5</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abccbaacbcca&quot;</span>, <span class="string">&quot;ccccbbbbbaaaa&quot;</span>));    <span class="comment">// 输出: 2</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abcd&quot;</span>, <span class="string">&quot;xyz&quot;</span>));                  <span class="comment">// 输出: 0</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;ab&quot;</span>, <span class="string">&quot;ab&quot;</span>));                    <span class="comment">// 输出: 2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（二维表格的几何美学）</strong><br>核心本质是 <strong>“用斜向物理位置的连续性来映射字符串的连续匹配”</strong>。格子的绝对坐标 $(i, j)$ 天然隔离了两个串的字符推进进度。公共子串的“连续性”在二维矩阵里，具象化为了 <strong>“一条从左上向右下延伸的对角线连通路径”</strong>。只有当路径连续不断时，计数才会累加；一旦字符不匹配，对角线瞬间被截断清零。</p>
+</li>
+<li><p><strong>防错指南（填表人守则）</strong></p>
+<ol>
+<li><strong>下标对齐防呆（Offset 陷阱）</strong>：我们在填表格时，为了留出第 0 行和第 0 列作为初始边界，循环是从 <code>1</code> 到 <code>len</code>（表示第 $i$ 个字符）。但在 C 语言中访问字符串数组时，索引是从 <code>0</code> 开始的。因此必须用 <code>s1[i-1]</code> 和 <code>s2[j-1]</code> 进行对齐。切记不要手快写成 <code>s1[i]</code>，否则不仅会漏掉字符串的首字符，还会在访问到最后一个字符时发生<strong>数组越界（Out of Bounds）</strong>。</li>
+<li><p><strong>地表最强易混点：彻底分清“子串（Substring）”与“子序列（Subsequence）”</strong><br>这是各大算法比赛中最容易让人翻车的隐形巨坑。两者的物理机制在二维表格的控制下有着本质的不同：</p>
+<p>| 核心概念 | 连续性要求 | 不相等时的状态转移方程 | 二维矩阵中的物理表现 |<br>| :--- | :--- | :--- | :--- |<br>| <strong>最长公共子串</strong><br>(Substring) | <strong>必须严格连续</strong> | <code>a[i][j] = 0;</code><br>(也就是保持 <code>memset</code> 的初始状态) | <strong>孤立的斜对角线</strong>。<br>一旦断开就原地清零，无法继承历史遗产，各格子相互独立。 |<br>| <strong>最长公共子序列</strong><br>(Subsequence) | <strong>允许非连续</strong> | <code>dp[i][j] = max(dp[i-1][j], dp[i][j-1]);</code> | <strong>全局水流扩散</strong>。<br>即使当前字符不匹配，历史的最大匹配长度也会像水流一样，从左边或上边平移继承过来。 |</p>
+<ul>
+<li>💡 <strong>深度细节补充</strong>：在写<strong>子串</strong>代码时，由于不相等时格子直接为 0，最大值可能出现在矩阵的<strong>任何一个孤立格</strong>里，所以我们必须在循环内部用 <code>max</code> 变量去实时捕捉全图的最高点；而写<strong>子序列</strong>代码时，由于不匹配时会疯狂继承历史遗产，最终的最大值一定会平移汇聚到矩阵的<strong>最右下角格子</strong> <code>dp[len1][len2]</code>。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
 
     </div>
 
@@ -344,7 +343,7 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag"># 高等数学</a>
+              <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag"># 动态规划</a>
           </div>
 
         
@@ -354,14 +353,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2026/03/25/games/" rel="prev" title="games">
-                  <i class="fa fa-angle-left"></i> games
+                <a href="/2026/05/23/string-combination-recursion-md/" rel="prev" title="基于字母数量限制的字符串递归组合问题">
+                  <i class="fa fa-angle-left"></i> 基于字母数量限制的字符串递归组合问题
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/03/28/fast-slow-pointers/" rel="next" title="快慢指针">
-                  快慢指针 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

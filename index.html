@@ -197,7 +197,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -208,7 +208,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -233,6 +233,118 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://caobowen.top/2026/05/25/longest-common-substring/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/android-chrome-512x512.png">
+      <meta itemprop="name" content="Bowen Cao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DevLog">
+      <meta itemprop="description" content="Bowen Cao 的个人技术博客，记录数据科学、算法与数学学习笔记">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | DevLog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/05/25/longest-common-substring/" class="post-title-link" itemprop="url">longest-common-substring</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-05-25 19:36:26 / 修改时间：19:41:31" itemprop="dateCreated datePublished" datetime="2026-05-25T19:36:26+08:00">2026-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p><strong>最长公共子串（Longest Common Substring</strong>问题要求：求两个字符串的所有子串中能够完全匹配上的最大长度是多少。</p>
+<p>例如：<code>s1 = &quot;abcdkkk&quot;</code> 和 <code>s2 = &quot;baabcdadabc&quot;</code>，它们最长的公共子串是 <code>&quot;abcd&quot;</code>，因此最大长度为 4。</p>
+<p>如果采用暴力的三层循环枚举，时间复杂度会直接飙升到 $O(N^3)$。但如果我们跳出时间维度的纠缠，借用一个二维矩阵表格，利用格子坐标<strong>天然隔离两个字符串各自推进的位置</strong>，就可以用极其内敛的 $O(N^2)$ 递推轻松破局。</p>
+<hr>
+<h3 id="解题思路：二维矩阵的位置隔离与斜向递推"><a href="#解题思路：二维矩阵的位置隔离与斜向递推" class="headerlink" title="解题思路：二维矩阵的位置隔离与斜向递推"></a>解题思路：二维矩阵的位置隔离与斜向递推</h3><p>这道题是“利用二维表格天然隔离状态”的教科书级范例：</p>
+<h4 id="1-坐标即位置，格子即状态"><a href="#1-坐标即位置，格子即状态" class="headerlink" title="1. 坐标即位置，格子即状态"></a>1. 坐标即位置，格子即状态</h4><p>我们引入一个二维数组 <code>int a[N][N]</code>。在这个表格里：</p>
+<ul>
+<li>横坐标 $i$ 代表第一个字符串 <code>s1</code> 当前推进到了第 $i$ 个字符（对应下标 <code>s1[i-1]</code>）。</li>
+<li>纵坐标 $j$ 代表第二个字符串 <code>s2</code> 当前推进到了第 $j$ 个字符（对应下标 <code>s2[j-1]</code>）。</li>
+<li>单元格 <code>a[i][j]</code> 的物理含义被严格冻结为：<strong>以 <code>s1[i-1]</code> 和 <code>s2[j-1]</code> 这两个字符作为“结尾”的最长公共子串的长度</strong>。</li>
+</ul>
+<h4 id="2-斜向连续性的状态转移"><a href="#2-斜向连续性的状态转移" class="headerlink" title="2. 斜向连续性的状态转移"></a>2. 斜向连续性的状态转移</h4><p>公共子串要求字符必须是<strong>连续匹配</strong>的。这就意味着，当我们在格子 $(i, j)$ 发现当前两个字符相等（<code>s1[i-1] == s2[j-1]</code>）时，能不能让长度加 1，完全取决于<strong>它们各自的前一个字符是否也相等</strong>。</p>
+<p>在二维表格中，<code>s1</code> 的前一个字符和 <code>s2</code> 的前一个字符，其对应的坐标恰好就是当前格子的<strong>左上角斜对角格—— <code>a[i-1][j-1]</code></strong>。</p>
+<ul>
+<li>如果左上角是 <code>0</code>，说明前面断掉了，当前格子只能自立门户，长度为 <code>0 + 1 = 1</code>。</li>
+<li>如果左上角是 <code>3</code>，说明前面已经连续接上了 3 个字符，当前格子顺理成章地续上，长度变为 <code>3 + 1 = 4</code>。</li>
+</ul>
+<p>因此，状态转移方程为：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[i][j] = a[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;</span><br></pre></td></tr></table></figure></p>
+<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> N 256</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">f</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* s1, <span class="type">const</span> <span class="type">char</span>* s2)</span> &#123;</span><br><span class="line">    <span class="type">int</span> a[N][N];</span><br><span class="line">    <span class="type">int</span> len1 = <span class="built_in">strlen</span>(s1);</span><br><span class="line">    <span class="type">int</span> len2 = <span class="built_in">strlen</span>(s2);</span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始化表格，所有格子置 0，天然作为初始边界</span></span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>) * N * N);</span><br><span class="line">    <span class="type">int</span> max = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 纵横交错遍历，利用物理位置天然隔离</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= len1; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">1</span>; j &lt;= len2; j++) &#123;</span><br><span class="line">            <span class="comment">// 如果当前末尾字符匹配成功</span></span><br><span class="line">            <span class="keyword">if</span> (s1[i<span class="number">-1</span>] == s2[j<span class="number">-1</span>]) &#123;</span><br><span class="line">                <span class="comment">// 核心状态转移：当前格子的长度由左上角（前一位置的状态）决定</span></span><br><span class="line">                a[i][j] = a[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>; </span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 动态更新全表最大值</span></span><br><span class="line">                <span class="keyword">if</span> (a[i][j] &gt; max) &#123;</span><br><span class="line">                    max = a[i][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abcdkkk&quot;</span>, <span class="string">&quot;baabcdadabc&quot;</span>));       <span class="comment">// 输出: 4</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;aaakkkabababa&quot;</span>, <span class="string">&quot;baabababcdadabc&quot;</span>)); <span class="comment">// 输出: 5</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abccbaacbcca&quot;</span>, <span class="string">&quot;ccccbbbbbaaaa&quot;</span>));    <span class="comment">// 输出: 2</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;abcd&quot;</span>, <span class="string">&quot;xyz&quot;</span>));                  <span class="comment">// 输出: 0</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f(<span class="string">&quot;ab&quot;</span>, <span class="string">&quot;ab&quot;</span>));                    <span class="comment">// 输出: 2</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
+<li><p><strong>一句话题眼（二维表格的几何美学）</strong><br>核心本质是 <strong>“用斜向物理位置的连续性来映射字符串的连续匹配”</strong>。格子的绝对坐标 $(i, j)$ 天然隔离了两个串的字符推进进度。公共子串的“连续性”在二维矩阵里，具象化为了 <strong>“一条从左上向右下延伸的对角线连通路径”</strong>。只有当路径连续不断时，计数才会累加；一旦字符不匹配，对角线瞬间被截断清零。</p>
+</li>
+<li><p><strong>防错指南（填表人守则）</strong></p>
+<ol>
+<li><strong>下标对齐防呆（Offset 陷阱）</strong>：我们在填表格时，为了留出第 0 行和第 0 列作为初始边界，循环是从 <code>1</code> 到 <code>len</code>（表示第 $i$ 个字符）。但在 C 语言中访问字符串数组时，索引是从 <code>0</code> 开始的。因此必须用 <code>s1[i-1]</code> 和 <code>s2[j-1]</code> 进行对齐。切记不要手快写成 <code>s1[i]</code>，否则不仅会漏掉字符串的首字符，还会在访问到最后一个字符时发生<strong>数组越界（Out of Bounds）</strong>。</li>
+<li><p><strong>地表最强易混点：彻底分清“子串（Substring）”与“子序列（Subsequence）”</strong><br>这是各大算法比赛中最容易让人翻车的隐形巨坑。两者的物理机制在二维表格的控制下有着本质的不同：</p>
+<p>| 核心概念 | 连续性要求 | 不相等时的状态转移方程 | 二维矩阵中的物理表现 |<br>| :--- | :--- | :--- | :--- |<br>| <strong>最长公共子串</strong><br>(Substring) | <strong>必须严格连续</strong> | <code>a[i][j] = 0;</code><br>(也就是保持 <code>memset</code> 的初始状态) | <strong>孤立的斜对角线</strong>。<br>一旦断开就原地清零，无法继承历史遗产，各格子相互独立。 |<br>| <strong>最长公共子序列</strong><br>(Subsequence) | <strong>允许非连续</strong> | <code>dp[i][j] = max(dp[i-1][j], dp[i][j-1]);</code> | <strong>全局水流扩散</strong>。<br>即使当前字符不匹配，历史的最大匹配长度也会像水流一样，从左边或上边平移继承过来。 |</p>
+<ul>
+<li>💡 <strong>深度细节补充</strong>：在写<strong>子串</strong>代码时，由于不相等时格子直接为 0，最大值可能出现在矩阵的<strong>任何一个孤立格</strong>里，所以我们必须在循环内部用 <code>max</code> 变量去实时捕捉全图的最高点；而写<strong>子序列</strong>代码时，由于不匹配时会疯狂继承历史遗产，最终的最大值一定会平移汇聚到矩阵的<strong>最右下角格子</strong> <code>dp[len1][len2]</code>。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -449,121 +561,6 @@
 <li><strong>大数越界防御（极重要）</strong>：当 $a, b$ 接近 $10^5$ 时，中间计算结果 <code>a * b</code> 会达到 $10^{10}$ 级别，<strong>远超 <code>int</code> 的最大上限（约 $2 \times 10^9$）</strong>。为了防止在赛场上因整型溢出痛失全分，变量与相乘计算必须强制使用 <strong><code>long long</code></strong>，输出配合 <strong><code>%lld</code></strong>。</li>
 <li><strong>前提条件拦截（不互质特判）</strong>：公式生效的<strong>绝对前提是 $\gcd(a, b) = 1$（两数互质）</strong>。若输入不互质（如 4 和 6），最大买不到的数为无穷大。竞赛代码中必须引入<strong>辗转相除法（GCD）</strong>对不互质或非正数输入进行前置过滤。</li>
 <li><strong>输入流防御</strong>：严格使用 <code>if (scanf(&quot;%lld %lld&quot;, &amp;a, &amp;b) == 2)</code> 确保双变量读入的健壮性。</li>
-</ol>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://caobowen.top/2026/05/22/beverage-exchange/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/android-chrome-512x512.png">
-      <meta itemprop="name" content="Bowen Cao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="DevLog">
-      <meta itemprop="description" content="Bowen Cao 的个人技术博客，记录数据科学、算法与数学学习笔记">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | DevLog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/05/22/beverage-exchange/" class="post-title-link" itemprop="url">饮料换购</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2026-05-22 20:48:35" itemprop="dateCreated datePublished" datetime="2026-05-22T20:48:35+08:00">2026-05-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-24 11:36:40" itemprop="dateModified" datetime="2026-05-24T11:36:40+08:00">2026-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="题目背景与核心痛点"><a href="#题目背景与核心痛点" class="headerlink" title="题目背景与核心痛点"></a>题目背景与核心痛点</h3><p>这是一道在算法比赛中非常经典的“饮料换购”问题。题目看似是一个需要不断模拟“换饮料 $\rightarrow$ 喝饮料 $\rightarrow$ 产生新瓶盖 $\rightarrow$ 再换饮料”的动态循环过程，但如果我们跳出纯粹的代码模拟，从<strong>资源消耗</strong>的本质去思考，它其实可以转化为一个极其优雅的数学模型。</p>
-<hr>
-<h3 id="解题思路：从循环模拟到数学降维打击"><a href="#解题思路：从循环模拟到数学降维打击" class="headerlink" title="解题思路：从循环模拟到数学降维打击"></a>解题思路：从循环模拟到数学降维打击</h3><h4 id="方法一：循环模拟法（直观逻辑）"><a href="#方法一：循环模拟法（直观逻辑）" class="headerlink" title="方法一：循环模拟法（直观逻辑）"></a>方法一：循环模拟法（直观逻辑）</h4><p>我们引入两个变量：<code>total_drunk</code>（已喝到的饮料总数）和 <code>caps</code>（当前拥有的瓶盖数）。<br>初始状态下，买几瓶就能喝几瓶，并产生同等数量的瓶盖：<code>total_drunk = n; caps = n;</code>。<br>只要满足 <code>caps &gt;= 3</code>，就不断进行如下循环：</p>
-<ol>
-<li>计算本轮可以兑换的新饮料：<code>new_drinks = caps / 3</code></li>
-<li>累加到总饮用量：<code>total_drunk += new_drinks</code></li>
-<li>更新下一轮的瓶盖数：<code>caps = (caps % 3) + new_drinks</code>（即这一轮换饮料剩下的瓶盖 + 新喝完产生的瓶盖）</li>
-</ol>
-<p>该方法在 $n &lt; 1000$ 的情况下执行速度很快，但如果数据量拓展到 $10^9$ 级别，循环机制就会带来额外的计算开销。</p>
-<h4 id="方法二：数学公式法（等效替代思维）"><a href="#方法二：数学公式法（等效替代思维）" class="headerlink" title="方法二：数学公式法（等效替代思维）"></a>方法二：数学公式法（等效替代思维）</h4><p>我们可以通过 <strong>“净消耗分析”</strong> 来实现 $O(1)$ 的降维打击：</p>
-<ol>
-<li><strong>寻找等效关系</strong>：根据规则，3 个瓶盖可以换 1 瓶新饮料。而换回来的新饮料喝完后会退回 1 个瓶盖。这意味着，在这个微型循环里，你每多喝一瓶新饮料，手里实质上<strong>净减少</strong>了 $3 - 1 = 2$ 个瓶盖。</li>
-<li><strong>处理“不能赊账”的边界</strong>：既然每消耗 2 个瓶盖就能多喝 1 瓶，那直接用 $n / 2$ 行不行？<strong>不行</strong>。因为老板不接受赊账，如果你手里只剩 2 个瓶盖，虽然它们“等价”于一瓶饮料，但你由于凑不够 3 个瓶盖的“入场券”，游戏会强制终止。也就是说，在全场的最后，不论如何你手里都会剩下一个注定无法被消耗的“保底”瓶盖。</li>
-<li><strong>推导公式</strong>：既然最后必定剩 1 个瓶盖，那我们索性先把这 1 个瓶盖藏起来。剩下真正能拿去参与“每 2 个净消耗换一瓶”规则的有效瓶盖数就是 $n - 1$ 个。<br>因此，额外能换到的饮料数就是 $\lfloor \frac{n - 1}{2} \rfloor$。</li>
-</ol>
-<p>加上初始购买的 $n$ 瓶，最终能够喝到的饮料总数为：</p>
-<p>$$total_drunk = n + \lfloor \frac{n - 1}{2} \rfloor$$</p>
-<hr>
-<h3 id="C-语言代码实现"><a href="#C-语言代码实现" class="headerlink" title="C 语言代码实现"></a>C 语言代码实现</h3><h4 id="方案一：循环模拟实现（适合初学者，逻辑直观）"><a href="#方案一：循环模拟实现（适合初学者，逻辑直观）" class="headerlink" title="方案一：循环模拟实现（适合初学者，逻辑直观）"></a>方案一：循环模拟实现（适合初学者，逻辑直观）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n) == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="type">int</span> total_drunk = n; <span class="comment">// 初始喝到的饮料数</span></span><br><span class="line">        <span class="type">int</span> caps = n;        <span class="comment">// 初始拥有的瓶盖数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 只要瓶盖不少于 3 个，就可以继续换</span></span><br><span class="line">        <span class="keyword">while</span> (caps &gt;= <span class="number">3</span>) &#123;</span><br><span class="line">            <span class="type">int</span> new_drinks = caps / <span class="number">3</span>;   <span class="comment">// 本轮用完所有能换的盖子</span></span><br><span class="line">            total_drunk += new_drinks;   <span class="comment">// 累加喝到的饮料</span></span><br><span class="line">            caps = (caps % <span class="number">3</span>) + new_drinks; <span class="comment">// 剩下的盖子 + 喝完新产生的盖子</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, total_drunk);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方案二：数学公式实现（效率高）"><a href="#方案二：数学公式实现（效率高）" class="headerlink" title="方案二：数学公式实现（效率高）"></a>方案二：数学公式实现（效率高）</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 严谨读取输入，确保成功接收到一个整数</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n) == <span class="number">1</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 运用数学公式直接计算出最终结果</span></span><br><span class="line">        <span class="type">int</span> total_drunk = n + (n - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 打印输出结果</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, total_drunk);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="💡-蓝桥杯通关·快速复盘"><a href="#💡-蓝桥杯通关·快速复盘" class="headerlink" title="💡 蓝桥杯通关·快速复盘"></a>💡 蓝桥杯通关·快速复盘</h3><ul>
-<li><p><strong>一句话题眼（数学降维打击）</strong><br>核心本质是 <strong>“等效替代与净消耗”</strong>。3个盖子换1瓶饮料（带1个盖子），等价于 <strong>“每净消耗 2 个盖子就能多喝 1 瓶”</strong>。由于老板不给赊账，最后必定剩 1 个保底盖子无法消耗。因此先扣掉这 1 个盖子，其余套用 $O(1)$ 通项公式直接秒杀：<br>$$\text{总数} = n + \lfloor \frac{n - 1}{2} \rfloor$$</p>
-</li>
-<li><p><strong>防错指南</strong></p>
-<ol>
-<li><strong>输入防御</strong>：严格使用 <code>if (scanf(&quot;%d&quot;, &amp;n) == 1)</code> 进行安全拦截，防止蓝桥杯盲测脏数据。</li>
-<li><strong>大数越界防御</strong>：如果题目涉及大数（如 $n &gt; 10^9$），直接用 <code>int</code> 可能会在计算公式中间整型溢出。稳妥起见，比赛时建议直接开 <code>long long</code> 配合 <code>%lld</code> 读写。</li>
-<li><strong>防范“除零”崩溃</strong>：套用通用拓展公式 $\lfloor \frac{n - B}{A - B} \rfloor$ 时，必须确保分母 $A \neq B$。如果 $A == B$（即等价于无消耗白嫖），需要特判处理，防止程序因“除以 0”直接 Runtime Error。</li>
 </ol>
 </li>
 </ul>
